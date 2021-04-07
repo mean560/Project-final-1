@@ -1,0 +1,30 @@
+<?php
+
+include "../env/config.php";
+
+$postid = $_POST['postid'];
+$title = $_POST['title'];
+$description = $_POST['description'];
+$file_name = $_POST['file_name'];
+$file_directory = $_POST['file_directory'];
+
+//Check entry
+$stmt = $con->prepare("SELECT count(*) as cntpost FROM posts WHERE id=?");
+$stmt->bind_param("i", $postid);
+$stmt->execute();
+$fetchdata = $stmt->get_result()->fetch_assoc();
+$count = $fetchdata['cntpost'];
+
+if ($count == 0) {
+
+    $stmt = $con->prepare("INSERT INTO posts(title,description, file_name ,file_directory) VALUES ( ?, ?, ?, ?)");
+    $stmt->bind_param("ss", $title,$description, $file_name, $file_directory);
+    $stmt->execute();
+    $postid = $stmt->insert_id;
+} else {
+    $stmt = $con->prepare("UPDATE posts SET title=?,description=?,file_name=?,file_directory=? where id=?");
+    $stmt->bind_param("ssi", $title, $description, $file_name, $file_directory, $postid);
+    $stmt->execute();
+}
+
+echo $postid;

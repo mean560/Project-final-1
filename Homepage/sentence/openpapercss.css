@@ -1,0 +1,235 @@
+.middle aside.left {
+    background: white;
+    width: 50%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    margin-left: 50px;
+
+
+}
+
+.col-xs-12 {
+    color: #555;
+    background: white;
+    border-style: hidden;
+    margin-bottom: 1em;
+
+
+}
+
+.form-file {
+    float: left;
+    margin-top: 15px;
+}
+
+.form-upload i.fas.fa-file-upload {
+    margin-right: 10px;
+}
+
+
+
+.col-xs-12 .btn {
+
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    border: none;
+    border-radius: 2px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    float: left;
+    text-align: left;
+
+}
+
+.w3-ul .btn.btn-info {
+    background: #38b87c;
+    border: 1.5px solid #38b87c;
+    padding: 6px 18px 6px 18px;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 27em;
+
+
+}
+
+.w3-ul .btn.btn-danger {
+    background: #f34541;
+    border: 1.5px solid #f34541;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 3px;
+
+
+}
+
+.middle aside.right {
+    background-color: white;
+    width: 40%;
+    float: left;
+    position: relative;
+    margin-left: 50px;
+
+
+}
+
+span.my-image-text i.fas.fa-angle-left {
+    margin-left: 10px;
+}
+
+
+
+.middle aside.right .w3-padding {
+    color: #555;
+    margin-bottom: 15px;
+    margin-top: 0px;
+    font-size: 30px;
+
+}
+
+
+.input-group .btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    border: none;
+    border-radius: 2px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+
+
+}
+
+.input-group .btn2 {
+    padding: 8px 15px;
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    border: none;
+    border-radius: 2px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+
+
+}
+
+.middle aside.right .input-note {
+    margin: 10px;
+}
+
+.input-note .w3-input {
+    padding: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.input-note .form-control {
+    padding: 15px;
+    font-size: 16px;
+    margin: 10px;
+
+}
+
+body {
+    font-family: Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+form.example input[type=text] {
+    padding: 8px;
+    font-size: 16px;
+    border: 1.5px solid #f1f1f1;
+    float: left;
+    width: 80%;
+    background: white;
+
+}
+
+form.example button {
+    float: left;
+    width: 20%;
+    padding: 8px;
+    background: #ccc;
+    color: white;
+    font-size: 16px;
+    border: 1.5px solid #ccc;
+    border-left: none;
+    cursor: pointer;
+}
+
+
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.form-allnote {
+    margin-top: 30px;
+
+
+}
+
+.form-search {
+    margin: 30px;
+}
+
+.form-create .w3-button.w3-round-large {
+    margin-top: 10px;
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    margin-left: 8px;
+
+
+}
+
+.form-create .bi.bi-plus-circle {
+    margin-left: 8px;
+    font-size: 14px;
+
+
+
+}
+
+.w3-ul .my-link {
+    font-size: 14px;
+    color: #555;
+}
+
+.sentence {
+    padding: 8px 15px;
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    border: none;
+    border-radius: 2px;
+}
+
+.translate {
+    padding: 8px 35px;
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    border: none;
+    border-radius: 2px;
+}
+
+.tagging {
+    padding: 8px 35px;
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    border: none;
+    border-radius: 2px;
+}

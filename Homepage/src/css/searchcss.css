@@ -1,0 +1,151 @@
+.input-group-btn .btn {
+    height: 40px;
+    padding: 6px 20px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #ccc;
+    background-image: none;
+    border: 1px solid #ccc;
+
+    -webkit-box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 0px 0px rgba(0, 0, 0, .075);
+}
+
+.input-group .form-control {
+    position: relative;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+    height: 40px
+}
+
+.input-group {
+    padding: 10px 10px;
+    background-color: #ccc;
+    /* margin: 10px 100px;*/
+    border-radius: 5px 5px 5px 5px;
+}
+
+/*.header {
+    padding: 30px 150px 1px;
+}
+*/
+.w3-padding.w3-xxxlarge {
+    padding: 25px 16px !important;
+}
+
+.middle {
+    overflow: auto;
+}
+
+.middle aside.left {
+    background-color: white;
+    width: 25%;
+    height: 500px;
+    float: left;
+    text-align: left;
+    padding-left: 20px;
+
+
+}
+
+
+.middle aside.left span.my-text {
+    /*   padding-left: 30px;*/
+    font-weight: 700;
+    color: #555;
+}
+
+aside.left .text-header {
+    font-weight: 700;
+    font-size: 2em;
+    margin-bottom: 15px;
+}
+
+.myblock.list-data {
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+
+.middle .content {
+    background-color: white;
+    width: 70%;
+    /*height: 500px;*/
+    float: left;
+    text-align: center;
+
+}
+
+.middle aside.right {
+    background-color: white;
+    width: 15%;
+    height: 500px;
+    float: left;
+    text-align: center;
+}
+
+.middle .content .myblock {
+    text-align: left;
+    font-size: 14px;
+    color: #555;
+    background-color: white;
+
+    margin: 10px;
+
+}
+
+.menu-sort .text-content ul.menu-select li.item {
+    list-style: none;
+}
+
+.my-text {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.title-doc {
+    text-align: left;
+    font-size: 16px;
+    font-weight: 700;
+    color: #007398;
+    margin-top: 20px;
+    padding-bottom: 10px;
+}
+
+#data-container {
+    max-height: 500px;
+    margin-bottom: 40px;
+    overflow-y: scroll;
+}
+
+#data-container ul {
+    list-style: none;
+}
+
+#data-container ul li {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+#pagination .paginationjs .paginationjs-pages {
+    float: right;
+}
+
+.results {
+    text-align: right;
+    font-size: 14px;
+    color: rgb(165, 164, 164);
+
+}
+
+.source {
+    display: inline;
+    font-size: 14px;
+    color: #555;
+}
+.results{
+    margin-right: 10px;
+}
+.paginationjs {
+margin-bottom: 10px;
+}

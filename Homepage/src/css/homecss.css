@@ -1,0 +1,164 @@
+.header {
+
+    background-color: white;
+    padding-bottom: 0px;
+
+}
+.col-12.title{
+ margin-bottom: 30px;
+}
+img {
+    width: 100%;
+}
+
+h1 {
+    font-size: 80px;
+    padding-bottom: 30px;
+}
+
+.w3-bar .w3-button {
+    margin: 15px 15px 15px 15px;
+
+}
+
+.middle {
+    overflow: auto;
+}
+
+.middle aside.left {
+    background-color: white;
+    width: 10%;
+    height: 80%;
+    float: left;
+    text-align: center;
+
+
+}
+
+.middle aside.right {
+    background-color: white;
+    width: 30%;
+    height: 80%;
+    float: left;
+
+
+}
+
+.middle .content a.my-link {
+    display: block;
+    margin-bottom: 40px;
+
+}
+
+.middle .content a.my-link::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.middle .content a.my-link span.my-image-text {
+    color: #555;
+    font-size: 1.2em;
+    padding-top: 40px;
+    margin-left: 15px;
+    font-weight: 700;
+    display: block;
+
+}
+
+.middle .content a.my-link span.my-image-text::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.middle .content a.my-link span.my-image-icon {
+    background-color: #92c8ed;
+    height: 110px;
+    width: 110px;
+    display: block;
+    position: relative;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+
+}
+
+.middle .content a.my-link span.my-image-icon.search {
+    background-color: #fdd187;
+
+
+}
+
+.middle .content a.my-link span.my-image-icon.bibliography {
+    background-color: #99d9b6;
+}
+
+.middle .content a.my-link span.my-image-icon.note {
+    background-color: #eb8b92;
+}
+
+.middle .content a.my-link span.my-image-icon i {
+    position: absolute;
+    top: 24%;
+    left: 26%;
+    right: 50%;
+    bottom: 50%;
+    font-size: 4em;
+    color: #555;
+
+}
+
+.middle .content a.my-link span.my-image-icon i.far.fa-file-alt {
+    left: 28%;
+
+}
+
+.footer {
+    background-color: white;
+    text-align: center;
+
+}
+
+/* เพิ่ม */
+.row .col-6 {
+
+    padding: 0px;
+}
+
+/* a.my-link span.my-image-icon.search  {
+    left: 10%;
+    margin-right: 80px;
+
+}
+a.my-link span.my-image-icon.note  {
+    left: 10%;
+} */
+
+.content {
+    position: relative;
+    left: 50px;
+}
+
+.dropdown .dropdown-toggle {
+    margin-left: 75em;
+    color: #555;
+    font-size: 18px;
+
+}
+
+ul.dropdown-menu.show {
+    margin-left: 87em;
+
+}
+
+ul.dropdown-menu.show .sign-out {
+    font-size: 16px;
+    color: #555;
+}
+
+nav.navbar.navbar-default {
+
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

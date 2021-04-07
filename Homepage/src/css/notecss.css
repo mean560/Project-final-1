@@ -1,0 +1,255 @@
+
+.middle{
+     max-height: 90vh;
+     overflow-y: scroll;
+}
+.middle aside.left {
+    background: white;
+    width: 70%;
+    height: 100%;
+    float: left;
+    text-align: center;
+
+
+}
+
+.col-xs-12 {
+    color: #555;
+    background: white;
+    border-color: white;
+    margin-bottom: 2em;
+
+}
+
+.form-file {
+    float: left;
+    margin-top: 15px;
+}
+
+.form-upload i.fas.fa-file-upload {
+    margin-right: 10px;
+}
+
+
+
+.col-xs-12 .btn {
+
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    border: none;
+    border-radius: 2px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    float: left;
+    text-align: left;
+
+}
+
+.w3-ul i.far.fa-edit {
+
+    color: white;
+    font-size: 14px;
+}
+
+.w3-ul i.far.fa-trash-alt {
+
+    color: white;
+    font-size: 14px;
+}
+
+a.btn.btn-sm.btn-warning {
+    margin-top: 10px;
+    margin-left: 30em;
+}
+
+a.btn.btn-sm.btn-danger {
+    margin-top: 10px;
+}
+
+.w3-ul.search a.btn.btn-sm.btn-danger {
+    margin-top: 10px;
+    margin-left: 30em;
+}
+
+
+.middle aside.right {
+    background-color: white;
+    width: 40%;
+    float: left;
+    position: relative;
+    margin-left: 5em;
+}
+
+.middle aside.left {
+    background-color: white;
+    width: 50%;
+    float: left;
+    position: relative;
+    margin-left: 3em;
+}
+
+span.my-image-text i.fas.fa-angle-left {
+    margin-left: 10px;
+}
+
+.middle aside.left .w3-padding {
+    color: #555;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 32px;
+
+}
+
+.middle aside.right .w3-padding {
+    color: #555;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 32px;
+
+}
+
+
+.input-note .btn {
+    padding: 8px 15px;
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    border: none;
+    border-radius: 2px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 0px;
+    margin-left: 20em;
+
+
+}
+
+.input-note .btn2 {
+    padding: 8px 15px;
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    border: none;
+    border-radius: 2px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 50px;
+    margin-left: 20em;
+
+}
+
+.middle aside.right .input-note {
+    margin: 10px;
+}
+
+.input-note .w3-input {
+    padding: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+.input-note .form-control {
+    padding: 15px;
+    font-size: 16px;
+    margin-top: 10px;
+
+}
+
+body {
+    font-family: Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+form.example input[type=text] {
+    padding: 8px;
+    font-size: 14px;
+    border: 2px solid #ccc;
+    float: left;
+    width: 80%;
+    background: white;
+    border-radius: 5px;
+
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3Cpath d='M0 0h24v24H0z' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: 18px 18px;
+    background-position: 95% center;
+    transition: all 250ms ease-in-out;
+    backface-visibility: hidden;
+
+
+}
+
+
+form.example button {
+
+    width: 10%;
+    padding: 8px;
+    background: #ccc;
+    color: white;
+    font-size: 16px;
+    border: 1.5px solid #ccc;
+    border-left: none;
+    cursor: pointer;
+}
+
+
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.form-allnote {
+    margin-top: 30px;
+    color: #555;
+    margin-right: 90px;
+
+}
+
+.form-search-note {
+    margin: 30px;
+
+}
+
+.form-search-paper {
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+}
+
+.form-create .w3-button.w3-round-large {
+    margin-top: 10px;
+    font-size: 14px;
+    color: white;
+    background: #5bc0de;
+    margin-left: 8px;
+
+
+}
+
+.form-create .bi.bi-plus-circle {
+    margin-left: 8px;
+
+    font-size: 14px;
+
+
+
+}
+
+
+.w3-ul .my-link {
+    font-size: 14px;
+    color: #555;
+
+}
+
+.w3.ul {
+    color: #5bc0de;
+}

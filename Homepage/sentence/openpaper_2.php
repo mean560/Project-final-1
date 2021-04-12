@@ -12,7 +12,7 @@
             } 
 
 
-            echo "<embed src='$path ' width='100%' height='425px'>";
+            echo "<embed src='$path ' width='100%' height='433px'>";
 
                        
 

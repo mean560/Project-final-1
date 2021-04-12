@@ -76,7 +76,7 @@ if (!isset($_SESSION['status_login'])) {
 					<div class="content">
 						<div class="row">
 							<div class="col-6">
-								<a href="./sentence/simplesentence.php" class="my-link">
+								<a href="./sentence/openpaper.php" class="my-link">
 									<span class="my-image-icon">
 										<i class="far fa-copy"></i>
 									</span>

@@ -19,10 +19,10 @@ $ext = strtolower(substr(strrchr($file_name, '.'), 1));
 $newfilename = $user_id . $username . time() . "." . $ext;
 
 
-$sql = "INSERT INTO tmp (file_name, file_directory) VALUES('$newfilename', '$file_directory')";
+$sql = "INSERT INTO tmp (file_name, file_directory) VALUES($newfilename, $file_directory)";
 $query = mysqli_query($con, $sql);
-$sql ="DELETE FROM tmp WHERE file_directory = '' OR file_directory IS NULL";
-$query = mysqli_query($con, $sql);
+// $sql ="DELETE FROM tmp WHERE file_directory = '' OR file_directory IS NULL";
+// $query = mysqli_query($con, $sql);
 
 echo $sql;
 

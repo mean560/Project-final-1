@@ -239,10 +239,7 @@ form.example::after {
 
     font-size: 14px;
 
-
-
 }
-
 
 .w3-ul .my-link {
     font-size: 14px;
@@ -252,4 +249,16 @@ form.example::after {
 
 .w3.ul {
     color: #5bc0de;
+}
+
+.onModal {
+    width: 150px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0px;
+    background-color: rgb(249, 249, 249);
+    border-width: 1px;
+    text-decoration-color: rgb(249, 249, 249);
+    border-color: rgb(212, 212, 212);
+    border-style: solid;
+    text-decoration-style: solid;
 }

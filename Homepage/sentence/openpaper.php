@@ -125,7 +125,6 @@ if (!isset($_SESSION['status_login'])) {
                         $target_path = "../uploads/";
                         $target_path = $target_path . basename($_FILES['uploadfile']['name']);
                         move_uploaded_file($_FILES['uploadfile']['tmp_name'], $target_path);
-                        
                         echo "<embed src='$target_path ' width='100%' height='433px'>";
 
                         // echo $_FILES['uploadfile']['name'];
@@ -135,11 +134,12 @@ if (!isset($_SESSION['status_login'])) {
                         <input type="hidden" id="file_directory" name="file_directory" value="<?= $target_path ?>">
                     <?php } ?>
                     
-                    <!-- <div class="response" name="response">
+                    <div class="response" name="response">
                         <?php
-                            // include "openpaper_2.php";
+                            include "openpaper_2.php";
+
                         ?>
-                    </div> -->
+                    </div>
                 </form>
             </div>
         </aside>
@@ -380,7 +380,7 @@ $(document).ready(function() {
 
     $('textarea').val($('textarea').val().trim())
 
-    $('#submitFile').click(function(){
+    $('#submitUpload').click(function(){
 
         var file_name = $('#file_name').val() || '';
         var file_directory = $('#file_directory').val() || '';

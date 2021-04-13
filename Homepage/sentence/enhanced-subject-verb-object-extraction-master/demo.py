@@ -12,5 +12,5 @@ for word in sys.argv[1:]:
 
 tokens1 = nlp(str1)
 svos1 = findSVOs(tokens1)
-print(svos1)
-# print(json.dumps(svos1))
+# print(svos1)
+print(json.dumps(svos1))

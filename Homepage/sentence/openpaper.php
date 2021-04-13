@@ -114,15 +114,14 @@ if (!isset($_SESSION['status_login'])) {
                                 <input type="file" name="uploadfile" />
                             </div>
                             <input type="submit" id="submitUpload" name="submitUpload" value="Upload" class="btn"/>
+                            <!-- <input type="submit" id="submitFile" name="submitFile" value="save file" class="btn"/> -->
 
                         <!-- </form> -->
 
                     </div>
 
                     <?php
-                    if (isset($_POST['submitUpload'])) {
-                        // $count++;
-                        
+                    if (isset($_POST['submitUpload'])) {                        
                         $target_path = "../uploads/";
                         $target_path = $target_path . basename($_FILES['uploadfile']['name']);
                         move_uploaded_file($_FILES['uploadfile']['tmp_name'], $target_path);
@@ -136,11 +135,11 @@ if (!isset($_SESSION['status_login'])) {
                         <input type="hidden" id="file_directory" name="file_directory" value="<?= $target_path ?>">
                     <?php } ?>
                     
-                    <div class="response" name="response">
+                    <!-- <div class="response" name="response">
                         <?php
-                            include "openpaper_2.php";
+                            // include "openpaper_2.php";
                         ?>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </aside>
@@ -187,11 +186,10 @@ if (!isset($_SESSION['status_login'])) {
                         
                         ?>
                     <!-- </textarea> -->
-                    <div class="container" style="font-size: 16px; border: 1px solid; width: 100%; height: 200px; text-align:center; padding: 10px;">
+                    <div class="container" style="font-size: 16px; border: 1px solid; width: 100%; height: 200px; text-align:center; padding: 10px; line-height: 1.8;">
                         <?php
                             if(isset($_POST["buttonTagging"])){ 
-                                include("runtagging.php"); 
-                                // print_r($arr);
+                                include("runtagging.php");
                                 if(empty($result)){ 
                                     echo"";
                                 }
@@ -234,7 +232,7 @@ if (!isset($_SESSION['status_login'])) {
                                     for ($x = 0; $x < count($result); $x++) {
                                         $arr[$x] = ($result[$x]);
                                         if ($arr[$x][1] == 'CC') { $cc++; ?>
-                                            <a href="#" data-toggle="tooltip" title="Coordinating Conjunction" style="border-radius: 5px; background-color: #FDB750; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <a href="#" data-toggle="tooltip" title="Coordinating Conjunction" style="border-radius: 5px; background-color: #FDB750; color:white; padding: 5px; "><?=$arr[$x][0]; ?></a>
                                         <?php } elseif ($arr[$x][1] == 'CD') { $cd++ ?>
                                             <a href="#" data-toggle="tooltip" title="Cardinal Digit" style="border-radius: 5px; background-color: #FC2E20; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
                                         <?php } elseif ($arr[$x][1] == 'DT') { $dt++; ?>
@@ -303,7 +301,7 @@ if (!isset($_SESSION['status_login'])) {
                                             <a href="#" data-toggle="tooltip" title="wh- adverb" style="border-radius: 5px; background-color: #1B2E3C; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
                                         <?php } elseif($arr[$x][1] == '.') { echo "."; }
                                     } ?>
-                                    <div class="container" style="font-size: 14px; font-style: italic; text-align:left; width: 96.25%; height:90px; position:absolute; right:10px; bottom: 10px;">Description :
+                                    <div class="container" style="overflow: auto; line-height: 1.5; font-size: 14px; font-style: italic; text-align:left; width: 96.25%; height:90px; position:absolute; right:10px; bottom: 10px;">Description :
                                     <?php
                                         if($cc >= 1){ ?> <i class="bi bi-circle-fill" style="color: #FDB750; border-radius: 5px; padding: 3px;">Coordinating Conjunction</i>
                                         <?php } if($cd>=1){ ?> <i class="bi bi-circle-fill" style="color: #FC2E20;">Cardinal Digit</i>
@@ -346,20 +344,17 @@ if (!isset($_SESSION['status_login'])) {
                             }
                             else if(isset($_POST["buttonPastofSentence"])){
                                 include("runsimplesentence.php");
-                                if(empty($output)){
+                                if(empty($ans)){
                                     echo "";
                                 }
                                 else{
-                                    // for ($x = 0; $x < count($output); $x++) {
-                                    //     $arr1 = array();
-                                    //     if($output[$x] == "["){
-                                    //         continue;
-                                    //     }
-                                    //     elseif($output[$x] == "("){
-                                    //         continue;
-                                    //     }
-                                    //     elseif
-                                    // }
+                                    for ($y = 0; $y < count($ans); $y++) {
+                                        for($z = 0; $z < count($ans[$y]); $z++){
+                                            print $ans[$y][$z];
+                                            print " ";
+                                        }
+                                        echo "<br>";
+                                    }
                                 }
                             }
                             elseif(isset($_POST["buttonTranslate"])){
@@ -385,47 +380,34 @@ $(document).ready(function() {
 
     $('textarea').val($('textarea').val().trim())
 
-    $(document).on('click', 'tagging', 'sentence', 'translate' ,function(){
+    $('#submitFile').click(function(){
 
         var file_name = $('#file_name').val() || '';
         var file_directory = $('#file_directory').val() || '';
-        
+
         $.ajax({
             url:'./savepdf.php',
             type: 'POST',
             data: {
-                file_name : file_name,
-                file_directory : file_directory,
+                file_name: file_name,
+                file_directory: file_directory,
             }
         });
     });
 
-    // $('[data-toggle="tooltip"]').tooltip();   
-    
-    // $('#my-form').on('submit','tagging', 'sentence', 'translate', function(e) {
+    // $(document).on('click', 'tagging', 'sentence', 'translate' ,function(){
 
-    //     var text = $('#inserttxt').val().trim();
-    //     // console.log(text);
-    //     if (text == '') {
-    //         e.preventDefault();
-    //         swal("กรุณากรอกข้อมูล!", {
-    //             icon: "warning",
-    //         });
-    //     }
-
-    // });
-
-    // $(".response").hide();
-    // $('#submitUpload').click(function() {
+    //     var file_name = $('#file_name').val() || '';
+    //     var file_directory = $('#file_directory').val() || '';
         
+    //     $.ajax({
+    //         url:'./savepdf.php',
+    //         type: 'POST',
+    //         data: {
+    //             file_name : file_name,
+    //             file_directory : file_directory,
+    //         }
+    //     });
     // });
 });
-// function myFunc() {
-//     var x = document.getElementById("response");
-//     if(x.style.display === "none") {
-//         x.style.display = "block";
-//     } else {
-//         x.style.display = "none";
-//     }
-// }
 </script>

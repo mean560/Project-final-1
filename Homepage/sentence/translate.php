@@ -7,11 +7,11 @@
     $target = 'th';
     $stringText = $_POST["inserttxt"];
 
-    // if($stringText == "" || trim($stringText) == ""){
+    if($stringText == "" || trim($stringText) == ""){
 
-    //     echo "plaese enter text to upper box...";
+        echo "plaese enter text to upper box...";
     
-    // } else {
+    } else {
             
     $trans = new GoogleTranslate();
     $result = $trans->translate($source, $target, $stringText);
@@ -19,4 +19,4 @@
 
 
         echo $result;
-    //}
+    }

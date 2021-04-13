@@ -6,25 +6,26 @@ $stringText = $_POST["inserttxt"];
 // $output = shell_exec('python C:/xampp/htdocs/Project-final/Homepage/sentence/enhanced-subject-verb-object-extraction-master/demo.py  '.$stringText);
 // echo "$output";
 
-// if($stringText == "" || trim($stringText) == ""){
+if($stringText == "" || trim($stringText) == ""){
 
-//     echo "plaese enter text to upper box...";
+    echo "plaese enter text to upper box...";
 
-// } else {
+} else {
 
-    $output = shell_exec('python C:/xampp/htdocs/Project-final/Homepage/sentence/enhanced-subject-verb-object-extraction-master/demo.py  '.$stringText);
-    echo $output;
+    $output = shell_exec('python C:/xampp/htdocs/Project-final-1/Homepage/sentence/enhanced-subject-verb-object-extraction-master/demo.py  '.$stringText);
+    // print_r($output);
+    // var_dump($output[1]);
+    $ans = json_decode($output, true);
+    // print_r($ans);
+
     // echo gettype($output);
-    // var_dump($output);
+    // var_dump($ans);
 
     // $ans = json_decode($output, true);
 
     // echo gettype($ans);
     // echo ($output[])
-
-
-
-// }
+}
 ?>
 
 

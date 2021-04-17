@@ -15,8 +15,8 @@ if($id > 0){
   if($totalrows > 0){
     // Delete record
 
-    $sql = "INSERT INTO tash SELECT * FROM author WHERE id=".$id;
-    mysqli_query($con, $sql);
+    // $sql = "INSERT INTO tash SELECT * FROM author WHERE id=".$id;
+    // mysqli_query($con, $sql);
 
     $query = "DELETE FROM author WHERE id=".$id;
     mysqli_query($con,$query);

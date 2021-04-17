@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
   include "config_s.php";
 
   if(isset($_POST['function'])&& $_POST['function'] == 'update_func'){
@@ -46,6 +46,8 @@ if (!isset($_SESSION['status_login'])) {
   <meta name="author" content="">
 
   <title>Bibliographys</title>
+
+  <link rel="stylesheet" href="indexcss.css">
 
   <!-- Bootstrap core CSS -->
   <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -119,18 +121,18 @@ if (!isset($_SESSION['status_login'])) {
     <div class="rightBody">
       <p class="text" style="display: inline-block; margin-left: 15px; margin-top:15px;">All Bibliographys</p>
       <input type="text" class="form-control" placeholder="Search" style="width: 200px; display: inline-block; margin-left: 10px;"></p>
-      <div class="container" style="height: 360px; background-color: white;">
-
-        <table class="table table-striped" id="tableAuthor" style='border-collapse: collapse;'>
+     
+      <div class="table-wrapper-scroll-y my-custom-scrollbar" style="height: 360px; background-color: white;">
+        <table class="table table-bordered table-striped mb-0" id="tableAuthor" style='border-collapse: collapse;'>
           <tr>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
+            <th style="width: 5%">A</th>
+            <th>B</th>
             <th>AUTHORS</th>
             <th>TITLE</th>
             <th>SOURCE</th>
             <th>YEAR</th>
             <th>&nbsp;</th>
-            <th>&nbsp;</th>
+            <!-- <th>&nbsp;</th> -->
           </tr>
           <?php
           $query = "select * from author";
@@ -143,8 +145,8 @@ if (!isset($_SESSION['status_login'])) {
             $year = $row['yearACC'];
           ?>
             <td>
-              <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-
+              <!-- <input type="checkbox" class="custom-control-input" id="customCheck" name="example1"> -->
+              <input type="checkbox" id="customCheck"/>
             </td>
             <?php
             // echo "<td></td>";
@@ -155,7 +157,7 @@ if (!isset($_SESSION['status_login'])) {
             echo "<td>" . $year . "</td>";
             ?>
             <td>
-              <button type="button" class="btn btn-warning editbtn" id="<?=$row['id']?>" id="userinfo" name="edit_author"><i class="fas fa-edit" style="color:white"></i></button>
+              <button type="button" class="btn btn-warning editbtn" id="<?=$row['id']?>" id="userinfo" name="edit_author" ><i class="fas fa-edit" style="color:white;"></i></button>
               <button type="button" class="btn btn-danger delete" data-id='<?= $id; ?>'"><i class="bi bi-trash"></i></button>
             </td>
           <?php
@@ -166,19 +168,19 @@ if (!isset($_SESSION['status_login'])) {
       </div>
 
       <div class="bottomBody">
-        <button type="button" class="btn" style="display: inline-block; position: static; margin-top: 35px; margin-left: 380px;
+        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter" style="display: inline-block; position: static; margin-top: 35px; margin-left: 380px;
           background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; margin-right: 5px;
           text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; 
           text-decoration-style: solid;">Download Bibliography</button>
         <div class="form-group" style="display: inline-block; position: absolute; border-width: 1px; margin-top: 35px;">
           <select class="form-control" style="width: 180px; height: 38px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif;">
             <option value="value1">APA</option>
-            <option value="value2">AMA</option>
+            <!-- <option value="value2">AMA</option>
             <option value="value3">Chicago</option>
             <option value="value4">IEEE</option>
             <option value="value5">MLA</option>
             <option value="value6">Turabian</option>
-            <option value="value7">Vancouver</option>
+            <option value="value7">Vancouver</option> -->
           </select>
         </div>
 
@@ -244,7 +246,7 @@ if (!isset($_SESSION['status_login'])) {
 
 </html>
 
-<!-- Modal -->
+<!-- Modal Create Source -->
 <div id="myModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
 
@@ -259,11 +261,11 @@ if (!isset($_SESSION['status_login'])) {
         <div class="form-group" style="display: inline-block;">
           <select class="form-control" data-role="" id="selectValue" style="max-width: 255px; max-height: 35px;
                                          padding: 0px 0px; border: none; background:none; font-size: 18px; ">
-            <!-- <option value="value0"></option> -->
+            <option selected disabled value="value0" >Select Type of Source</option>
             <!-- <option value="value1">Book</option>
             <option value="value2">Book Section</option> -->
             <option value="value3">Journal Article</option>
-            <option selected value="value4">Article in a Periodical</option>
+            <option value="value4">Article in a Periodical</option>
             <!-- <option value="value5">Conference Proceedings</option>
             <option value="value6">Report</option>
             <option value="value7">Web site</option>
@@ -400,7 +402,7 @@ if (!isset($_SESSION['status_login'])) {
   </div>
 </div>
 <!-- ####################################################################################################################### -->
-<!-- Modal Edit -->
+<!-- Modal Edit Source -->
 <div id="myEditModal" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
 
@@ -558,27 +560,51 @@ if (!isset($_SESSION['status_login'])) {
   </div>
 </div>
 <!-- ####################################################################################################################### -->
-
+<!-- Modal Download Bibliography -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Download Bibliography</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="font-size:16px">
+        <br/>
+        <?php 
+          include 'template/apa.php';
+        ?>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ####################################################################################################################### -->
 
 <script type="text/javascript">
   $(document).ready(function() {
 
     var i = 1;
-
+    //add input author
     $('#addif').click(function() {
       i++;
       $('#dynamic_field').append('<tr id="row' + i + '"><td class="text" style="padding-left: 25px;">AUTHOR&nbsp;&nbsp;</td><td><input type="text" id="' + i + '" placeholder="Kramer, James D; Chen, Jacky" class="form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn_remove"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTI1NiwwQzExNC44NTMsMCwwLDExNC44MzMsMCwyNTZzMTE0Ljg1MywyNTYsMjU2LDI1NmMxNDEuMTY3LDAsMjU2LTExNC44MzMsMjU2LTI1NlMzOTcuMTQ3LDAsMjU2LDB6IE0yNTYsNDcyLjM0MSAgICBjLTExOS4yOTUsMC0yMTYuMzQxLTk3LjA0Ni0yMTYuMzQxLTIxNi4zNDFTMTM2LjcwNSwzOS42NTksMjU2LDM5LjY1OVM0NzIuMzQxLDEzNi43MDUsNDcyLjM0MSwyNTZTMzc1LjI5NSw0NzIuMzQxLDI1Niw0NzIuMzQxeiAgICAiIGZpbGw9IiNjYjAwMDAiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiPjwvcGF0aD4KCTwvZz4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTM1NS4xNDgsMjM0LjM4NkgxNTYuODUyYy0xMC45NDYsMC0xOS44Myw4Ljg4NC0xOS44MywxOS44M3M4Ljg4NCwxOS44MywxOS44MywxOS44M2gxOTguMjk2ICAgIGMxMC45NDYsMCwxOS44My04Ljg4NCwxOS44My0xOS44M1MzNjYuMDk0LDIzNC4zODYsMzU1LjE0OCwyMzQuMzg2eiIgZmlsbD0iI2NiMDAwMCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" style="width: 30px; height: 30px; display: inline-block; padding-left: 0px;"/></button></td></tr>');
     });
-
+    //add delete input author
     $(document).on('click', '.btn_remove', function() {
       var button_id = $(this).attr("id");
       $('#row' + button_id + '').remove();
     });
-
+    //submit save author
     $('#submit').click(function() {
       saveAuthor();
     });
-
+    //submit edit author
     $('.editbtn').click(function(){
       // console.log($(this).attr('id'))
       var id = $(this).attr('id');
@@ -606,7 +632,7 @@ if (!isset($_SESSION['status_login'])) {
       })
       return false;
     });
-
+    //Delete Author
     $(document).on('click', '.delete', function(){
       var el = this;
       var deleteid = $(this).data('id');
@@ -631,9 +657,7 @@ if (!isset($_SESSION['status_login'])) {
           });
       }
     });
-
-
-    //Save Author
+    //Function Save Author
     function saveAuthor() {
 
       var name = $('#name').val();
@@ -694,7 +718,7 @@ if (!isset($_SESSION['status_login'])) {
       //}
 
     }
-
+    //Function Edit Author
     function editAuthor() {
 
       var name = $('#name').val();
@@ -755,5 +779,25 @@ if (!isset($_SESSION['status_login'])) {
       //}
 
     }
+
+    // $('.userinfo').click(function(){
+      
+    //   var userid = $(this).data('id');
+
+    //   // AJAX request
+    //   $.ajax({
+    //     url: 'ajax_file.php',
+    //     type: 'post',
+    //     data: {userid: userid},
+    //     success: function(response){ 
+    //       // Add response in Modal body
+    //       $('.modal-body').html(response);
+
+    //       // Display Modal
+    //       $('#exampleModalCenter').modal('show'); 
+    //     }
+    //   });
+    // });
+
   });
-</script>
+</script> -->

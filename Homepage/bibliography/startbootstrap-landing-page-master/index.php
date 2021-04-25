@@ -1,34 +1,6 @@
 <?php
   include "config_s.php";
 
-  if(isset($_POST['function'])&& $_POST['function'] == 'update_func'){
-    // echo $_POST['id'];
-    // print_r($_POST);
-    // exit();
-
-    $id = $_POST['id'];
-    // $name = $_POST['name'];
-    $sql = "SELECT * FROM author WHERE id = '$id' ";
-    $query = mysqli_query($con, $sql) or die("Error in sql : $sql". mysqli_error($sql));
-    $row = mysqli_num_rows($query);
-    if($row > 0){
-      $result = mysqli_fetch_assoc($query);
-      echo json_encode($result); 
-      // print_r($result);
-      // echo $result['name'];
-      // $old_name = $result['name'];
-      // if(rename($old_name,$name)){
-      //   $sql_update = "UPDATE author SET name = '$name' WHERE id = '$id'";
-      //   $query_update = mysqli_query($con, $sql_update);
-      //   if($query_update){
-      //     echo "Saved!";
-      //     exit();
-      //   }
-      // }
-      exit();
-    }
-  }
-
 ?>
 <?php
 session_start();
@@ -64,7 +36,6 @@ if (!isset($_SESSION['status_login'])) {
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />   -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-
 
 </head>
 
@@ -172,28 +143,15 @@ if (!isset($_SESSION['status_login'])) {
           text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; 
           text-decoration-style: solid;">Download Bibliography</button>
         <div class="form-group" style="display: inline-block; position: absolute; border-width: 1px; margin-top: 35px;">
-          <select class="form-control" style="width: 180px; height: 38px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif;">
-            <option value="value1">APA</option>
-            <!-- <option value="value2">AMA</option>
-            <option value="value3">Chicago</option>
-            <option value="value4">IEEE</option>
-            <option value="value5">MLA</option>
-            <option value="value6">Turabian</option>
-            <option value="value7">Vancouver</option> -->
+          <select class="form-control" name="bibliographyStyle" style="width: 180px; height: 38px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif;">
+            <option selected value="apa">APA</option>
+            <!-- <option value="ama">AMA</option> -->
+            <option value="chicago">Chicago</option>
+            <!-- <option value="ieee">IEEE</option> -->
+            <option value="mla">MLA</option>
+            <!-- <option value="turabian">Turabian</option>
+            <option value="vancouver">Vancouver</option> -->
           </select>
-
-        <!-- Example single danger button -->
-        <!-- <div class="btn-group" style="display: inline-block; position: absolute; margin-top: 35px;">
-          <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 180px; height: 38px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; border-color: rgb(212, 212, 212); border-style: solid;">
-            Action
-          </button>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </div> -->
-
       </div>
     </div>
   </div>
@@ -286,7 +244,8 @@ if (!isset($_SESSION['status_login'])) {
         </div>
       </div>
       <div class="modal-body">
-        <form method="POST" name="add_name" id="add_name">
+        <span id="success_result"></span>
+        <form action="" method="POST" name="add_name" id="add_name">
           <div class="form-group">
             <div class="table-responsive">
               <table id="dynamic_field">
@@ -301,9 +260,17 @@ if (!isset($_SESSION['status_login'])) {
           <button type="button" name="addif" id="addif" class="btn btn-default" style="margin-left: 100px; margin-bottom: 20px; padding-left: 15px;"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI1NiA1MTJjLTE0MS4xNjQwNjIgMC0yNTYtMTE0LjgzNTkzOC0yNTYtMjU2czExNC44MzU5MzgtMjU2IDI1Ni0yNTYgMjU2IDExNC44MzU5MzggMjU2IDI1Ni0xMTQuODM1OTM4IDI1Ni0yNTYgMjU2em0wLTQ4MGMtMTIzLjUxOTUzMSAwLTIyNCAxMDAuNDgwNDY5LTIyNCAyMjRzMTAwLjQ4MDQ2OSAyMjQgMjI0IDIyNCAyMjQtMTAwLjQ4MDQ2OSAyMjQtMjI0LTEwMC40ODA0NjktMjI0LTIyNC0yMjR6bTAgMCIgZmlsbD0iIzA2OWJiZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTM2OCAyNzJoLTIyNGMtOC44MzIwMzEgMC0xNi03LjE2Nzk2OS0xNi0xNnM3LjE2Nzk2OS0xNiAxNi0xNmgyMjRjOC44MzIwMzEgMCAxNiA3LjE2Nzk2OSAxNiAxNnMtNy4xNjc5NjkgMTYtMTYgMTZ6bTAgMCIgZmlsbD0iIzA2OWJiZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI1NiAzODRjLTguODMyMDMxIDAtMTYtNy4xNjc5NjktMTYtMTZ2LTIyNGMwLTguODMyMDMxIDcuMTY3OTY5LTE2IDE2LTE2czE2IDcuMTY3OTY5IDE2IDE2djIyNGMwIDguODMyMDMxLTcuMTY3OTY5IDE2LTE2IDE2em0wIDAiIGZpbGw9IiMwNjliYmQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiPjwvcGF0aD48L2c+PC9zdmc+" style="width: 30px; height: 30px;" />
             <p class="text" style="color: #069BBD; display: inline;">&nbsp;&nbsp;Add another Report author</p></img>
           </button>
+          <!-- <div class="form-group">
+            <div class="row">
+            <label for="name" class="col-sm-3 control-label">File</label>
+            <div class="col-sm-9">
+                <input type="file" name="txt_file" class="form-control">
+            </div>
+            </div>
+          </div> -->
           <div class="form-group" id="Dtitle">
             <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">TITLE&nbsp;&nbsp;:</p>
-            <input type="text" name="title" class="form-control" placeholder="How to Write Bibliographies" style="display: inline; width: 88%;">
+            <input type="text" name="title"  class="form-control" placeholder="How to Write Bibliographies" style="display: inline; width: 88%;">
           </div>
           <div class="form-group" id="Djournal_name">
             <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">JOURNAL NAME&nbsp;&nbsp;:</p>
@@ -313,10 +280,6 @@ if (!isset($_SESSION['status_login'])) {
             <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">PERIODICAL TITLE&nbsp;&nbsp;:</p>
             <input type="" name="periodical_name" class="form-control" placeholder="Adventure Works Daily" style="display: inline; width: 75%;">
           </div>
-          <!-- <div class="form-group" id="Dcity">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">CITY&nbsp;&nbsp;:</p>
-            <input type="text" id="city" class="form-control" placeholder="Chicago" style="width: 500px; display: inline-block;">
-          </div> -->
           <div class="form-group" id="DdateP">
             <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">DATE PUBLISHED&nbsp;&nbsp;:</p>
             <input type="text" name="dayP" class="form-control" placeholder="1" style="width: 25%; display: inline-block;">
@@ -353,74 +316,18 @@ if (!isset($_SESSION['status_login'])) {
             <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">DOI&nbsp;&nbsp;:</p>
             <input type="text" name="doi" class="form-control" placeholder="10.1000/182" style="width: 70%; display: inline-block;">
           </div>
-
-
-          <!-- Demo Collapse -->
-          <!-- <div id="demo" class="collapse">
-            <div class="md-form">
-              <div class="form-group" id="Deditor">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">EDITOR&nbsp;&nbsp;:</p>
-                <input type="text" id="editor" class="form-control" placeholder="Kramer, James D; Chen, Jacky" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dpublisher">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">PUBLISHER&nbsp;&nbsp;:</p>
-                <input type="text" id="publisher" class="form-control" placeholder="Adventure Works Monthly" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dedition">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">EDITON&nbsp;&nbsp;:</p>
-                <input type="text" id="edition" class="form-control" placeholder="Weekend" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dvolume">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">VOLUME&nbsp;&nbsp;:</p>
-                <input type="text" id="volume" class="form-control" placeholder="III" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dissue">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">ISSUE&nbsp;&nbsp;:</p>
-                <input type="text" id="issue" class="form-control" placeholder="12" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dshort_title">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">SHORT TITLE&nbsp;&nbsp;:</p>
-                <input type="text" id="short_title" class="form-control" placeholder="Bibliographies" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dstandard_num">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">STANDARD NUMBER&nbsp;&nbsp;:</p>
-                <input type="text" id="standard_num" class="form-control" placeholder="ISBN/ISSN" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dcomment">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">COMMENTS&nbsp;&nbsp;:</p>
-                <input type="text" id="comment" class="form-control" placeholder="enter comment about this source" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dmedium">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">MEDIUM&nbsp;&nbsp;:</p>
-                <input type="text" id="medium" class="form-control" placeholder="Document" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="DdateACC">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">DATE ACCESSED&nbsp;&nbsp;:</p>
-                <input type="text" id="dayACC" class="form-control" placeholder="1" style="width: 150px; display: inline-block; padding-right: 0px;">
-                <input type="text" id="monthACC" class="form-control" placeholder="January" style="width: 150px; display: inline-block; padding-right: 0px;">
-                <input type="text" id="yearACC" class="form-control" placeholder="2006" style="width: 150px; display: inline-block; padding-right: 0px;">
-              </div>
-              <div class="form-group" id="Durl">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">URL&nbsp;&nbsp;:</p>
-                <input type="text" id="url" class="form-control" placeholder="http://www.adatum.com" style="width: 650px; display: inline-block; padding-right: 0px;">
-              </div>
-              <div class="form-group" id="Ddoi">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">DOI&nbsp;&nbsp;:</p>
-                <input type="text" id="doi" class="form-control" placeholder="10.1000/182" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-            </div>
-          </div> -->
-          <!-- </from> -->
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-info mr-auto" data-toggle="collapse" data-target="#demo" style="background-color: white; border: none;">
+          </div>
+          <div class="modal-footer">
+          <!-- <button type="button" class="btn btn-info mr-auto" data-toggle="collapse" data-target="#demo" style="background-color: white; border: none;">
           <p class="text" style="display: inline-block; color: black; align-content: center;">Show more detail</p>
-        </button><br /> -->
-        <input type="hidden" name="author_id" id="author_id" />
-        <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />
+          </button><br /> -->
+          <input type="hidden" name="author_id" id="author_id" />
+          <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />
+        <!-- </from> -->
+
+        </div>
         </from>
 
-      </div>
     </div>
   </div>
 </div>
@@ -610,10 +517,25 @@ if (!isset($_SESSION['status_login'])) {
         </button>
       </div>
       <div class="modal-body" style="font-size:16px">
-        <br/>
         <?php 
-          include 'template/apa.php';
+          // echo "APA style";
+          // include 'template/apa.php'; 
+          // echo "<br/>";
+          // echo "MLA style";
+          // include 'template/mla.php';
+          // echo "<br/>";
+          // echo "Chicago style";
+          // include 'template/chicago.php';
         ?>
+        <div id="apa">
+          <?php include 'template/apa.php'; ?>
+        </div>
+        <div id="mla">
+          <?php include 'template/mla.php'; ?>
+        </div>
+        <div id="chicago">
+          <?php include 'template/chicago.php'; ?>
+        </div>
         
       </div>
       <div class="modal-footer">
@@ -650,11 +572,13 @@ if (!isset($_SESSION['status_login'])) {
                      alert(data);  
                      $('#add_name')[0].reset();  
                      $('#myModal').modal('hide');
-                      location.reload();
+                     $('#add_name').html(data);  
+
+                      // location.reload();
                     //  location.reload();
                 }  
            });  
-      }); 
+    }); 
 // hide/show radio input url/doi ######################################################################################################################################################
     $('#Ddoi').hide();
     $('#Durl').show();
@@ -684,26 +608,49 @@ if (!isset($_SESSION['status_login'])) {
           } 
       });
     }); 
+// select style bibliography ######################################################################################################################################
+    $('#apa').show();
+    $('#mla').hide();
+    $('#chicago').hide();
+
+    $('select[name=bibliographyStyle]').change(function () {
+      $("select[name=bibliographyStyle] option:selected").each(function () {
+          var value = $(this).val();
+          if(value == "apa") {
+            $('#apa').show();
+            $('#mla').hide();
+            $('#chicago').hide();
+          } else if(value == "mla") {
+            $('#apa').hide();
+            $('#mla').show();
+            $('#chicago').hide();
+          }  else if(value == "chicago") {
+            $('#apa').hide();
+            $('#mla').hide();
+            $('#chicago').show();
+          } 
+      });
+    }); 
 // ########################################################################################################################################################
-    $(document).on('click', '.update', function(){
-      var author_id = $(this).attr("id");
-      $.ajax({
-      url:"update.php",
-      method:"POST",
-      data:{author_id:author_id},
-      dataType:"json",
-      success:function(data)
-      {
-        $('#myModal').modal('show');
-        $('#name').val(data.name);
-        // $('#title').val(data.title);
-        // $('#last_name').val(data.last_name);
-        $('.modal-title').text("Edit Source");
-        $('#author_id').val(author_id);
-        // $('#user_uploaded_image').html(data.user_image);
-        $('#submit').val("Edit");      }
-      })
-    });
+    // $(document).on('click', '.update', function(){
+    //   var author_id = $(this).attr("id");
+    //   $.ajax({
+    //   url:"update.php",
+    //   method:"POST",
+    //   data:{author_id:author_id},
+    //   dataType:"json",
+    //   success:function(data)
+    //   {
+    //     $('#myModal').modal('show');
+    //     $('#name').val(data.name);
+    //     // $('#title').val(data.title);
+    //     // $('#last_name').val(data.last_name);
+    //     $('.modal-title').text("Edit Source");
+    //     $('#author_id').val(author_id);
+    //     // $('#user_uploaded_image').html(data.user_image);
+    //     $('#submit').val("Edit");      }
+    //   })
+    // });
 // ########################################################################################################################################################
 
     //submit save author
@@ -711,58 +658,58 @@ if (!isset($_SESSION['status_login'])) {
     //   saveAuthor();
     // });
     //submit edit author
-    $('.editbtn').click(function(){
-      // console.log($(this).attr('id'))
-      var id = $(this).attr('id');
-      $.ajax({
-        url: "index.php",
-        type: "post",
-        data: {
-          id: id, 
-          function: "update_func"
-        },
-        dataType: "json",
-        // dataType: "html",
-        success: function(response) {
-          console.log(response.id);
-          $('#name_update').val(response.name);
-          $('#title_update').val(response.title);
-          $('#id').val(response.id);
-          $('#myEditModal').modal('show');
-          // if(confirm(response)){
-          //   location.reload();
-          // }else{
-          //   location.reload();
-          //}
-        }
-      })
-      return false;
-    });
+    // $('.editbtn').click(function(){
+    //   // console.log($(this).attr('id'))
+    //   var id = $(this).attr('id');
+    //   $.ajax({
+    //     url: "index.php",
+    //     type: "post",
+    //     data: {
+    //       id: id, 
+    //       function: "update_func"
+    //     },
+    //     dataType: "json",
+    //     // dataType: "html",
+    //     success: function(response) {
+    //       console.log(response.id);
+    //       $('#name_update').val(response.name);
+    //       $('#title_update').val(response.title);
+    //       $('#id').val(response.id);
+    //       $('#myEditModal').modal('show');
+    //       // if(confirm(response)){
+    //       //   location.reload();
+    //       // }else{
+    //       //   location.reload();
+    //       //}
+    //     }
+    //   })
+    //   return false;
+    // });
     //Delete Author
-    $(document).on('click', '.delete', function(){
-      var el = this;
-      var deleteid = $(this).data('id');
-      var confirmalert = confirm("Are you sure?");
-      if (confirmalert == true) {
-          // AJAX Request
-          $.ajax({
-            url: 'before-delete.php',
-            type: 'POST',
-            data: { id:deleteid },
-            success: function(response){
-              if(response == 1){
-                // Remove row from HTML Table
-                $(el).closest('tr').css('background','tomato');
-                $(el).closest('tr').fadeOut(800,function(){
-                  $(this).remove();
-                });
-              }else{
-                alert('Invalid ID.');
-              }
-            }
-          });
-      }
-    });
+    // $(document).on('click', '.delete', function(){
+    //   var el = this;
+    //   var deleteid = $(this).data('id');
+    //   var confirmalert = confirm("Are you sure?");
+    //   if (confirmalert == true) {
+    //       // AJAX Request
+    //       $.ajax({
+    //         url: 'before-delete.php',
+    //         type: 'POST',
+    //         data: { id:deleteid },
+    //         success: function(response){
+    //           if(response == 1){
+    //             // Remove row from HTML Table
+    //             $(el).closest('tr').css('background','tomato');
+    //             $(el).closest('tr').fadeOut(800,function(){
+    //               $(this).remove();
+    //             });
+    //           }else{
+    //             alert('Invalid ID.');
+    //           }
+    //         }
+    //       });
+    //   }
+    // });
     //Function Save Author
     function saveAuthor() {
 
@@ -907,4 +854,5 @@ if (!isset($_SESSION['status_login'])) {
 
 
   });
+
 </script> -->

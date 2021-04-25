@@ -8,15 +8,16 @@
           $id = $row['id'];
           $name = $row['name'];
           $title = $row['title'];
-          $yearP = $row['yearP'];
           $journal_name = $row['journal_name'];
           $volume = $row['volume'];
+          $issue = $row['issue'];
+          $monthP = $row['monthP'];
+          $yearP = $row['yearP'];
           // $page = $row['pages'];
           $page_start = $row['page_start'];
           $page_end = $row['page_end'];
           $url = $row['url'];
-          $issue = $row['issue'];
-
+          $doi = $row['doi'];
           //จัดการชื่อ
           $answer = explode(" ",$name);
           // echo $answer[0][0];
@@ -28,7 +29,8 @@
           // echo $answer2[2]."_".$answer2[3]."<br/>";
           
           //print apa
-          echo $answer[1].", ".$answer[0][0].". (".$yearP."). ".$title.". ".$journal_name.", ".$volume."(".$issue."), ".$page_start."-".$page_end.". ".$url."<br/>";
+          echo $answer[1].", ".$answer[0].". "."<span>\"$title.\"<span>"."<i> $journal_name </i>";
+          echo $volume.", no. ".$issue." (".$monthP." ".$yearP."): ".$page_start."-".$page_end.". ".$url."<br/>";
 
         }
 ?>

@@ -29,21 +29,22 @@ $connect = new PDO("mysql:host=localhost;dbname=userdb1", "root", "");
             ':doi'                =>  $_POST["doi"],
             ':whereCreate'        =>  "Bibliography"
         );
+        print_r($data);
 
-        $query = "
-        INSERT INTO author_test 
-        (name, title, journal_name, periodical_name, dayP, monthP, yearP, page_start, page_end, volume, issue, url, doi, whereCreate) 
-        VALUES (:name, :title, :journal_name, :periodical_name, :dayP, :monthP, :yearP, :page_start, :page_end, :volume, :issue, :url, :doi, :whereCreate)
-        ";
+        // $query = "
+        // INSERT INTO author_test 
+        // (name, title, journal_name, periodical_name, dayP, monthP, yearP, page_start, page_end, volume, issue, url, doi, whereCreate) 
+        // VALUES (:name, :title, :journal_name, :periodical_name, :dayP, :monthP, :yearP, :page_start, :page_end, :volume, :issue, :url, :doi, :whereCreate)
+        // ";
 
-        $statement = $connect->prepare($query);
+        // $statement = $connect->prepare($query);
 
-        if($statement->execute($data))
-        {
-            echo '
-                Data Successfully Inserted
-            ';
-        }
+        // if($statement->execute($data))
+        // {
+        //     echo '
+        //         Data Successfully Inserted
+        //     ';
+        // }
     }
     
 

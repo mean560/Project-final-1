@@ -19,6 +19,8 @@
   }
   .leftBody {
     background-color: rgb(249, 249, 249);
+    position: fixed;
+
     float: left;
     width: 15%;
     height: 541px;

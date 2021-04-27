@@ -143,6 +143,7 @@ span.my-image-text i.fas.fa-angle-left {
 
 .middle aside.right .input-note {
     margin: 10px;
+    background-color:rgb(249, 249, 249);
 }
 
 .input-note .w3-input {
@@ -262,3 +263,4 @@ form.example::after {
     border-style: solid;
     text-decoration-style: solid;
 }
+

@@ -78,7 +78,7 @@ if (!isset($_SESSION['status_login'])) {
 	</head>
 	<body data-new-gr-c-s-check-loaded="14.990.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.990.0">
 		<!-- Navigation -->
-		<nav class="navbar navbar-default bg-light static-top" id="top-navigation" style="height: 83px;">
+		<nav class="navbar navbar-default bg-light static-top" id="top-navigation" style="height: 70px;">
 			<!-- <div class="container"> -->
 				<a href="../../index.php" style="text-align: right;">
 					<div class="navbar-brand">

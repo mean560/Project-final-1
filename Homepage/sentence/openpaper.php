@@ -168,24 +168,6 @@ if (!isset($_SESSION['status_login'])) {
                     <input class="sentence" type="submit" name="buttonPastofSentence" id="buttonPastofSentence" value="Simple Sentence" style="margin: 0px 20px 5px 0px;">
                     <input class="translate" type="submit" name="buttonTranslate" id="buttonTranslate" value="Translate" style="margin: 0px 0px 5px 0px;">
 
-                    <!-- <textarea name="output_area" id="output_area" style="padding: 5px; font-size: 16px; width:100%; height: 190px;"> -->
-                        <?php
-                    
-                            // if (isset($_POST["buttonTranslate"])) {
-                            //     include("translate.php");
-                            // } else if (isset($_POST["buttonPastofSentence"])) {
-                            //     include("runsimplesentence.php");
-                            // } else if (isset($_POST["buttonTagging"])) {
-                            //     include("runtagging.php");
-                            //     //  $stringText = $_POST["inserttxt"];
-                            //     //  echo trim($stringText);
-
-                            // } else {
-                            //     echo " ";
-                            // }
-                        
-                        ?>
-                    <!-- </textarea> -->
                     <div class="container" style="font-size: 16px; border: 1px solid; width: 100%; height: 200px; text-align:center; padding: 10px; line-height: 1.8;">
                         <?php
                             if(isset($_POST["buttonTagging"])){ 

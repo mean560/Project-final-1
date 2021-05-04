@@ -376,20 +376,5 @@ $(document).ready(function() {
             }
         });
     });
-
-    // $(document).on('click', 'tagging', 'sentence', 'translate' ,function(){
-
-    //     var file_name = $('#file_name').val() || '';
-    //     var file_directory = $('#file_directory').val() || '';
-        
-    //     $.ajax({
-    //         url:'./savepdf.php',
-    //         type: 'POST',
-    //         data: {
-    //             file_name : file_name,
-    //             file_directory : file_directory,
-    //         }
-    //     });
-    // });
 });
 </script>

@@ -22,4 +22,8 @@ $newfilename = $user_id . $username . time() . "." . $ext;
 $sql = "INSERT INTO search (title, description, file_name, file_directory,user_id,date_create, url, last_update, keyword)
         VALUES('$title', '$description', '$newfilename', '$file_directory','$user_id','$date_create','$url','$last_update','$keyword')";
 $query = mysqli_query($con, $sql);
+
 echo $sql;
+$sql = "INSERT INTO bibli (user_id)
+        VALUES('$user_id')";
+$query = mysqli_query($con, $sql);

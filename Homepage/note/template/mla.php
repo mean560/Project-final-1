@@ -3,23 +3,23 @@
 
         // include 'config_s.php';
         $con = mysqli_connect("localhost", "root", "", "project_test"); 
-        $query = "select * from author_test_note";
+        $query = "select * from search where id = $id";
         $result = mysqli_query($con,$query);
         // $num = mysqli_num_rows($result);
         while($row = mysqli_fetch_array($result)){
           $id = $row['id'];
-          $name = $row['name'];
-          $title = $row['title'];
-          $journal_name = $row['journal_name'];
-          $volume = $row['volume'];
-          $issue = $row['issue'];
-          $monthP = $row['monthP'];
-          $yearP = $row['yearP'];
+          $name = $row['b_name'];
+          $title = $row['b_title'];
+          $journal_name = $row['b_journal_name'];
+          $volume = $row['b_volume'];
+          $issue = $row['b_issue'];
+          $monthP = $row['b_monthP'];
+          $yearP = $row['b_yearP'];
           // $page = $row['pages'];
-          $page_start = $row['page_start'];
-          $page_end = $row['page_end'];
-          $url = $row['url'];
-          $doi = $row['doi'];
+          $page_start = $row['b_page_start'];
+          $page_end = $row['b_page_end'];
+          $url = $row['b_url'];
+          $doi = $row['b_doi'];
           //จัดการชื่อ
           $answer = explode(" ",$name);
           // echo $answer[0][0];

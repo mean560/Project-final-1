@@ -34,8 +34,14 @@ if (!isset($_SESSION['status_login'])) {
   <link href="css/landing-page.min.css" rel="stylesheet">
 
   <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />   -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <!-- <script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/wow.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </head>
 
@@ -76,7 +82,7 @@ if (!isset($_SESSION['status_login'])) {
   <!--Body-->
   <div class="containerBody">
     <div class="leftBody">
-      <button type="button" class="btn" data-toggle="modal" data-target="#myModal" style="margin-top: 25px; margin-left: 25px; width: 150px; font-family: Arial, Helvetica, sans-serif; letter-spacing: 0px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; text-decoration-style: solid;">Create Source</button>
+      <button type="button" class="btn" data-toggle="modal" data-target="#insertModal" style="margin-top: 25px; margin-left: 25px; width: 70%; font-family: Arial, Helvetica, sans-serif; letter-spacing: 0px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; text-decoration-style: solid;">Create Source</button>
       <!-- list button -->
       <ul class="list-group" style="padding-top: 16px; border-width: 0px;">
         <div class="btn-group-vertical" style="opacity: 1;">
@@ -93,7 +99,7 @@ if (!isset($_SESSION['status_login'])) {
       <div class="table-wrapper-scroll-y my-custom-scrollbar" style="height: 360px; background-color: white;">
         <table class="table table-bordered table-striped mb-0" id="tableAuthor" style='border-collapse: collapse;'>
           <tr>
-            <th style="width: 5%">A</th>
+            <th>A</th>
             <th>B</th>
             <th>AUTHORS</th>
             <th>TITLE</th>
@@ -112,23 +118,19 @@ if (!isset($_SESSION['status_login'])) {
             $name = $row['name'];
             $title = $row['title'];
             $journal = $row['journal_name'];
-            // $year = $row['yearACC'];
           ?>
-            <td>
-              <!-- <input type="checkbox" class="custom-control-input" id="customCheck" name="example1"> -->
-              <input type="checkbox" id="customCheck"/>
-            </td>
+            <form action="multiselect.php" method="post">
+              <td><input type="checkbox" name="idcheckbox[]" value="<?php echo $row['id']; ?>" /></td>
+            </form>
+            <td><input type="checkbox" id="customCheck2" value="<?php echo $row['id']; ?>" /></td>
             <?php
-            // echo "<td></td>";
-            echo "<td></td>";
             echo "<td>" . $name . "</td>";
             echo "<td>" . $title . "</td>";
             echo "<td>" . $journal . "</td>";
-            // echo "<td>" . $year . "</td>";
             ?>
             <td>
-              <button type="button" class="btn btn-warning update" id="<?=$row['id']?>" id="userinfo" name="update" ><i class="fas fa-edit" style="color:white;"></i></button>
-              <button type="button" class="btn btn-danger delete" data-id='<?= $id; ?>'"><i class="bi bi-trash"></i></button>
+              <button type="button" class="btn btn-warning edit_data" id="<?php echo $row['id']; ?>" name="edit_data" ><i class="fas fa-edit" style="color:white;"></i></button>
+              <button type="button" class="btn btn-danger delete_data" id="<?php echo $row['id']; ?>" name="delete_data"><i class="bi bi-trash"></i></button>
             </td>
           <?php
             echo "</tr>";
@@ -136,9 +138,11 @@ if (!isset($_SESSION['status_login'])) {
           ?>
         </table>
       </div>
+      <!-- <?php// require 'insertModal.php'; ?> -->
 
       <div class="bottomBody">
-        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter" style="display: inline-block; position: static; margin-top: 35px; margin-left: 380px;
+        <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalCenter" style="display: inline-block; position: static; 
+          margin-top: 35px; margin-left: 23%;
           background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; margin-right: 5px;
           text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; 
           text-decoration-style: solid;">Download Bibliography</button>
@@ -155,44 +159,36 @@ if (!isset($_SESSION['status_login'])) {
       </div>
     </div>
   </div>
+        <?php require 'insertModal.php'; ?>
+
   <style>
     .navbar .container {
       margin: 0;
     }
-
     li.dropdown {
       list-style: none;
-
     }
-
     li.dropdown .dropdown-toggle {
       color: #555;
       font-size: 18px;
-
     }
-
     .containerBody {
       background-color: rgb(249, 249, 249);
       height: 100%;
       width: auto;
     }
-
-
-
     .leftBody {
       background-color: rgb(249, 249, 249);
       float: left;
       width: 15%;
       height: 637px;
     }
-
     .rightBody {
       background-color: white;
       float: right;
       width: 85%;
       height: 541px;
     }
-
     .bottomBody {
       background-color: rgb(249, 249, 249);
       position: fixed;
@@ -209,302 +205,6 @@ if (!isset($_SESSION['status_login'])) {
 </body>
 </html>
 
-<!-- Modal Create Source -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header text-center d-block">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">Create Source</h4>
-        <h5 class="modal-title" style="display: contents;">Type of Source&nbsp;&nbsp;&nbsp;:</h5>
-        <div class="form-group" style="display: inline-block;">
-        <!-- <form method="POST" name="add_name" id="add_name"> -->
-          <select class="form-control" data-role="" name="selectTypeOfSource" style="max-width: 255px; max-height: 35px; padding: 0px 0px; border: none; background:none; font-size: 18px; ">
-            <!-- <option selected disabled value="" >Select Type of Source</option> -->
-            <!-- <option value="value1">Book</option>
-            <option value="value2">Book Section</option> -->
-            <option selected value="journal_article">Journal Article</option>
-            <option value="article_periodical">Article in a Periodical</option>
-            <!-- <option value="value5">Conference Proceedings</option>
-            <option value="value6">Report</option>
-            <option value="value7">Web site</option>
-            <option value="value8">Document From Web site</option>
-            <option value="value9">Electronic Source</option>
-            <option value="value10">Art</option>
-            <option value="value11">Sound Recording</option>
-            <option value="value12">Performance</option>
-            <option value="value13">Film</option>
-            <option value="value14">Interview</option>
-            <option value="value15">Patent</option>
-            <option value="value16">Case</option>
-            <option value="value17">Miscellaneous</option> -->
-          </select>
-        </div>
-      </div>
-      <div class="modal-body">
-        <span id="success_result"></span>
-        <form action="" method="POST" name="add_name" id="add_name">
-          <div class="form-group">
-            <div class="table-responsive">
-              <table id="dynamic_field">
-                <tr>
-                  <td class="text" style="padding-left: 25px;">AUTHOR&nbsp;&nbsp;</td>
-                  <td><input type="text" name="name[]" placeholder="Kramer, James D; Chen, Jacky" class="form-control name_list" style="width: 300px;" /></td>
-                  <td><button type="button" name="remove" id="'+i+'" class="btn btn_remove"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTI1NiwwQzExNC44NTMsMCwwLDExNC44MzMsMCwyNTZzMTE0Ljg1MywyNTYsMjU2LDI1NmMxNDEuMTY3LDAsMjU2LTExNC44MzMsMjU2LTI1NlMzOTcuMTQ3LDAsMjU2LDB6IE0yNTYsNDcyLjM0MSAgICBjLTExOS4yOTUsMC0yMTYuMzQxLTk3LjA0Ni0yMTYuMzQxLTIxNi4zNDFTMTM2LjcwNSwzOS42NTksMjU2LDM5LjY1OVM0NzIuMzQxLDEzNi43MDUsNDcyLjM0MSwyNTZTMzc1LjI5NSw0NzIuMzQxLDI1Niw0NzIuMzQxeiAgICAiIGZpbGw9IiNjYjAwMDAiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiPjwvcGF0aD4KCTwvZz4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTM1NS4xNDgsMjM0LjM4NkgxNTYuODUyYy0xMC45NDYsMC0xOS44Myw4Ljg4NC0xOS44MywxOS44M3M4Ljg4NCwxOS44MywxOS44MywxOS44M2gxOTguMjk2ICAgIGMxMC45NDYsMCwxOS44My04Ljg4NCwxOS44My0xOS44M1MzNjYuMDk0LDIzNC4zODYsMzU1LjE0OCwyMzQuMzg2eiIgZmlsbD0iI2NiMDAwMCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" style="width: 30px; height: 30px; display: block; padding-left: 0px;" /></button></td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <button type="button" name="addif" id="addif" class="btn btn-default" style="margin-left: 100px; margin-bottom: 20px; padding-left: 15px;"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI1NiA1MTJjLTE0MS4xNjQwNjIgMC0yNTYtMTE0LjgzNTkzOC0yNTYtMjU2czExNC44MzU5MzgtMjU2IDI1Ni0yNTYgMjU2IDExNC44MzU5MzggMjU2IDI1Ni0xMTQuODM1OTM4IDI1Ni0yNTYgMjU2em0wLTQ4MGMtMTIzLjUxOTUzMSAwLTIyNCAxMDAuNDgwNDY5LTIyNCAyMjRzMTAwLjQ4MDQ2OSAyMjQgMjI0IDIyNCAyMjQtMTAwLjQ4MDQ2OSAyMjQtMjI0LTEwMC40ODA0NjktMjI0LTIyNC0yMjR6bTAgMCIgZmlsbD0iIzA2OWJiZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTM2OCAyNzJoLTIyNGMtOC44MzIwMzEgMC0xNi03LjE2Nzk2OS0xNi0xNnM3LjE2Nzk2OS0xNiAxNi0xNmgyMjRjOC44MzIwMzEgMCAxNiA3LjE2Nzk2OSAxNiAxNnMtNy4xNjc5NjkgMTYtMTYgMTZ6bTAgMCIgZmlsbD0iIzA2OWJiZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI1NiAzODRjLTguODMyMDMxIDAtMTYtNy4xNjc5NjktMTYtMTZ2LTIyNGMwLTguODMyMDMxIDcuMTY3OTY5LTE2IDE2LTE2czE2IDcuMTY3OTY5IDE2IDE2djIyNGMwIDguODMyMDMxLTcuMTY3OTY5IDE2LTE2IDE2em0wIDAiIGZpbGw9IiMwNjliYmQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiPjwvcGF0aD48L2c+PC9zdmc+" style="width: 30px; height: 30px;" />
-            <p class="text" style="color: #069BBD; display: inline;">&nbsp;&nbsp;Add another Report author</p></img>
-          </button>
-          <!-- <div class="form-group">
-            <div class="row">
-            <label for="name" class="col-sm-3 control-label">File</label>
-            <div class="col-sm-9">
-                <input type="file" name="txt_file" class="form-control">
-            </div>
-            </div>
-          </div> -->
-          <div class="form-group" id="Dtitle">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">TITLE&nbsp;&nbsp;:</p>
-            <input type="text" name="title"  class="form-control" placeholder="How to Write Bibliographies" style="display: inline; width: 88%;">
-          </div>
-          <div class="form-group" id="Djournal_name">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">JOURNAL NAME&nbsp;&nbsp;:</p>
-            <input type="text" name="journal_name" class="form-control" placeholder="Adventure Works Monthly" style="display: inline; width: 77%;">
-          </div>
-          <div class="form-group" id="Dperiodical_name">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">PERIODICAL TITLE&nbsp;&nbsp;:</p>
-            <input type="" name="periodical_name" class="form-control" placeholder="Adventure Works Daily" style="display: inline; width: 75%;">
-          </div>
-          <div class="form-group" id="DdateP">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">DATE PUBLISHED&nbsp;&nbsp;:</p>
-            <input type="text" name="dayP" class="form-control" placeholder="1" style="width: 25%; display: inline-block;">
-            <input type="text" name="monthP" class="form-control" placeholder="January" style="width: 25%; display: inline-block;">
-            <input type="text" name="yearP" class="form-control" placeholder="2006" style="width: 25%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Dpages">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">FROM PAGE&nbsp;&nbsp;:</p>
-            <input type="text" name="page_start" class="form-control" placeholder="50" style="width: 25%; display: inline-block;">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">TO PAGE&nbsp;&nbsp;:</p>
-            <input type="text" name="page_end" class="form-control" placeholder="62" style="width: 25%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Dvolume" style="display: inline-block">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">VOLUME&nbsp;&nbsp;:</p>
-            <input type="text" name="volume" class="form-control" placeholder="III" style="width: 60%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Dissue" style="display: inline-block">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">ISSUE&nbsp;&nbsp;:</p>
-            <input type="text" name="issue" class="form-control" placeholder="12" style="width: 60%; display: inline-block;">
-          </div><br/>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-left: 50px; padding-bottom:10px;">
-            <label class="btn btn-info active" >
-              <input type="radio" name="options" id="optionURL" checked> URL
-            </label>
-            <label class="btn btn-info">
-              <input type="radio" name="options" id="optionDOI"> DOI
-            </label>
-          </div>
-          <div class="form-group" id="Durl">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">URL&nbsp;&nbsp;:</p>
-            <input type="text" name="url" class="form-control" placeholder="http://www.adatum.com" style="width: 70%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Ddoi">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">DOI&nbsp;&nbsp;:</p>
-            <input type="text" name="doi" class="form-control" placeholder="10.1000/182" style="width: 70%; display: inline-block;">
-          </div>
-          </div>
-          <div class="modal-footer">
-          <!-- <button type="button" class="btn btn-info mr-auto" data-toggle="collapse" data-target="#demo" style="background-color: white; border: none;">
-          <p class="text" style="display: inline-block; color: black; align-content: center;">Show more detail</p>
-          </button><br /> -->
-          <input type="hidden" name="author_id" id="author_id" />
-          <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />
-        <!-- </from> -->
-
-        </div>
-        </from>
-
-    </div>
-  </div>
-</div>
-<!-- ####################################################################################################################### -->
-<!-- Modal Edit Source -->
-<div id="myEditModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header text-center d-block">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">Create Source</h4>
-        <h5 class="modal-title" style="display: contents;">Type of Source&nbsp;&nbsp;&nbsp;:</h5>
-        <div class="form-group" style="display: inline-block;">
-        <!-- <form method="POST" name="add_name" id="add_name"> -->
-          <select class="form-control" data-role="" name="selectTypeOfSource" style="max-width: 255px; max-height: 35px; padding: 0px 0px; border: none; background:none; font-size: 18px; ">
-            <!-- <option selected disabled value="" >Select Type of Source</option> -->
-            <!-- <option value="value1">Book</option>
-            <option value="value2">Book Section</option> -->
-            <option selected value="journal_article">Journal Article</option>
-            <option value="article_periodical">Article in a Periodical</option>
-            <!-- <option value="value5">Conference Proceedings</option>
-            <option value="value6">Report</option>
-            <option value="value7">Web site</option>
-            <option value="value8">Document From Web site</option>
-            <option value="value9">Electronic Source</option>
-            <option value="value10">Art</option>
-            <option value="value11">Sound Recording</option>
-            <option value="value12">Performance</option>
-            <option value="value13">Film</option>
-            <option value="value14">Interview</option>
-            <option value="value15">Patent</option>
-            <option value="value16">Case</option>
-            <option value="value17">Miscellaneous</option> -->
-          </select>
-        </div>
-      </div>
-      <div class="modal-body">
-        <form method="POST" name="add_name" id="add_name">
-          <div class="form-group">
-            <div class="table-responsive">
-              <table id="dynamic_field">
-                <tr>
-                  <td class="text" style="padding-left: 25px;">AUTHOR&nbsp;&nbsp;</td>
-                  <td><input type="text" name="name[]" placeholder="Kramer, James D; Chen, Jacky" class="form-control name_list" style="width: 300px;" /></td>
-                  <td><button type="button" name="remove" id="'+i+'" class="btn btn_remove"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTI1NiwwQzExNC44NTMsMCwwLDExNC44MzMsMCwyNTZzMTE0Ljg1MywyNTYsMjU2LDI1NmMxNDEuMTY3LDAsMjU2LTExNC44MzMsMjU2LTI1NlMzOTcuMTQ3LDAsMjU2LDB6IE0yNTYsNDcyLjM0MSAgICBjLTExOS4yOTUsMC0yMTYuMzQxLTk3LjA0Ni0yMTYuMzQxLTIxNi4zNDFTMTM2LjcwNSwzOS42NTksMjU2LDM5LjY1OVM0NzIuMzQxLDEzNi43MDUsNDcyLjM0MSwyNTZTMzc1LjI5NSw0NzIuMzQxLDI1Niw0NzIuMzQxeiAgICAiIGZpbGw9IiNjYjAwMDAiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiPjwvcGF0aD4KCTwvZz4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTM1NS4xNDgsMjM0LjM4NkgxNTYuODUyYy0xMC45NDYsMC0xOS44Myw4Ljg4NC0xOS44MywxOS44M3M4Ljg4NCwxOS44MywxOS44MywxOS44M2gxOTguMjk2ICAgIGMxMC45NDYsMCwxOS44My04Ljg4NCwxOS44My0xOS44M1MzNjYuMDk0LDIzNC4zODYsMzU1LjE0OCwyMzQuMzg2eiIgZmlsbD0iI2NiMDAwMCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" style="width: 30px; height: 30px; display: block; padding-left: 0px;" /></button></td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <button type="button" name="addif" id="addif" class="btn btn-default" style="margin-left: 100px; margin-bottom: 20px; padding-left: 15px;"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI1NiA1MTJjLTE0MS4xNjQwNjIgMC0yNTYtMTE0LjgzNTkzOC0yNTYtMjU2czExNC44MzU5MzgtMjU2IDI1Ni0yNTYgMjU2IDExNC44MzU5MzggMjU2IDI1Ni0xMTQuODM1OTM4IDI1Ni0yNTYgMjU2em0wLTQ4MGMtMTIzLjUxOTUzMSAwLTIyNCAxMDAuNDgwNDY5LTIyNCAyMjRzMTAwLjQ4MDQ2OSAyMjQgMjI0IDIyNCAyMjQtMTAwLjQ4MDQ2OSAyMjQtMjI0LTEwMC40ODA0NjktMjI0LTIyNC0yMjR6bTAgMCIgZmlsbD0iIzA2OWJiZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTM2OCAyNzJoLTIyNGMtOC44MzIwMzEgMC0xNi03LjE2Nzk2OS0xNi0xNnM3LjE2Nzk2OS0xNiAxNi0xNmgyMjRjOC44MzIwMzEgMCAxNiA3LjE2Nzk2OSAxNiAxNnMtNy4xNjc5NjkgMTYtMTYgMTZ6bTAgMCIgZmlsbD0iIzA2OWJiZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI1NiAzODRjLTguODMyMDMxIDAtMTYtNy4xNjc5NjktMTYtMTZ2LTIyNGMwLTguODMyMDMxIDcuMTY3OTY5LTE2IDE2LTE2czE2IDcuMTY3OTY5IDE2IDE2djIyNGMwIDguODMyMDMxLTcuMTY3OTY5IDE2LTE2IDE2em0wIDAiIGZpbGw9IiMwNjliYmQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiPjwvcGF0aD48L2c+PC9zdmc+" style="width: 30px; height: 30px;" />
-            <p class="text" style="color: #069BBD; display: inline;">&nbsp;&nbsp;Add another Report author</p></img>
-          </button>
-          <div class="form-group" id="Dtitle">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">TITLE&nbsp;&nbsp;:</p>
-            <input type="text" name="title" class="form-control" placeholder="How to Write Bibliographies" style="display: inline; width: 88%;">
-          </div>
-          <div class="form-group" id="Djournal_name">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">JOURNAL NAME&nbsp;&nbsp;:</p>
-            <input type="text" name="journal_name" class="form-control" placeholder="Adventure Works Monthly" style="display: inline; width: 77%;">
-          </div>
-          <div class="form-group" id="Dperiodical_name">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">PERIODICAL TITLE&nbsp;&nbsp;:</p>
-            <input type="" name="periodical_name" class="form-control" placeholder="Adventure Works Daily" style="display: inline; width: 75%;">
-          </div>
-          <!-- <div class="form-group" id="Dcity">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">CITY&nbsp;&nbsp;:</p>
-            <input type="text" id="city" class="form-control" placeholder="Chicago" style="width: 500px; display: inline-block;">
-          </div> -->
-          <div class="form-group" id="DdateP">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">DATE PUBLISHED&nbsp;&nbsp;:</p>
-            <input type="text" name="dayP" class="form-control" placeholder="1" style="width: 25%; display: inline-block;">
-            <input type="text" name="monthP" class="form-control" placeholder="January" style="width: 25%; display: inline-block;">
-            <input type="text" name="yearP" class="form-control" placeholder="2006" style="width: 25%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Dpages">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">FROM PAGE&nbsp;&nbsp;:</p>
-            <input type="text" name="page_start" class="form-control" placeholder="50" style="width: 25%; display: inline-block;">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">TO PAGE&nbsp;&nbsp;:</p>
-            <input type="text" name="page_end" class="form-control" placeholder="62" style="width: 25%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Dvolume" style="display: inline-block">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">VOLUME&nbsp;&nbsp;:</p>
-            <input type="text" name="volume" class="form-control" placeholder="III" style="width: 60%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Dissue" style="display: inline-block">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">ISSUE&nbsp;&nbsp;:</p>
-            <input type="text" name="issue" class="form-control" placeholder="12" style="width: 60%; display: inline-block;">
-          </div><br/>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-left: 50px; padding-bottom:10px;">
-            <label class="btn btn-info active" >
-              <input type="radio" name="options" id="optionURL" checked> URL
-            </label>
-            <label class="btn btn-info">
-              <input type="radio" name="options" id="optionDOI"> DOI
-            </label>
-          </div>
-          <div class="form-group" id="Durl">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">URL&nbsp;&nbsp;:</p>
-            <input type="text" name="url" class="form-control" placeholder="http://www.adatum.com" style="width: 70%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Ddoi">
-            <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">DOI&nbsp;&nbsp;:</p>
-            <input type="text" name="doi" class="form-control" placeholder="10.1000/182" style="width: 70%; display: inline-block;">
-          </div>
-
-
-          <!-- Demo Collapse -->
-          <!-- <div id="demo" class="collapse">
-            <div class="md-form">
-              <div class="form-group" id="Deditor">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">EDITOR&nbsp;&nbsp;:</p>
-                <input type="text" id="editor" class="form-control" placeholder="Kramer, James D; Chen, Jacky" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dpublisher">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">PUBLISHER&nbsp;&nbsp;:</p>
-                <input type="text" id="publisher" class="form-control" placeholder="Adventure Works Monthly" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dedition">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">EDITON&nbsp;&nbsp;:</p>
-                <input type="text" id="edition" class="form-control" placeholder="Weekend" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dvolume">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">VOLUME&nbsp;&nbsp;:</p>
-                <input type="text" id="volume" class="form-control" placeholder="III" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dissue">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">ISSUE&nbsp;&nbsp;:</p>
-                <input type="text" id="issue" class="form-control" placeholder="12" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dshort_title">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">SHORT TITLE&nbsp;&nbsp;:</p>
-                <input type="text" id="short_title" class="form-control" placeholder="Bibliographies" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dstandard_num">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">STANDARD NUMBER&nbsp;&nbsp;:</p>
-                <input type="text" id="standard_num" class="form-control" placeholder="ISBN/ISSN" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dcomment">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">COMMENTS&nbsp;&nbsp;:</p>
-                <input type="text" id="comment" class="form-control" placeholder="enter comment about this source" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="Dmedium">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">MEDIUM&nbsp;&nbsp;:</p>
-                <input type="text" id="medium" class="form-control" placeholder="Document" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-              <div class="form-group" id="DdateACC">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">DATE ACCESSED&nbsp;&nbsp;:</p>
-                <input type="text" id="dayACC" class="form-control" placeholder="1" style="width: 150px; display: inline-block; padding-right: 0px;">
-                <input type="text" id="monthACC" class="form-control" placeholder="January" style="width: 150px; display: inline-block; padding-right: 0px;">
-                <input type="text" id="yearACC" class="form-control" placeholder="2006" style="width: 150px; display: inline-block; padding-right: 0px;">
-              </div>
-              <div class="form-group" id="Durl">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">URL&nbsp;&nbsp;:</p>
-                <input type="text" id="url" class="form-control" placeholder="http://www.adatum.com" style="width: 650px; display: inline-block; padding-right: 0px;">
-              </div>
-              <div class="form-group" id="Ddoi">
-                <p class="text" style="padding-left: 25px; padding-right: 10px; display: inline-block;">DOI&nbsp;&nbsp;:</p>
-                <input type="text" id="doi" class="form-control" placeholder="10.1000/182" style="width: 500px; display: inline-block; padding-right: 0px; ">
-              </div>
-            </div>
-          </div> -->
-          <!-- </from> -->
-      </div>
-      <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-info mr-auto" data-toggle="collapse" data-target="#demo" style="background-color: white; border: none;">
-          <p class="text" style="display: inline-block; color: black; align-content: center;">Show more detail</p>
-        </button><br /> -->
-        <!-- <input type="hidden" name="author_id" id="author_id" /> -->
-        <input type="button" name="submit" id="submit" class="btn btn-info" value="Submit" />
-        </from>
-
-      </div>
-    </div>
-  </div>
-</div>
 <!-- ####################################################################################################################### -->
 <!-- Modal Download Bibliography -->
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -518,6 +218,7 @@ if (!isset($_SESSION['status_login'])) {
       </div>
       <div class="modal-body" style="font-size:16px">
         <?php 
+        include 'multiselect.php';
           // echo "APA style";
           // include 'template/apa.php'; 
           // echo "<br/>";
@@ -527,15 +228,15 @@ if (!isset($_SESSION['status_login'])) {
           // echo "Chicago style";
           // include 'template/chicago.php';
         ?>
-        <div id="apa">
-          <?php include 'template/apa.php'; ?>
+        <!-- <div id="apa">
+          <?php //include 'template/apa.php'; ?>
         </div>
         <div id="mla">
-          <?php include 'template/mla.php'; ?>
+          <?php //include 'template/mla.php'; ?>
         </div>
         <div id="chicago">
-          <?php include 'template/chicago.php'; ?>
-        </div>
+          <?php //include 'template/chicago.php'; ?>
+        </div> -->
         
       </div>
       <div class="modal-footer">
@@ -561,20 +262,24 @@ if (!isset($_SESSION['status_login'])) {
       $('#row' + button_id + '').remove();
     });
 
-// save data from #myModal to database ######################################################################################################################################################
-    $('#submit').click(function(){            
+// save data from #insertModal to database ######################################################################################################################################################
+    $('#insert-form').on('submit', function(e){ 
+      e.preventDefault();           
            $.ajax({  
-                url:"savedata.php",  
+                url:"insert.php",  
                 method:"POST",  
-                data:$('#add_name').serialize(),  
+                data:$('#insert-form').serialize(),  
+                beforeSend:function(){
+                  $('#insertSubmit').val("Insert...");
+                },
                 success:function(data)  
                 {  
-                     alert(data);  
-                     $('#add_name')[0].reset();  
-                     $('#myModal').modal('hide');
-                     $('#add_name').html(data);  
+                    //  alert(data);  
+                     $('#insert-form')[0].reset();  
+                     $('#insertModal').modal('hide');
+                    //  $('#add_name').html(data);  
 
-                      // location.reload();
+                    location.reload();
                     //  location.reload();
                 }  
            });  
@@ -631,228 +336,61 @@ if (!isset($_SESSION['status_login'])) {
           } 
       });
     }); 
-// ########################################################################################################################################################
-    // $(document).on('click', '.update', function(){
-    //   var author_id = $(this).attr("id");
-    //   $.ajax({
-    //   url:"update.php",
-    //   method:"POST",
-    //   data:{author_id:author_id},
-    //   dataType:"json",
-    //   success:function(data)
-    //   {
-    //     $('#myModal').modal('show');
-    //     $('#name').val(data.name);
-    //     // $('#title').val(data.title);
-    //     // $('#last_name').val(data.last_name);
-    //     $('.modal-title').text("Edit Source");
-    //     $('#author_id').val(author_id);
-    //     // $('#user_uploaded_image').html(data.user_image);
-    //     $('#submit').val("Edit");      }
-    //   })
-    // });
-// ########################################################################################################################################################
-
-    //submit save author
-    // $('#submit').click(function() {
-    //   saveAuthor();
-    // });
-    //submit edit author
-    // $('.editbtn').click(function(){
-    //   // console.log($(this).attr('id'))
-    //   var id = $(this).attr('id');
-    //   $.ajax({
-    //     url: "index.php",
-    //     type: "post",
-    //     data: {
-    //       id: id, 
-    //       function: "update_func"
-    //     },
-    //     dataType: "json",
-    //     // dataType: "html",
-    //     success: function(response) {
-    //       console.log(response.id);
-    //       $('#name_update').val(response.name);
-    //       $('#title_update').val(response.title);
-    //       $('#id').val(response.id);
-    //       $('#myEditModal').modal('show');
-    //       // if(confirm(response)){
-    //       //   location.reload();
-    //       // }else{
-    //       //   location.reload();
-    //       //}
-    //     }
-    //   })
-    //   return false;
-    // });
-    //Delete Author
-    // $(document).on('click', '.delete', function(){
-    //   var el = this;
-    //   var deleteid = $(this).data('id');
-    //   var confirmalert = confirm("Are you sure?");
-    //   if (confirmalert == true) {
-    //       // AJAX Request
-    //       $.ajax({
-    //         url: 'before-delete.php',
-    //         type: 'POST',
-    //         data: { id:deleteid },
-    //         success: function(response){
-    //           if(response == 1){
-    //             // Remove row from HTML Table
-    //             $(el).closest('tr').css('background','tomato');
-    //             $(el).closest('tr').fadeOut(800,function(){
-    //               $(this).remove();
-    //             });
-    //           }else{
-    //             alert('Invalid ID.');
-    //           }
-    //         }
-    //       });
-    //   }
-    // });
-    //Function Save Author
-    function saveAuthor() {
-
-      var name = $('#name').val();
-      var title = $('#title').val();
-      var journal_name = $('#journal_name').val();
-      var periodical_name = $('#periodical_name').val();
-      var city = $('#city').val();
-      var dayP = $('#dayP').val();
-      var monthP = $('#monthP').val();
-      var yearP = $('#yearP').val();
-      var pages = $('#pages').val();
-      var editor = $('#editor').val();
-      var publisher = $('#publisher').val();
-      var edition = $('#edition').val();
-      var volume = $('#volume').val();
-      var issue = $('#issue').val();
-      var short_title = $('#short_title').val();
-      var standard_num = $('#standard_num').val();
-      var comment = $('#comment').val();
-      var medium = $('#medium').val();
-      var dayACC = $('#dayACC').val();
-      var monthACC = $('#monthACC').val();
-      var yearACC = $('#yearACC').val();
-      var url = $('#url').val();
-      var doi = $('#doi').val();
-
-      // if (title != '' ) {
+// edit data from #insertModal to database ########################################################################################################################################################
+  $('.edit_data').click( function(){  
+      // var uid = $('#postid').val();
+      var uid = $(this).attr("id");  
+      $.ajax({  
+        url:"fetch.php",  
+        method:"POST",  
+        data:{id: uid},  
+        dataType:"json",  
+        success:function(data){  
+          $('#hidden_id').val(data.id);
+          $('#name').val(data.name);  
+          $('#titleB').val(data.title);  
+          $('#journal_nameB').val(data.journal_name);  
+          $('#periodical_nameB').val(data.periodical_name); 
+          $('#dayPB').val(data.dayP);  
+          $('#monthPB').val(data.monthP); 
+          $('#yearPB').val(data.yearP);  
+          $('#page_startB').val(data.page_start); 
+          $('#page_endB').val(data.page_end);  
+          $('#volumeB').val(data.volume); 
+          $('#issueB').val(data.issue);  
+          $('#urlB').val(data.url);  
+          $('#doiB').val(data.doi); 
+          $('#insertSubmit').val("Update");
+          $('#insertModal').modal('show');
+        }  
+      });  
+  });
+// delete data from #insertModal to database ########################################################################################################################################################
+  $('.delete_data').click( function(){
+    var el = this;
+    var uid = $(this).attr("id");
+    var confirmalert = confirm("Are you sure?");
+    if (confirmalert == true) {
       $.ajax({
-        url: 'savedata.php',
+        url: 'delete.php',
         type: 'POST',
-        data: {
-          // "title=" + title + "&journal_name=" + journal_name + "&periodical_name=" + periodical_name + "&city=" + city + "&dayP=" + dayP + "&monthP=" + monthP + "&yearP=" + yearP + "&pages=" + pages,
-          name: name,
-          title: title,
-          journal_name: journal_name,
-          periodical_name: periodical_name,
-          city: city,
-          dayP: dayP,
-          monthP: monthP,
-          yearP: yearP,
-          pages: pages,
-          editor: editor,
-          publisher: publisher,
-          edition: edition,
-          volume: volume,
-          issue: issue,
-          short_title: short_title,
-          standard_num: standard_num,
-          comment: comment,
-          medium: medium,
-          dayACC: dayACC,
-          monthACC: monthACC,
-          yearACC: yearACC,
-          url: url,
-          doi: doi,
-        },
+        data: {id: uid },
+        success: function(data){
+          // if(data == 1){
+          //   $(el).closest('tr').css('background','tomato');
+          //   $(el).closest('tr').fadeOut(800,function(){
+          //     $(this).remove();
+          //   });
+          // } else {
+          //   alert('Invalid ID.');
+          // }
+          location.reload();
+        }
       });
-      //}
-
     }
-    //Function Edit Author
-    function editAuthor() {
-
-      var name = $('#name').val();
-      var title = $('#title').val();
-      var journal_name = $('#journal_name').val();
-      var periodical_name = $('#periodical_name').val();
-      var city = $('#city').val();
-      var dayP = $('#dayP').val();
-      var monthP = $('#monthP').val();
-      var yearP = $('#yearP').val();
-      var pages = $('#pages').val();
-      var editor = $('#editor').val();
-      var publisher = $('#publisher').val();
-      var edition = $('#edition').val();
-      var volume = $('#volume').val();
-      var issue = $('#issue').val();
-      var short_title = $('#short_title').val();
-      var standard_num = $('#standard_num').val();
-      var comment = $('#comment').val();
-      var medium = $('#medium').val();
-      var dayACC = $('#dayACC').val();
-      var monthACC = $('#monthACC').val();
-      var yearACC = $('#yearACC').val();
-      var url = $('#url').val();
-      var doi = $('#doi').val();
-
-      // if (title != '' ) {
-      $.ajax({
-        url: 'update.php',
-        type: 'POST',
-        data: {
-          // "title=" + title + "&journal_name=" + journal_name + "&periodical_name=" + periodical_name + "&city=" + city + "&dayP=" + dayP + "&monthP=" + monthP + "&yearP=" + yearP + "&pages=" + pages,
-          name: name,
-          title: title,
-          journal_name: journal_name,
-          periodical_name: periodical_name,
-          city: city,
-          dayP: dayP,
-          monthP: monthP,
-          yearP: yearP,
-          pages: pages,
-          editor: editor,
-          publisher: publisher,
-          edition: edition,
-          volume: volume,
-          issue: issue,
-          short_title: short_title,
-          standard_num: standard_num,
-          comment: comment,
-          medium: medium,
-          dayACC: dayACC,
-          monthACC: monthACC,
-          yearACC: yearACC,
-          url: url,
-          doi: doi,
-        },
-      });
-      //}
-
-    }
-
-    // $('.userinfo').click(function(){
-      
-    //   var userid = $(this).data('id');
-
-    //   // AJAX request
-    //   $.ajax({
-    //     url: 'ajax_file.php',
-    //     type: 'post',
-    //     data: {userid: userid},
-    //     success: function(response){ 
-    //       // Add response in Modal body
-    //       $('.modal-body').html(response);
-
-    //       // Display Modal
-    //       $('#exampleModalCenter').modal('show'); 
-    //     }
-    //   });
-    // });
-
-
   });
 
-</script> -->
+
+});
+
+</script>

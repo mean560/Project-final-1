@@ -97,3 +97,28 @@ if (isset($_POST['update'])) {
      echo $file_name;
     
 }
+
+// if (isset($_POST['submitSave'])) {
+//     $id              = $_POST['id'];
+//     $name            = implode(", ", $_POST['b_name']);
+//     // $name            = $_POST['name'];
+//     $title           = $_POST['b_title'];
+//     $journal_name    = $_POST['b_journal_name'];
+//     $periodical_name = $_POST['b_periodical_name'];
+//     $dayP            = $_POST['b_dayP'];
+//     $monthP          = $_POST['b_monthP'];
+//     $yearP           = $_POST['b_yearP'];
+//     $page_start      = $_POST['b_page_start'];
+//     $page_end        = $_POST['b_page_end'];
+//     $volume          = $_POST['b_volume'];
+//     $issue           = $_POST['b_issue'];
+//     $url             = $_POST['b_url'];
+//     $doi             = $_POST['b_doi'];
+
+//     $sql = "UPDATE search SET b_name = '$name', b_title = '$title', b_journal_name = '$journal_name', 
+//     b_periodical_name = '$periodical_name', b_dayP = '$dayP', b_monthP = '$monthP', 
+//     b_yearP = '$yearP', b_page_start = '$page_start', b_page_end = '$page_end', 
+//     b_volume = '$volume', b_issue = '$issue', b_url = '$url',  b_doi = '$doi' WHERE id = '$id'";
+//     $query = mysqli_query($con, $sql);
+
+// }

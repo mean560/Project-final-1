@@ -47,6 +47,8 @@ if (isset($_GET['logout'])) {
            <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>   -->
+           <link rel="stylesheet" type="text/css" href="css/bootstrap.css"/>
+
 
 
 </head>
@@ -518,12 +520,24 @@ if (isset($_GET['logout'])) {
           <?php include 'template/chicago.php'; ?>
         </div>
       </div>
-      <button type="button" class="btn" id="add_button" data-toggle="modal" data-target="#myModal" style="display: inline-block; position: static;
+      <?php
+        require 'conn.php';
+				$query = mysqli_query($conn, "SELECT * FROM `search` WHERE id = $id") or die(mysqli_error());
+				while($fetch = mysqli_fetch_array($query)){
+				?>
+        <button type="button" class="btn add_button" name="add_button" data-toggle="modal" data-target="#myModal<?php echo $fetch['id']?>" 
+        style="display: inline-block; position: static; background-color: #5bc0de; font-family: Arial, Helvetica, sans-serif; border-width: 1px;
+        color:white; margin-left: 20%; margin-right:  2%; border-style: solid; width: 180px; height: 38px;">Create Source</button>
+				<?php
+        	include 'update_q.php';
+      } ?>
+      <!-- <button type="button" class="btn" id="add_button" data-toggle="modal" data-target="#myModal<?php echo $fetch['user_id']?>" style="display: inline-block; position: static;
 			background-color: #5bc0de; font-family: Arial, Helvetica, sans-serif; border-width: 1px; color:white; margin-left: 20%; margin-right:  2%;
-      border-style: solid; width: 180px; height: 38px;">Create Source</button>
-      <button type="button" class="btn" id="edit_button" name="edit_button" data-toggle="modal" data-target="#myModal" style="display: inline-block; position: static;
+      border-style: solid; width: 180px; height: 38px;">Create Source</button> -->
+
+      <!-- <button type="button" class="btn" id="edit_button" name="edit_button" data-toggle="modal" data-target="#myModal" style="display: inline-block; position: static;
 			background-color: #5bc0de; font-family: Arial, Helvetica, sans-serif; border-width: 1px; color:white; 
-      border-style: solid; width: 180px; height: 38px;">Update Source</button>
+      border-style: solid; width: 180px; height: 38px;">Update Source</button> -->
       <div class="form-group" style="display: inline-block; position: absolute; border-width: 1px;">
 				<select class="form-control" name="bibliographyStyle" style="width: 180px; height: 38px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif;">
 					<option selected value="apa" style="padding-left: 29px;">APA</option>
@@ -542,143 +556,13 @@ if (isset($_GET['logout'])) {
     </div>
   </div>
 </div>
-
+<script src="js/jquery-3.2.1.min.js"></script>	
+<script src="js/bootstrap.js"></script>	
 </body>
 </html>
-<!-- ################################################################################################################################ -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-  <form method="POST" id="add_name">
-    <div class="modal-content">
-      <div class="modal-header text-center d-block">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">Create Source</h4>
-        <h5 class="modal-title" style="display: contents;">Type of Source&nbsp;&nbsp;&nbsp;:</h5>
-        <div class="form-group" style="display: inline-block;">
-        <!-- <form method="POST" name="add_name" id="add_name"> -->
-          <select class="form-control" data-role="" name="selectTypeOfSource" style="max-width: 255px; max-height: 35px; padding: 0px 0px; border: none; background:none; font-size: 18px; ">
-            <option selected value="journal_article">Journal Article</option>
-            <option value="article_periodical">Article in a Periodical</option>
-          </select>
-        </div>
-      </div>
-      <div class="modal-body">
-        <!-- <form method="POST" id="add_name"> -->
-          <div class="form-group">
-            <div class="table-responsive">
-              <table id="dynamic_field">
-                <tr>
-                  <td class="text" style="padding-left: 25px;">AUTHOR&nbsp;&nbsp;</td>
-                  <td><input type="text" name="name[]" placeholder="Kramer, James D; Chen, Jacky" class="form-control name_list" style="width: 300px;" /></td>
-                  <td><button type="button" name="remove" id="'+i+'" class="btn btn_remove"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTI1NiwwQzExNC44NTMsMCwwLDExNC44MzMsMCwyNTZzMTE0Ljg1MywyNTYsMjU2LDI1NmMxNDEuMTY3LDAsMjU2LTExNC44MzMsMjU2LTI1NlMzOTcuMTQ3LDAsMjU2LDB6IE0yNTYsNDcyLjM0MSAgICBjLTExOS4yOTUsMC0yMTYuMzQxLTk3LjA0Ni0yMTYuMzQxLTIxNi4zNDFTMTM2LjcwNSwzOS42NTksMjU2LDM5LjY1OVM0NzIuMzQxLDEzNi43MDUsNDcyLjM0MSwyNTZTMzc1LjI5NSw0NzIuMzQxLDI1Niw0NzIuMzQxeiAgICAiIGZpbGw9IiNjYjAwMDAiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiPjwvcGF0aD4KCTwvZz4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgoJPGc+CgkJPHBhdGggZD0iTTM1NS4xNDgsMjM0LjM4NkgxNTYuODUyYy0xMC45NDYsMC0xOS44Myw4Ljg4NC0xOS44MywxOS44M3M4Ljg4NCwxOS44MywxOS44MywxOS44M2gxOTguMjk2ICAgIGMxMC45NDYsMCwxOS44My04Ljg4NCwxOS44My0xOS44M1MzNjYuMDk0LDIzNC4zODYsMzU1LjE0OCwyMzQuMzg2eiIgZmlsbD0iI2NiMDAwMCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPgoJPC9nPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjxnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjwvZz4KPGcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPC9nPgo8ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8L2c+CjwvZz48L3N2Zz4=" style="width: 30px; height: 30px; display: block; padding-left: 0px;" /></button></td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <button type="button" name="addif" id="addif" class="btn btn-default" style="margin-left: 100px; margin-bottom: 20px; padding-left: 15px;"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI1NiA1MTJjLTE0MS4xNjQwNjIgMC0yNTYtMTE0LjgzNTkzOC0yNTYtMjU2czExNC44MzU5MzgtMjU2IDI1Ni0yNTYgMjU2IDExNC44MzU5MzggMjU2IDI1Ni0xMTQuODM1OTM4IDI1Ni0yNTYgMjU2em0wLTQ4MGMtMTIzLjUxOTUzMSAwLTIyNCAxMDAuNDgwNDY5LTIyNCAyMjRzMTAwLjQ4MDQ2OSAyMjQgMjI0IDIyNCAyMjQtMTAwLjQ4MDQ2OSAyMjQtMjI0LTEwMC40ODA0NjktMjI0LTIyNC0yMjR6bTAgMCIgZmlsbD0iIzA2OWJiZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTM2OCAyNzJoLTIyNGMtOC44MzIwMzEgMC0xNi03LjE2Nzk2OS0xNi0xNnM3LjE2Nzk2OS0xNiAxNi0xNmgyMjRjOC44MzIwMzEgMCAxNiA3LjE2Nzk2OSAxNiAxNnMtNy4xNjc5NjkgMTYtMTYgMTZ6bTAgMCIgZmlsbD0iIzA2OWJiZCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI1NiAzODRjLTguODMyMDMxIDAtMTYtNy4xNjc5NjktMTYtMTZ2LTIyNGMwLTguODMyMDMxIDcuMTY3OTY5LTE2IDE2LTE2czE2IDcuMTY3OTY5IDE2IDE2djIyNGMwIDguODMyMDMxLTcuMTY3OTY5IDE2LTE2IDE2em0wIDAiIGZpbGw9IiMwNjliYmQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiPjwvcGF0aD48L2c+PC9zdmc+" style="width: 30px; height: 30px;" />
-            <p class="text" style="color: #069BBD; display: inline;">&nbsp;&nbsp;Add another Report author</p></img>
-          </button>
-          <div class="form-group" id="Dtitle">
-            <p class="text" style="display: inline-block;">TITLE&nbsp;&nbsp;:</p>
-            <input type="text" name="title" class="form-control" placeholder="How to Write Bibliographies" style="display: inline; width: 88%;">
-          </div>
-          <div class="form-group" id="Djournal_name">
-            <p class="text" style="display: inline-block;">JOURNAL NAME&nbsp;&nbsp;:</p>
-            <input type="text" name="journal_name" class="form-control" placeholder="Adventure Works Monthly" style="display: inline; width: 77%;">
-          </div>
-          <div class="form-group" id="Dperiodical_name">
-            <p class="text" style="display: inline-block;">PERIODICAL TITLE&nbsp;&nbsp;:</p>
-            <input type="" name="periodical_name" class="form-control" placeholder="Adventure Works Daily" style="display: inline; width: 75%;">
-          </div>
-          <div class="form-group" id="DdateP">
-            <p class="text" style="display: inline-block;">DATE PUBLISHED&nbsp;&nbsp;:</p>
-            <input type="text" name="dayP" class="form-control" placeholder="1" style="width: 20%; display: inline-block;">
-            <input type="text" name="monthP" class="form-control" placeholder="January" style="width: 20%; display: inline-block;">
-            <input type="text" name="yearP" class="form-control" placeholder="2006" style="width: 20%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Dpages">
-            <p class="text" style="display: inline-block;">FROM PAGE&nbsp;&nbsp;:</p>
-            <input type="text" name="page_start" class="form-control" placeholder="50" style="width: 25%; display: inline-block;">
-            <p class="text" style="display: inline-block;">TO PAGE&nbsp;&nbsp;:</p>
-            <input type="text" name="page_end" class="form-control" placeholder="62" style="width: 25%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Dvolume" style="display: inline-block">
-            <p class="text" style="display: inline-block;">VOLUME&nbsp;&nbsp;:</p>
-            <input type="text" name="volume" class="form-control" placeholder="III" style="width: 60%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Dissue" style="display: inline-block">
-            <p class="text" style="display: inline-block;">ISSUE&nbsp;&nbsp;:</p>
-            <input type="text" name="issue" class="form-control" placeholder="12" style="width: 60%; display: inline-block;">
-          </div><br/>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons" style="padding-left: 50px; padding-bottom:10px;">
-            <label class="btn btn-info active" >
-              <input type="radio" name="options" id="optionURL" checked> URL
-            </label>
-            <label class="btn btn-info">
-              <input type="radio" name="options" id="optionDOI"> DOI
-            </label>
-          </div>
-          <div class="form-group" id="Durl">
-            <p class="text" style="display: inline-block;">URL&nbsp;&nbsp;:</p>
-            <input type="text" name="url" class="form-control" placeholder="http://www.adatum.com" style="width: 70%; display: inline-block;">
-          </div>
-          <div class="form-group" id="Ddoi">
-            <p class="text" style="display: inline-block;">DOI&nbsp;&nbsp;:</p>
-            <input type="text" name="doi" class="form-control" placeholder="10.1000/182" style="width: 70%; display: inline-block;">
-          </div>
-          </div>
-          <div class="modal-footer">
-            <input type="hidden" name="author_id" id="author_id" />
-            <input type="button" name="submitModal" id="submitModal" class="btn btn-info" value="Submit" />
-          </div>
-        <!-- </from> -->
+<!-- ########################################################################################################################## -->
 
-
-    </div>
-            </from>
-  </div>
-</div>
-<!-- ################################################################################################################################ -->
- <div id="add_data_Modal" class="modal fade">  
-      <div class="modal-dialog">  
-           <div class="modal-content">  
-                <div class="modal-header">  
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>  
-                     <h4 class="modal-title">PHP Ajax Update MySQL Data Through Bootstrap Modal</h4>  
-                </div>  
-                <div class="modal-body">  
-                     <form method="post" id="insert_form">  
-                          <label>Enter Employee Name</label>  
-                          <input type="text" name="name" id="name" class="form-control" />  
-                          <br />  
-                          <label>Enter Employee Address</label>  
-                          <textarea name="address" id="address" class="form-control"></textarea>  
-                          <br />  
-                          <label>Select Gender</label>  
-                          <select name="gender" id="gender" class="form-control">  
-                               <option value="Male">Male</option>  
-                               <option value="Female">Female</option>  
-                          </select>  
-                          <br />  
-                          <label>Enter Designation</label>  
-                          <input type="text" name="designation" id="designation" class="form-control" />  
-                          <br />  
-                          <label>Enter Age</label>  
-                          <input type="text" name="age" id="age" class="form-control" />  
-                          <br />  
-                          <input type="hidden" name="employee_id" id="employee_id" />  
-                          <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" />  
-                     </form>  
-                </div>  
-                <div class="modal-footer">  
-                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>  
-                </div>  
-           </div>  
-      </div>  
- </div>  
-<!-- ################################################################################################################################ -->
+<!-- ########################################################################################################################## -->
 <script>
 $(document).ready(function(){
 
@@ -858,58 +742,41 @@ $(document).ready(function(){
   }); 
 
 
-  $('#add_button').click(function(){  
-    $('#submitModal').val("Save");  
-    $('#add_name')[0].reset();
-  });
+  // $('#add_button').click(function(){  
+  //   $('#submitModal').val("Save");  
+  //   $('#add_name')[0].reset();
+  // });
 
-  // $(document).on('click', '.edit_button', function(){  
-  //   var author_id = $(this).attr("id");  
-  //   $.ajax({  
-  //     url:"test_fetch.php",  
-  //     method:"POST",  
-  //     data:{author_id:author_id},  
-  //     dataType:"json",  
-  //     success:function(data){  
-  //       $('#name').val(data.name);  
-  //       $('#address').val(data.address);  
-  //       $('#gender').val(data.gender);  
-  //       $('#designation').val(data.designation);  
-  //       $('#age').val(data.age);  
-  //       $('#employee_id').val(data.id);  
-  //       $('#insert').val("Update");  
-  //       $('#add_data_Modal').modal('show');  
-  //     }  
-  //   });  
-  // }); 
-
-  $('#add_name').on("submitModal", function(event){  
-    event.preventDefault();  
-    if($('#name').val() == "") {  
-      alert("Name is required");  
-    // } else if($('#address').val() == '') {  
-    //   alert("Address is required");  
-    // } else if($('#designation').val() == '') {  
-    //   alert("Designation is required");  
-    // } else if($('#age').val() == '') {  
-    //   alert("Age is required");  
-    } else {  
-      $.ajax({  
-        url:"test_insert.php",  
-        method:"POST",  
-        data:$('#add_name').serialize(),  
-        beforeSend:function(){  
-          $('#submitModal').val("Saving");  
-        },
-        success:function(data){  
-          $('#add_name')[0].reset();  
-          $('#myModal').modal('hide');  
-          $('#author_id').html(data);  
-        }  
-      });  
-    }  
+  $(document).on('click', '.add_button', function(){  
+    var uid = $('#postid').val();
+    // var uid = $(this).attr("id");  
+    $.ajax({  
+      url:"fetch.php",  
+      method:"POST",  
+      data:{id: uid},  
+      dataType:"json",  
+      success:function(data){  
+        $('#hid_id').val(data.id);
+        $('#name').val(data.b_name);  
+        $('#titleB').val(data.b_title);  
+        $('#journal_name').val(data.b_journal_name);  
+        $('#periodical_name').val(data.b_periodical_name); 
+        $('#dayP').val(data.b_dayP);  
+        $('#monthP').val(data.b_monthP); 
+        $('#yearP').val(data.b_yearP);  
+        $('#page_start').val(data.b_page_start); 
+        $('#page_end').val(data.b_page_end);  
+        $('#volume').val(data.b_volume); 
+        $('#issue').val(data.b_issue);  
+        $('#urlB').val(data.b_url);  
+        $('#doi').val(data.b_doi);  
+      //   $('#age').val(data.age);  
+      //   $('#employee_id').val(data.id);  
+      //   $('#insert').val("Update");  
+      //   $('#add_data_Modal').modal('show');  
+      }  
+    });  
   });
-  
 
 });
 

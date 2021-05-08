@@ -6,7 +6,7 @@ if (!isset($_SESSION['status_login'])) {
 ?>
 <html>
 	<head>
-		<title>Webslesson Demo - PHP PDO Ajax CRUD with Data Tables and Bootstrap Modals</title>
+		<title>My Bibliographys</title>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 		<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -240,7 +240,7 @@ if (!isset($_SESSION['status_login'])) {
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header text-center d-block">
-        <h2 class="modal-title" id="exampleModalLongTitle">Download Bibliography</h2>
+        <h2 id="exampleModalLongTitle">Download Bibliography</h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

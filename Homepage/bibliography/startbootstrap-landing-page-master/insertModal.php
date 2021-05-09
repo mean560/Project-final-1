@@ -1,5 +1,5 @@
 <div id="insertModal" class="modal fade" role="dialog">
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
     <div class="modal-content">
     <form method="POST"  name="insert-form" id="insert-form">
       <div class="modal-header text-center d-block">

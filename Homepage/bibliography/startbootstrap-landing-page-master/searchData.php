@@ -109,7 +109,7 @@ if (!isset($_SESSION['status_login'])) {
 
       </form>
       <?php if($count==0){
-                echo "ไม่มีโว้ย ไม่หน้าแมว!";
+                echo "ไม่มีข้อมูลในตารางนี้นะ";
             }else{?>
 
             

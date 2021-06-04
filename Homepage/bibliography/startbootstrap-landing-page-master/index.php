@@ -1,17 +1,19 @@
 <?php
+  error_reporting(0);
   include "config_s.php";
-  $sql="SELECT * FROM author_test ORDER BY id ASC";
+  $sql="SELECT * FROM author_test";
   $result=mysqli_query($con, $sql);
 
   $count=mysqli_num_rows($result);
   $order=1;
 ?>
 <?php
-session_start();
-if (!isset($_SESSION['status_login'])) {
-  header('location: ../authen/signin.php');
-}
+  session_start();
+  if (!isset($_SESSION['status_login'])) {
+    header('location: ../authen/signin.php');
+  }
 ?>
+
 <!DOCTYPE html>
 
 <head>
@@ -99,16 +101,19 @@ if (!isset($_SESSION['status_login'])) {
     <div class="rightBody">
       <form action="searchData.php" class="form-group" method="post">
         <p class="text" style="display: inline-block; margin-left: 15px; margin-top:15px;">All Bibliographys</p>
-        <input type="text" class="form-control" id="search_word" name="search_word" placeholder="Search" style="width: 20%; display: inline-block; margin-left: 10px;">
-        <button type="submit" class="btn btn-secondary"><i class="bi bi-search"></i></button>
-      </p>
-
+          <input type="text" class="form-control" id="search_word" name="search_word" placeholder="Search" style="width: 20%; display: inline-block; margin-left: 10px;">
+          <button type="submit" class="btn btn-secondary"><i class="bi bi-search"></i></button>
+        </p>
       </form>
+      <form id="check-form" method="post">
         <div class="table-wrapper-scroll-y my-custom-scrollbar" style="height: 450px; background-color: white;">
           <table class="table table-bordered table-striped mb-0" id="tableAuthor" style='border-collapse: collapse;'>
             <tr>
-              <th>A</th>
-              <th>B</th>
+              <th style="width:5%;">
+                <input type="checkbox" id="select_all" class="form-check-input">
+                <label class="form-check-label">All</label>
+              </th>
+              <!-- <th>B</th> -->
               <th>AUTHORS</th>
               <th>TITLE</th>
               <th>SOURCE</th>
@@ -127,8 +132,9 @@ if (!isset($_SESSION['status_login'])) {
               $title = $row['title'];
               $journal = $row['journal_name'];
             ?>
-              <td><input type="checkbox" name="idcheckbox[]" class="form-control" value="<?php echo $row['id']; ?>" /></td>
-              <td><input type="checkbox" id="customCheck2" value="<?php echo $row['id']; ?>" /></td>
+              <td><input type="checkbox" class="checkbox" name="ids[]" value=<?php echo $row['id'] ?> ></td>
+              <!-- <td><input type="checkbox" name="idcheckbox[]" class="form-control" value="<?php echo $row['id']; ?>" /></td> -->
+              <!-- <td></td> -->
               <?php
               echo "<td>" . $name . "</td>";
               echo "<td>" . $title . "</td>";
@@ -144,16 +150,22 @@ if (!isset($_SESSION['status_login'])) {
             ?>
           </table>
         </div>
-        <?php echo "55555555555555555"; ?>
+        </form>
 
-      <!-- <?php// require 'insertModal.php'; ?> -->
+        <?php  require 'insertModal.php'; ?>
 
       <div class="bottomBody">
-        <button type="submit" class="btn" data-toggle="modal" data-target="#exampleModalCenter" style="display: inline-block; position: static; 
-          margin-top: 35px; margin-left: 23%;
+      <button type="submit" class="btn" form="check-form" id="show_button" name="show_button" data-toggle="modal" data-target="#exampleModalCenter"
+          style="display: inline-block; position: static; margin-top: 35px; margin-left: 23%;
           background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; margin-right: 5px;
           text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; 
           text-decoration-style: solid;">Download Bibliography</button>
+        <!-- <button type="button" class="btn" form="check-form" data-toggle="modal" data-target="#exampleModalCenter" id="show_button" name="show_button"
+          style="display: inline-block; position: static; margin-top: 35px; margin-left: 23%;
+          background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; margin-right: 5px;
+          text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; 
+          text-decoration-style: solid;">Download Bibliography</button> -->
+
         <div class="form-group" style="display: inline-block; position: absolute; border-width: 1px; margin-top: 35px;">
           <select class="form-control" name="bibliographyStyle" style="width: 180px; height: 38px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif;">
             <option selected value="apa">APA</option>
@@ -164,12 +176,23 @@ if (!isset($_SESSION['status_login'])) {
             <!-- <option value="turabian">Turabian</option>
             <option value="vancouver">Vancouver</option> -->
           </select>
-      </div>
+        </div>
     </div>
+    <!-- </form> -->
   </div>
-        <?php require 'insertModal.php'; ?>
+        <?php// require 'insertModal.php'; ?>
+      
+        <?php require 'multiselect.php'; ?>
+        <div id="dialog" title="Basic dialog">
+  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>
+</div>
+
 
   <style>
+    th {
+      vertical-align: middle;
+      text-align: center;
+    }
     .navbar .container {
       margin: 0;
     }
@@ -210,6 +233,7 @@ if (!isset($_SESSION['status_login'])) {
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
 
@@ -225,26 +249,7 @@ if (!isset($_SESSION['status_login'])) {
         </button>
       </div>
       <div class="modal-body" style="font-size:16px">
-        <?php 
-        include 'multiselect.php';
-          // echo "APA style";
-          // include 'template/apa.php'; 
-          // echo "<br/>";
-          // echo "MLA style";
-          // include 'template/mla.php';
-          // echo "<br/>";
-          // echo "Chicago style";
-          // include 'template/chicago.php';
-        ?>
-        <!-- <div id="apa">
-          <?php //include 'template/apa.php'; ?>
-        </div>
-        <div id="mla">
-          <?php //include 'template/mla.php'; ?>
-        </div>
-        <div id="chicago">
-          <?php //include 'template/chicago.php'; ?>
-        </div> -->
+        <iframe src="multiselect.php" width="auto" height="auto" frameborder="0" allowtransparency="true"></iframe>  
         
       </div>
       <div class="modal-footer">
@@ -254,6 +259,8 @@ if (!isset($_SESSION['status_login'])) {
     </div>
   </div>
 </div>
+
+
 <!-- ####################################################################################################################### -->
 
 <script type="text/javascript">
@@ -397,6 +404,55 @@ if (!isset($_SESSION['status_login'])) {
       });
     }
   });
+// click select all choose all ###################################################################################################################################################
+  $('#select_all').on('click', function(){
+    if(this.checked) {
+      $('.checkbox').each(function() {
+        this.checked = true;
+      })
+    } else {
+      $('.checkbox').each(function() {
+        this.checked = false;
+      })
+    }
+  });
+// click choose all checked select all #######################################################################################################################################
+  $('.checkbox').on('click', function() {
+    if($('.checkbox:checked').length == $('.checkbox').length) {
+      $('#select_all').prop('checked', true);
+    } else {
+      $('#select_all').prop('checked', false);
+    }
+  });
+// ##############################################################################
+// $("#show_button").submit(function(e){
+//     $('#exampleModalCenter').modal('show');
+//     e.preventDefault();
+// });
+
+// $("#show_button").on("click", function(){
+
+
+//   $.post("multiselect.php", function(data){
+
+//     $("#exampleModalCenter").html(data).modal('show');
+
+//   });
+
+// });
+// $( "#show_button").load( "multiselect.php" );
+// $('#check-form').on('submit', function(e){
+//   $('#exampleModalCenter').modal('show');
+//   e.preventDefault();
+// });
+
+// $('#myForm').on('submit', function(e){
+//   $('#exampleModalCenter').modal('show');
+//   e.preventDefault();
+// });
+
+// $('#dialog-confirm').dialog();
+
 
 
 });

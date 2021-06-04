@@ -239,7 +239,7 @@ if (!isset($_SESSION['status_login'])) {
                 ?>
                     <ul class="w3-ul" style="width:100%">
                         <li> <?php echo $res['title']; ?><br>
-                            <a href="./note.php?edit=<?php echo $res['id']; ?>" class="btn btn-sm btn-warning " data-toggle="tooltip" title="Edit"><i class="far fa-edit "></i></a>
+                            <a href="./note.php?edit=<?php echo $res['id']; ?>#note-tab" class="btn btn-sm btn-warning " data-toggle="tooltip" title="Edit"><i class="far fa-edit "></i></a>
                             <input type="hidden" class="delete_id_note" value="<?php echo $res['id']; ?>">
                             <a href="./allnote.php?delete=<?php echo $res['id']; ?>" id="delete" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete"><i class="far fa-trash-alt"></i></a>
 

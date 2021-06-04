@@ -102,9 +102,77 @@ if (!isset($_SESSION['status_login'])) {
     <div class="middle">
         <aside class="left">
             <div class="middle_right" align="left">
-                <form method="post" enctype="multipart/form-data">
+            <?php
+            //1. เชื่อมต่อ database: 
+            // include('connection.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี
+            // //2. query ข้อมูลจากตาราง: 
+            // $query = "SELECT * FROM uploadfile ORDER BY fileID asc" or die("Error:" . mysqli_error()); 
+            // //3. execute the query. 
+            // $result = mysqli_query($con, $query); 
+            // //4 . แสดงข้อมูลที่ query ออกมา: 
+
+            // //ใช้ตารางในการจัดข้อมูล
+            // echo "<table border='1' align='center' width='500'>";
+            // //หัวข้อตาราง
+            // echo "<tr align='center' bgcolor='#CCCCCC'><td>File ID</td><td>File</td><td>date_create</td></tr>";
+            // while($row = mysqli_fetch_array($result)) { 
+            // echo "<tr>";
+            // echo "<td align='center'>" .$row["fileID"] .  "</td> "; 
+            // //echo "<td><a href='.$row['fileupload']'>showfile</a></td> ";
+            // echo "<td>"  .$row["fileupload"] . "</td> ";  
+            // echo "<td align='center'>" .$row["dateup"] .  "</td> ";
+            // echo "</tr>";
+            // }
+            // echo "</table>";
+            // //5. close connection
+            // mysqli_close($con);
+            ?>
+            <!-- <br/> -->
+            <form action="add_file_db.php" method="post" enctype="multipart/form-data" name="upfile" id="upfile">
+            <!-- <p>&nbsp;</p> -->
+            <div class="form-upload">
+                                <i class="fas fa-file-upload" style="font-size:54px;"></i>
+                                <font style="font-size:32px;">Upload File</font>
+                                <input type="hidden" value="1000000000" name="MAX_FILE_SIZE" />
+                            </div>
+                            <br/>
+            <table width="700" border="0" align="center" cellpadding="0" cellspacing="0">
+                <!-- <tr>
+                <td height="40" colspan="2" align="center" bgcolor="#D6D6D6">Form Upload&nbsp;File</td>
+                </tr> -->
+                <!-- <tr>
+                <td width="126" bgcolor="#EDEDED">&nbsp;</td>
+                <td width="574" bgcolor="#EDEDED">&nbsp;</td>
+                </tr> -->
+                <tr>
+                <!-- <td align="center" bgcolor="#EDEDED">File Browser</td> -->
+                <td><label>
+                    <input type="file" name="fileupload" id="fileupload"  required="required" style="display:inline; "/>
+                    <input type="submit" name="button" id="button" value="Upload" style="color: white; background: #5bc0de; border-radius: 2px; border: none; font-size: 14px; padding: 8px 35px;"/>
+                </label></td>
+                </tr>
+                <!-- <tr>
+                <td bgcolor="#EDEDED">&nbsp;</td>
+                <td bgcolor="#EDEDED">&nbsp;</td>
+                </tr> -->
+                <!-- <tr>
+                <td bgcolor="#EDEDED">&nbsp;</td>
+                <td><input type="submit" name="button" id="button" value="Upload" /></td>
+                </tr> -->
+                <!-- <tr>
+                <td bgcolor="#EDEDED">&nbsp;</td>
+                <td bgcolor="#EDEDED">&nbsp;</td>
+                </tr> -->
+            </table>
+            <!-- <p>&nbsp;</p> -->
+            </form>
+            <?php
+                            include "openpaper_2.php";
+
+                        ?>
+
+                <!-- <form method="post" enctype="multipart/form-data">
                     <div class="col-xs-12">
-                        <!-- <form method="post" enctype="multipart/form-data"> -->
                             <div class="form-upload">
                                 <i class="fas fa-file-upload" style="font-size:54px;"></i>
                                 <font style="font-size:32px;">Upload File</font>
@@ -114,33 +182,31 @@ if (!isset($_SESSION['status_login'])) {
                                 <input type="file" name="uploadfile" />
                             </div>
                             <input type="submit" id="submitUpload" name="submitUpload" value="Upload" class="btn"/>
-                            <!-- <input type="submit" id="submitFile" name="submitFile" value="save file" class="btn"/> -->
 
-                        <!-- </form> -->
 
                     </div>
 
                     <?php
-                    if (isset($_POST['submitUpload'])) {                        
-                        $target_path = "../uploads/";
-                        $target_path = $target_path . basename($_FILES['uploadfile']['name']);
-                        move_uploaded_file($_FILES['uploadfile']['tmp_name'], $target_path);
-                        echo "<embed src='$target_path ' width='100%' height='433px'>";
+                    //if (isset($_POST['submitUpload'])) {                        
+                        // $target_path = "../uploads/";
+                        // $target_path = $target_path . basename($_FILES['uploadfile']['name']);
+                        // move_uploaded_file($_FILES['uploadfile']['tmp_name'], $target_path);
+                        // echo "<embed src='$target_path ' width='100%' height='433px'>";
 
                         // echo $_FILES['uploadfile']['name'];
                         // echo $target_path;
                     ?>
-                        <input type="hidden" name="file_name" value="<?= $_FILES['uploadfile']['name'] ?>">
-                        <input type="hidden" id="file_directory" name="file_directory" value="<?= $target_path ?>">
-                    <?php } ?>
+                        <input type="hidden" name="file_name" value="<?//= $_FILES['uploadfile']['name'] ?>">
+                        <input type="hidden" id="file_directory" name="file_directory" value="<?//= $target_path ?>">
+                    <?php// } ?>
                     
                     <div class="response" name="response">
                         <?php
-                            include "openpaper_2.php";
+                            //include "openpaper_2.php";
 
                         ?>
                     </div>
-                </form>
+                </form> -->
             </div>
         </aside>
 
@@ -327,7 +393,7 @@ if (!isset($_SESSION['status_login'])) {
                             else if(isset($_POST["buttonPastofSentence"])){
                                 include("runsimplesentence.php");
                                 if(empty($ans)){
-                                    echo "";
+                                    echo "This is simple sentence";
                                 }
                                 else{
                                     for ($y = 0; $y < count($ans); $y++) {
@@ -362,19 +428,19 @@ $(document).ready(function() {
 
     $('textarea').val($('textarea').val().trim())
 
-    $('#submitUpload').click(function(){
+    // $('#submitUpload').click(function(){
 
-        var file_name = $('#file_name').val() || '';
-        var file_directory = $('#file_directory').val() || '';
+    //     var file_name = $('#file_name').val() || '';
+    //     var file_directory = $('#file_directory').val() || '';
 
-        $.ajax({
-            url:'./savepdf.php',
-            type: 'POST',
-            data: {
-                file_name: file_name,
-                file_directory: file_directory,
-            }
-        });
-    });
+    //     $.ajax({
+    //         url:'./savepdf.php',
+    //         type: 'POST',
+    //         data: {
+    //             file_name: file_name,
+    //             file_directory: file_directory,
+    //         }
+    //     });
+    // });
 });
 </script>

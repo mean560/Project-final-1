@@ -6,6 +6,8 @@
     $source = 'en';
     $target = 'th';
     $stringText = $_POST["inserttxt"];
+    $stringText = str_replace(array("\n", "\r"), '', $stringText);
+
 
     if($stringText == "" || trim($stringText) == ""){
 

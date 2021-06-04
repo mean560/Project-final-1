@@ -22,16 +22,9 @@
 
           //จัดการชื่อ
           $answer = explode(" ",$name);
-          // echo $answer[0][0];
-          // echo $answer[1];
-
-          // $answer = explode(" ",$name);
-          // $answer2 = str_replace(",","",$answer);
-          // echo $answer2[0]."_".$answer2[1]."<br/>";
-          // echo $answer2[2]."_".$answer2[3]."<br/>";
-
+          //apa template
           if(sizeof($answer)==2){
-            echo $answer[1].", ";
+            echo $answer[1]." ";
             echo $answer[0][0].". ";
             echo "(".$yearP."). ";
             echo $title.". ";

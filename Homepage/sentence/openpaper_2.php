@@ -1,18 +1,19 @@
 <?php
 
 
-            $conn = new mysqli('localhost', 'root', '', 'project_test');
+            $conn = new mysqli('localhost', 'root', '', 'userdb1');
             //Check for connection error
-            $select = "SELECT * FROM `tmp` WHERE file_directory IS NOT NULL";
+            $select = "SELECT * FROM `uploadfile`";
             $result = $conn->query($select);
             while($row = $result->fetch_object()){
-                $pdf = $row->file_name;
-                $path = $row->file_directory;
-                $file = $path;
+                $pdf = $row->fileupload;
+                // $path = $row->file_directory;
+                // $file = $path;
             } 
+            // echo $pdf;
 
 
-            echo "<embed src='$path ' width='100%' height='433px'>";
+            echo "<embed src='../fileupload/$pdf' width='100%' height='500px'>";
 
                        
 

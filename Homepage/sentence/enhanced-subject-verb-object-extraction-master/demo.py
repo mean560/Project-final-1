@@ -7,7 +7,9 @@ for word in sys.argv[1:]:
     str1 += word + ' '
 
 
-# str1 = "Then there’s a development setback on top of that that pushes you even further back."
+# str1 = "I like cats, and Sam also likes cats because they are lovely."
+# tokens = nlp("Seated in Mission Control, Chris Kraft neared the end of a tedious Friday afternoon as he monitored a seemingly interminable ground test of the Apollo 1 spacecraft.")
+
 
 
 tokens1 = nlp(str1)

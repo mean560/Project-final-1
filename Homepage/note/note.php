@@ -435,18 +435,19 @@ if (isset($_GET['logout'])) {
                               }
                               else if(isset($_POST["buttonPastofSentence"])){
                                   include("../sentence/runsimplesentence.php");
-                                  if(empty($ans)){
-                                      echo "";
-                                  }
-                                  else{
-                                      for ($y = 0; $y < count($ans); $y++) {
-                                          for($z = 0; $z < count($ans[$y]); $z++){
-                                              print $ans[$y][$z];
-                                              print " ";
-                                          }
-                                          echo "<br>";
-                                      }
-                                  }
+                                  // echo 
+                                  // if(empty($ans)){
+                                  //     echo "";
+                                  // }
+                                  // else{
+                                  //     for ($y = 0; $y < count($ans); $y++) {
+                                  //         for($z = 0; $z < count($ans[$y]); $z++){
+                                  //             print $ans[$y][$z];
+                                  //             print " ";
+                                  //         }
+                                  //         echo "<br>";
+                                  //     }
+                                  // }
                               }
                               elseif(isset($_POST["buttonTranslate"])){
                                   include("../sentence/translate.php");

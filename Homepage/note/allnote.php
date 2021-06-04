@@ -219,7 +219,7 @@ if ($last != 1) {
                         <td><?php echo ($res['title']); ?></td>
                         <td><?php echo mb_substr($res['description'], 0, 80, 'utf-8') ?></td>
                         <td>
-                            <a href="./note.php?edit=<?php echo $res['id']; ?>" class="btn btn-sm btn-warning " data-toggle="tooltip" title="Edit">
+                            <a href="./note.php?edit=<?php echo $res['id']; ?>#note-tab" class="btn btn-sm btn-warning " data-toggle="tooltip" title="Edit">
                                 <i class="far fa-edit "></i>
                             </a>
                             <input type="hidden" class="delete_id_note" value="<?php echo $res['id']; ?>">

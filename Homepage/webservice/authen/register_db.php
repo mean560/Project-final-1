@@ -15,7 +15,14 @@ if (isset($_POST['reg_user'])) {
     }
     if (empty($email)) {
         array_push($errors, "Email is required");
-    }
+    } 
+    // else {
+    //     $email = test_input($email);
+    //     // check if e-mail address is well-formed
+    //     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    //       echo "Invalid email format";
+    //     }
+    //   }
     if (strlen($password1)  < 8) {
         array_push($errors, "Password must be at least 8 characters");
     }
@@ -40,7 +47,14 @@ if (isset($_POST['reg_user'])) {
 
         if ($user['email'] === $email) {
             array_push($errors, "Email already exists");
-        }
+        } 
+        // else {
+        //     $email = test_input($email);
+        //     // check if e-mail address is well-formed
+        //     // if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //     //   $emailErr = "Invalid email format";
+        //     // }
+        //   }
     }
     if (count($errors) == 0) {
         $password = md5($password1);
@@ -58,6 +72,13 @@ if (isset($_POST['reg_user'])) {
         $_SESSION['status_login'] = "login";
         header('location: ../../index.php');
     } else {
+        // if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //     array_push($errors, "Invalid email format");
+        //     $_SESSION['error'] = "Invalid email format";
+        //     // $emailErr = "Invalid email format";
+        //     header("location: ../../authen/register.php");
+
+        //   }
         if (($_POST["username"]) == $username || ($_POST["email"]) == $email) {
             array_push($errors, "Username or Email already exists");
             $_SESSION['error'] = "Username or Email already exists";
@@ -86,3 +107,9 @@ if (isset($_POST['reg_user'])) {
         }
     }
 }
+// function test_input($data) {
+//     $data = trim($data);
+//     $data = stripslashes($data);
+//     $data = htmlspecialchars($data);
+//     return $data;
+//   }

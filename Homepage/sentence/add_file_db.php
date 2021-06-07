@@ -1,5 +1,8 @@
 <meta charset="UTF-8">
 <?php
+include "../env/config.php";
+$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username'];
 //1. เชื่อมต่อ database: 
 include('connect.php');  //ไฟล์เชื่อมต่อกับ database ที่เราได้สร้างไว้ก่อนหน้าน้ี
 //$fileupload = $_POST['fileupload']; //รับค่าไฟล์จากฟอร์ม
@@ -20,7 +23,7 @@ if($upload != '') {   //not select file
         $type = strrchr($_FILES['fileupload']['name'],".");
             
         //ตั้งชื่อไฟล์ใหม่โดยเอาเวลาไว้หน้าชื่อไฟล์เดิม
-        $newname = $date.$numrand.$type;
+        $newname = $user_id.$username.$date.$numrand.$type;
         $path_copy=$path.$newname;
         $path_link="../fileupload/".$newname;
 
@@ -29,8 +32,8 @@ if($upload != '') {   //not select file
 	}
 	// เพิ่มไฟล์เข้าไปในตาราง uploadfile
 	
-		$sql = "INSERT INTO uploadfile (fileupload) 
-		VALUES('$newname')";
+		$sql = "INSERT INTO uploadfile (fileupload,user_id) 
+		VALUES('$newname','$user_id')";
 		
 		$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
 	

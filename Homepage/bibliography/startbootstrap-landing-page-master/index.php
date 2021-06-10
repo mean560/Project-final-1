@@ -123,13 +123,19 @@
               <!-- <th>&nbsp;</th> -->
             </tr>
             <?php
-            $con = mysqli_connect("localhost", "root", "", "userdb1"); 
+            $con = mysqli_connect("localhost", "root", "", "project_test"); 
 
-            $query = "select * from author_test where user_id = {$_SESSION['user_id']}";
-            $result = mysqli_query($con, $query);
-            while ($row = mysqli_fetch_array($result)) {
+            // $query = "select * from author_test where user_id = {$_SESSION['user_id']} UNION select b_name from search where user_id = {$_SESSION['user_id']}";
+            $query = "select b_name from search where user_id = {$_SESSION['user_id']}";
+            $query2 = "select name from author_test where user_id = {$_SESSION['user_id']}";
+            // $query = "select b_name from author_test union select name from search where user_id = {$_SESSION['user_id']}";
+            // $result = mysqli_query($con, $query);
+            $result1 = mysqli_query($con, $query);
+            $result2 = mysqli_query($con, $query2);
+            while ($row1 = mysqli_fetch_array($result1) && $row2 = mysqli_fetch_array($result2)) {
               $id = $row['id'];
-              $name = $row['name'];
+              $name = $row1['b_name'];
+              $name = $row2['name'];
               $title = $row['title'];
               $journal = $row['journal_name'];
             ?>

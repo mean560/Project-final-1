@@ -152,8 +152,9 @@ $(document).ready(function(){
               title: "Success!",
               text: "Data has been create successfully.",
               icon: "success",
-              button: "Close",
-          });
+              // button: "Close",
+          }),
+          location.reload();
         }
     });
   });

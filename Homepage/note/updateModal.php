@@ -5,16 +5,17 @@
 
 
 
-	if(isset($_POST['submitSave'])){
+	// if(isset($_POST['submitSave'])){
         $id = mysqli_real_escape_string($conn,$_POST['id']);
-        // $s_name = mysqli_real_escape_string($con,$_POST["name"]);
-        $b_name = mysqli_real_escape_string($conn, implode(", ", $_POST['b_name']));
+        $b_name = mysqli_real_escape_string($conn,$_POST["b_name"]);
+        // $b_name = mysqli_real_escape_string($conn,implode($_POST["b_name"]));
+        // $b_name = implode(", ", $_POST['b_name']);
         $b_title = mysqli_real_escape_string($conn,$_POST['b_title']);
         $b_journal_name = mysqli_real_escape_string($conn,$_POST['b_journal_name']);
         $b_periodical_name = mysqli_real_escape_string($conn,$_POST['b_periodical_name']);
         $b_dayP = mysqli_real_escape_string($conn,$_POST['b_dayP']);
         $b_monthP = mysqli_real_escape_string($conn,$_POST['b_monthP']);
-        $b_yearP = mysqli_real_escape_string($conn,$_POST['b_yearPB']);
+        $b_yearP = mysqli_real_escape_string($conn,$_POST['b_yearP']);
         $b_page_start = mysqli_real_escape_string($conn,$_POST['b_page_start']);
         $b_page_end = mysqli_real_escape_string($conn,$_POST['b_page_end']);
         $b_volume = mysqli_real_escape_string($conn,$_POST['b_volume']);
@@ -55,7 +56,7 @@
         //  b_yearP = '$yearP', b_page_start = '$page_start', b_page_end = '$page_end', 
         //  b_volume = '$volume', b_issue = '$issue', b_url = '$url',  b_doi = '$doi' WHERE id = '$id' ");
 
-	} else {
-        echo "die(mysqli_error($conn))";
-    }
+	// } else {
+    //     echo "ไอ้ควาย";
+    // }
 ?>

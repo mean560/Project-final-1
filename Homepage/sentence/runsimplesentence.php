@@ -2,35 +2,37 @@
 <?php
 
 $stringText = $_POST["inserttxt"];
-// $stringText = str_replace(array("\n", "\r"), '', $stringText);
 
-
-// $output = shell_exec('python C:/xampp/htdocs/Project-final/Homepage/sentence/enhanced-subject-verb-object-extraction-master/demo.py  '.$stringText);
-// echo "$output";
-
-if($stringText == "" || trim($stringText) == ""){
-
+if ($stringText == "" || trim($stringText) == "") {
     echo "plaese enter text to upper box...";
-
 } else {
+    $stringText = trim(preg_replace('/\s+/', ' ', $stringText));
 
-    $output = shell_exec('python C:/xampp/htdocs/Project-final-1/Homepage/sentence/enhanced-subject-verb-object-extraction-master/demo.py  '.$stringText);
-    // print_r($output);
-    // var_dump($output[1]);
-    $ans = json_decode($output, true);
+    $arrStr = explode(".", $stringText);
 
-    // if($ans == ''){
-    //     echo "This is simple sentence";
-    // } 
-    // print_r($ans);
+    // echo count($arrStr);
+    $output = array();
+    $result = array();
+    for($i = 0; $i < count($arrStr); $i++) {
+        $output[$i] = shell_exec('python C:/xampp/htdocs/Project-final-1/Homepage/sentence/enhanced-subject-verb-object-extraction-master/demo.py  ' . $arrStr[$i]);
+        // var_dump($output[$i]); echo "<br/>";
+
+        //$result[$i] = array_values(json_decode($output, true));
+        // $ans = json_decode($output, true);
+        echo "$output[$i] <br/>";
+    }
+    // $ans = array();
+    // $ans = json_decode($output, true);   
+    // $result = 
+    
+    // echo $stringText;
+    // var_dump($result);
 
     // echo gettype($output);
-    // var_dump($ans);
+    
 
-    // $ans = json_decode($output, true);
 
-    // echo gettype($ans);
-    // echo ($output[])
+
 }
 ?>
 

@@ -198,7 +198,7 @@ if (!isset($_SESSION['status_login'])) {
                     ?>
                         <input type="hidden" name="file_name" value="<?//= $_FILES['uploadfile']['name'] ?>">
                         <input type="hidden" id="file_directory" name="file_directory" value="<?//= $target_path ?>">
-                    <?php// } ?>
+                    <?php // } ?>
                     
                     <div class="response" name="response">
                         <?php
@@ -356,8 +356,8 @@ if (!isset($_SESSION['status_login'])) {
                                         <?php } if($dt>=1){ ?> <i style="background-color:#FD7F20; color:white; border-radius: 5px; padding: 3px;">Determiner </i>
                                         <?php } if($ex>=1){ ?> <i class="bi bi-circle-fill" style="color: #3B0918;">Existential</i>
                                         <?php } if($fw>=1){ ?> <i class="bi bi-circle-fill" style="color: #B8390E;">Foreign Word</i>
-                                        <?php } if($in>=1){ ?> <i style="background-color:#DC4731; color:white; border-radius: 5px; padding: 3px;">Preposition/Subordinating Conjunction</i>
-                                        <?php } if($jj>=1){ ?> <i class="bi bi-circle-fill" style="color: #D5AF10;">This NLTK POS Tag is an adjective</i>
+                                        <?php } if($in>=1){ ?> <i class="bi bi-circle-fill" style="color:#DC4731;">Preposition/Subordinating Conjunction</i>
+                                        <?php } if($jj>=1){ ?> <i class="bi bi-circle-fill" style="color: #D5AF10;">adjective</i>
                                         <?php } if($jjr>=1){ ?> <i class="bi bi-circle-fill" style="color: #BE6310;">Adjective, Comparative</i>
                                         <?php } if($jjs>=1){ ?> <i class="bi bi-circle-fill" style="color: #BC3110;">Adjective, Superlative</i>
                                         <?php } if($ls>=1){ ?> <i class="bi bi-circle-fill" style="color: #0074B7;">List Market</i>
@@ -393,7 +393,8 @@ if (!isset($_SESSION['status_login'])) {
                             else if(isset($_POST["buttonPastofSentence"])){
                                 include("runsimplesentence.php");
                                 if(empty($ans)){
-                                    echo "This is simple sentence";
+                                    // echo "This is simple sentence";
+                                    echo "";
                                 }
                                 else{
                                     for ($y = 0; $y < count($ans); $y++) {

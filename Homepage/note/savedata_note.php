@@ -9,19 +9,19 @@ $connect = new PDO("mysql:host=localhost;dbname=project_test", "root", "");
 
         $data = array(	
             // ':selectTypeOfSource' =>  "journal_aticle",
-            ':name'		          =>  $name,
-            ':title'              =>  $_POST["title"],
-            ':journal_name'       =>  $_POST["journal_name"],
-            ':periodical_name'    =>  $_POST["periodical_name"],
-            ':dayP'               =>  $_POST["dayP"],
-            ':monthP'             =>  $_POST["monthP"],
-            ':yearP'              =>  $_POST["yearP"],
-            ':page_start'         =>  $_POST["page_start"],
-            ':page_end'           =>  $_POST["page_end"],
-            ':volume'             =>  $_POST["volume"],
-            ':issue'              =>  $_POST["issue"],
-            ':url'                =>  $_POST["url"],
-            ':doi'                =>  $_POST["doi"],
+            ':name'		          =>  $b_name,
+            ':title'              =>  $_POST["b_title"],
+            ':journal_name'       =>  $_POST["b_journal_name"],
+            ':periodical_name'    =>  $_POST["b_periodical_name"],
+            ':dayP'               =>  $_POST["b_dayP"],
+            ':monthP'             =>  $_POST["b_monthP"],
+            ':yearP'              =>  $_POST["b_yearP"],
+            ':page_start'         =>  $_POST["b_page_start"],
+            ':page_end'           =>  $_POST["b_page_end"],
+            ':volume'             =>  $_POST["b_volume"],
+            ':issue'              =>  $_POST["b_issue"],
+            ':url'                =>  $_POST["b_url"],
+            ':doi'                =>  $_POST["b_doi"],
             // ':user_id'            => $_POST["author_id"]
         );
 

@@ -35,7 +35,7 @@ if($upload != '') {   //not select file
 		$sql = "INSERT INTO uploadfile (fileupload,user_id) 
 		VALUES('$newname','$user_id')";
 		
-		$result = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
+		$result = mysqli_query($con, $sql); //or die ("Error in query: $sql " . mysqli_error( ));
 	
 	mysqli_close($con);
 	// javascript แสดงการ upload file

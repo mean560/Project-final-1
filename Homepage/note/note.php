@@ -95,11 +95,9 @@ if (isset($_GET['logout'])) {
 
 
                     <li>
-                        <!-- <a href="../sentence/openpaper.php" data-toggle="navtab" id="simpletence"> -->
-                          <button id="simplesentence_btn" style="height:50px; border:none; background-color: rgb(249, 249, 249);">
-
+                        <a href="../sentence/openpaper.php" data-toggle="navtab" id="simpletence">
                             Simple sentence & translate
-                          </button>
+                        </a>
                     </li>
                     <li>
                         <a href="../search/searchpage.php" data-toggle="navtab" id="searchpage">
@@ -107,20 +105,14 @@ if (isset($_GET['logout'])) {
                         </a>
                     </li>
                     <li>
-                        <!-- <a href="#" data-toggle="navtab" id=""> -->
-                        <button id="bibliography_btn" style="height:50px; border:none; background-color: rgb(249, 249, 249);">
-
+                        <a href="../bibliography/startbootstrap-landing-page-master/index.php" data-toggle="navtab" id="bibliography">
                             Bibliography
-                        <!-- </a> -->
-                          </button>
+                        </a>
                     </li>
                     <li>
-                        <!-- <a href="./allnote.php" data-toggle="navtab" id="allnote"> -->
-                        <button id="note_btn" style="height:50px; border:none; background-color: rgb(249, 249, 249);">
-
+                        <a href="./allnote.php" data-toggle="navtab" id="allnote">
                             Note
-                        <!-- </a> -->                          </button>
-
+                        </a> 
                     </li>
 
                     <li class="dropdown">
@@ -523,7 +515,7 @@ if (isset($_GET['logout'])) {
       </div>
       <?php
         require 'conn.php';
-				$query = mysqli_query($conn, "SELECT * FROM `search` WHERE id = $id") or die(mysqli_error());
+				$query = mysqli_query($conn, "SELECT * FROM `search` WHERE id = $id"); //or die(mysqli_error());
 				while($fetch = mysqli_fetch_array($query)){
 				?>
         <button type="button" class="btn add_button" name="add_button" data-toggle="modal" data-target="#myModal<?php echo $fetch['id']?>" 
@@ -771,13 +763,11 @@ $(document).ready(function(){
         $('#issue').val(data.b_issue);  
         $('#urlB').val(data.b_url);  
         $('#doi').val(data.b_doi);  
-      //   $('#age').val(data.age);  
-      //   $('#employee_id').val(data.id);  
-      //   $('#insert').val("Update");  
-      //   $('#add_data_Modal').modal('show');  
       }  
     });  
   });
+
+
 
 });
 

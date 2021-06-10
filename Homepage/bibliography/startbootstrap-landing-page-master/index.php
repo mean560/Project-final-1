@@ -89,6 +89,7 @@
   <div class="containerBody">
     <div class="leftBody">
       <button type="button" class="btn" data-toggle="modal" data-target="#insertModal" style="margin-top: 25px; margin-left: 25px; width: 70%; font-family: Arial, Helvetica, sans-serif; letter-spacing: 0px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; text-decoration-style: solid;">Create Source</button>
+    
       <!-- list button -->
       <ul class="list-group" style="padding-top: 16px; border-width: 0px;">
         <div class="btn-group-vertical" style="opacity: 1;">
@@ -124,7 +125,7 @@
             <?php
             $con = mysqli_connect("localhost", "root", "", "userdb1"); 
 
-            $query = "select * from author_test";
+            $query = "select * from author_test where user_id = {$_SESSION['user_id']}";
             $result = mysqli_query($con, $query);
             while ($row = mysqli_fetch_array($result)) {
               $id = $row['id'];
@@ -180,7 +181,7 @@
     </div>
     <!-- </form> -->
   </div>
-        <?php// require 'insertModal.php'; ?>
+        <?php // require 'insertModal.php'; ?>
       
         <?php require 'multiselect.php'; ?>
         <div id="dialog" title="Basic dialog">
@@ -229,6 +230,7 @@
       height: 110px;
       text-align: left;
     }
+
   </style>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
@@ -405,54 +407,26 @@
     }
   });
 // click select all choose all ###################################################################################################################################################
-  $('#select_all').on('click', function(){
-    if(this.checked) {
-      $('.checkbox').each(function() {
-        this.checked = true;
-      })
-    } else {
-      $('.checkbox').each(function() {
-        this.checked = false;
-      })
-    }
-  });
+  // $('#select_all').on('click', function(){
+  //   if(this.checked) {
+  //     $('.checkbox').each(function() {
+  //       this.checked = true;
+  //     })
+  //   } else {
+  //     $('.checkbox').each(function() {
+  //       this.checked = false;
+  //     })
+  //   }
+  // });
 // click choose all checked select all #######################################################################################################################################
-  $('.checkbox').on('click', function() {
-    if($('.checkbox:checked').length == $('.checkbox').length) {
-      $('#select_all').prop('checked', true);
-    } else {
-      $('#select_all').prop('checked', false);
-    }
-  });
+  // $('.checkbox').on('click', function() {
+  //   if($('.checkbox:checked').length == $('.checkbox').length) {
+  //     $('#select_all').prop('checked', true);
+  //   } else {
+  //     $('#select_all').prop('checked', false);
+  //   }
+  // });
 // ##############################################################################
-// $("#show_button").submit(function(e){
-//     $('#exampleModalCenter').modal('show');
-//     e.preventDefault();
-// });
-
-// $("#show_button").on("click", function(){
-
-
-//   $.post("multiselect.php", function(data){
-
-//     $("#exampleModalCenter").html(data).modal('show');
-
-//   });
-
-// });
-// $( "#show_button").load( "multiselect.php" );
-// $('#check-form').on('submit', function(e){
-//   $('#exampleModalCenter').modal('show');
-//   e.preventDefault();
-// });
-
-// $('#myForm').on('submit', function(e){
-//   $('#exampleModalCenter').modal('show');
-//   e.preventDefault();
-// });
-
-// $('#dialog-confirm').dialog();
-
 
 
 });

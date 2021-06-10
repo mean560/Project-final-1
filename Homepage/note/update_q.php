@@ -84,7 +84,7 @@
       </div>
       <!-- <div style="clear:both;"></div> -->
       <div class="modal-footer">
-        <input type="hidden" name="author_id" id="author_id" />
+        <!-- <input type="hidden" name="author_id" id="author_id" /> -->
         <input type="button" name="submitSave" id="submitSave" class="btn btn-info" value="Submit" >  
       </div>
         </from>
@@ -95,67 +95,67 @@
 <script>
 $(document).ready(function(){
 
-//   $('#submitSave').click(function(){
-//     var id                = $('#postid').val();
-//     var b_name            = $('#name').val();
-//     var b_title           = $('#title').val();
-//     var b_journal_name    = $('#journal_name').val();
-//     var b_periodical_name = $('#periodical_name').val();
-//     var b_dayP            = $('#dayP').val();
-//     var b_monthP          = $('#monthP').val();
-//     var b_yearP           = $('#yearP').val();
-//     var b_page_start      = $('#page_start').val();
-//     var b_page_end        = $('#page_end').val();
-//     var b_volume          = $('#volume').val();
-//     var b_issue           = $('#issue').val();
-//     var b_url             = $('#url').val();
-//     var b_doi             = $('#doi').val();
+  $('#submitSave').click(function(){
+    var id                = $('#postid').val();
+    var b_name            = $('#name').val();
+    var b_title           = $('#titleB').val();
+    var b_journal_name    = $('#journal_name').val();
+    var b_periodical_name = $('#periodical_name').val();
+    var b_dayP            = $('#dayP').val();
+    var b_monthP          = $('#monthP').val();
+    var b_yearP           = $('#yearP').val();
+    var b_page_start      = $('#page_start').val();
+    var b_page_end        = $('#page_end').val();
+    var b_volume          = $('#volume').val();
+    var b_issue           = $('#issue').val();
+    var b_url             = $('#urlB').val();
+    var b_doi             = $('#doi').val();
 
-//     console.log(id)
-//     console.log(b_name)
-//     console.log(b_title)
-//     console.log(b_journal_name)
-//     console.log(b_periodical_name)
-//     console.log(b_dayP)
-//     console.log(b_monthP)
-//     console.log(b_yearP)
-//     console.log(b_page_start)
-//     console.log(b_page_end)
-//     console.log(b_volume)
-//     console.log(b_issue)
-//     console.log(b_url)
-//     console.log(b_doi)
+    console.log(id)
+    console.log(b_name)
+    console.log(b_title)
+    console.log(b_journal_name)
+    console.log(b_periodical_name)
+    console.log(b_dayP)
+    console.log(b_monthP)
+    console.log(b_yearP)
+    console.log(b_page_start)
+    console.log(b_page_end)
+    console.log(b_volume)
+    console.log(b_issue)
+    console.log(b_url)
+    console.log(b_doi)
 
-//     $.ajax({
-//         url: 'updateModal.php',
-//         type: 'POST',
-//         data: {
-//             'updateModal': 1,
-//             id: id,
-//             b_name: b_name,
-//             b_title: b_title,
-//             b_journal_name: b_journal_name,
-//             b_periodical_name: b_periodical_name,
-//             b_dayP: b_dayP,
-//             b_monthP: b_monthP,
-//             b_yearP: b_yearP,
-//             b_page_start: b_page_start,
-//             b_page_end: b_page_end,
-//             b_volume: b_volume,
-//             b_issue: b_issue,
-//             b_url: b_url,
-//             b_doi: b_doi
-//         },
-//         success: function(response) {
-//           console.log("Yes")
-//           swal({
-//               title: "Success!",
-//               text: "Data has been updated successfully.",
-//               icon: "success",
-//               button: "Close",
-//           });
-//         }
-//     });
-//   });
+    $.ajax({
+        url: 'updateModal.php',
+        type: 'POST',
+        data: {
+            'updateModal': 1,
+            id: id,
+            b_name: b_name,
+            b_title: b_title,
+            b_journal_name: b_journal_name,
+            b_periodical_name: b_periodical_name,
+            b_dayP: b_dayP,
+            b_monthP: b_monthP,
+            b_yearP: b_yearP,
+            b_page_start: b_page_start,
+            b_page_end: b_page_end,
+            b_volume: b_volume,
+            b_issue: b_issue,
+            b_url: b_url,
+            b_doi: b_doi
+        },
+        success: function(response) {
+          console.log("Yes")
+          swal({
+              title: "Success!",
+              text: "Data has been create successfully.",
+              icon: "success",
+              button: "Close",
+          });
+        }
+    });
+  });
 });
 </script>

@@ -25,7 +25,99 @@
           //จัดการชื่อ
           $answer = explode(" ",$name);
           //print apa
-          echo $answer[1].", ".$answer[0][0].". (".$yearP."). ".$title.". ".$journal_name.", ".$volume."(".$issue."), ".$page_start."-".$page_end.". ".$url."<br/>";
+          if(sizeof($answer)==2){
+            echo $answer[1]." ";
+            echo $answer[0][0].". ";
+            echo "(".$yearP."). ";
+            echo $title.". ";
+            echo "<i>$journal_name</i>".", ";
+            if($volume != "") {
+              echo $volume;
+            } else {
+              echo "";
+            }
+            if($issue!=""){
+              echo "(".$issue."), ";
+            } else {
+              echo ", ";
+            }
+            if($page_end != ""){
+              echo $page_start."-".$page_end.". ";
+            } else {
+              echo $page_start.". ";
+            }
+            if($url != ""){
+              echo $url;
+            } else {
+              echo "https://doi.org/".$doi;
+            } 
+            echo "<br/>";
+
+          } else if (sizeof($answer)==4){
+            echo $answer[1]." ";
+            echo $answer[0][0]."., & ";
+            echo $answer[3].", ";
+            echo $answer[2][0].". ";
+            echo "(".$yearP."). ";
+            echo $title.". ";
+            echo "<i>$journal_name</i>".", ";
+            if($volume != "") {
+              echo $volume;
+            } else {
+              echo "";
+            }
+            if($issue!=""){
+              echo "(".$issue."), ";
+            } else {
+              echo ", ";
+            }
+            if($page_end != ""){
+              echo $page_start."-".$page_end.". ";
+            } else {
+              echo $page_start.". ";
+            }            
+            if($url != ""){
+              echo $url;
+            } else {
+              echo "https://doi.org/".$doi;
+            }
+            echo "<br/>";
+
+          } else if (sizeof($answer)==6){
+            echo $answer[1]." ";
+            echo $answer[0][0]."., ";
+            echo $answer[3]." ";
+            echo $answer[2][0]."., & ";
+            echo $answer[5].", ";
+            echo $answer[4][0].". ";
+            echo "(".$yearP."). ";
+            echo $title.". ";
+            echo "<i>$journal_name</i>".", ";
+            if($volume != "") {
+              echo $volume;
+            } else {
+              echo "";
+            }
+            if($issue != ""){
+              echo "(".$issue."), ";
+            } else {
+              echo ", ";
+            }
+            if($page_end != ""){
+              echo $page_start."-".$page_end.". ";
+            } else {
+              echo $page_start.". ";
+            }
+            if($url != ""){
+              echo $url;
+            } else {
+              echo "https://doi.org/".$doi;
+            }
+            echo "<br/>";
+
+          }
+          echo "<br/>";
 
         }
+        
 ?>

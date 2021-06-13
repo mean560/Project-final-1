@@ -23,58 +23,31 @@
             for($i = 0; $i < count($arrStr); $i++) {
 
                 $output[$i] = shell_exec('python C:/xampp/htdocs/Project-final-1/Homepage/sentence/enhanced-subject-verb-object-extraction-master/demo.py  ' . $arrStr[$i]);
+                // echo json_decode($output[$i]);
 
-                echo "$output[$i] <br/>";
-                // echo json_encode($output);
-                // echo json_decode($output, true);   
-                // echo $output[$i];
             }
-            // print_r($output);
-            // $output_new = array_map('trim',$output);
+            // echo "__________________________________________";
+            $output_new = array_map('trim',$output);
             // print_r($output_new);
+            if(!empty($output_new)){
+                // echo "ไม่ว่างนะ";
+                // print_r($output_new);
+                $c = 0;
+                for($j = 0; $j < count($output_new); $j++) {
+                    if($output_new[$j]=="[]"){
+                        $c = $c+1;
+                    } else {
+                        echo $output_new[$j]."<br/>";
+                    }
+                    if($c == count($output_new)){
+                        echo "This is simple sentence.";
+                        // echo "ว่างแน้ว";
+                        break;
+                    }
 
-
-
+                }
+            }
         }
-
-        // $arrStr = explode(".", $stringText);
-        // echo gettype($arrStr);
-        // echo $arrStr;
-        // echo json_encode($arrStr);
-
-        // echo count($arrStr);
-        // $output = array();
-        // $result = array();
-        // for($i = 0; $i < count($arrStr); $i++) {
-        //     $output = shell_exec('python C:/xampp/htdocs/Project-final-1/Homepage/sentence/enhanced-subject-verb-object-extraction-master/demo.py  ' . $arrStr[$i]);
-
-        //     // echo "$output <br/>";
-            
-        //     // echo json_encode($output);
-        //     // echo json_decode($output, true);   
-        //     // echo $output[$i];
-        // }
-        // echo $output[0];
-
-
-        // echo json_decode($output, true);   
-        // var_dump($output);
-        // $ans = array();
-        // $result = 
-        // echo $stringText;
-        // var_dump($result);
-        // echo gettype($output);
-        // for($r = 0; $r < count($output); $r++){
-        //     for($l = 0; $l < $r; $l++){
-        //         echo $output[$r][$l];
-        //         echo "<br/>";
-        //     }
-
-        // }
-        
-
-
-
     }
 ?>
 

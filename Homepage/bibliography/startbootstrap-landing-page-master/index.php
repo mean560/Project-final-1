@@ -266,30 +266,35 @@
               <!-- <th>&nbsp;</th> -->
             </tr>
             <?php
+            
             $con = mysqli_connect("localhost", "root", "", "project_test"); 
-
             $query = "SELECT * FROM author WHERE user_id = {$_SESSION['user_id']}";
             $result = mysqli_query($con, $query);
-            while ($row = mysqli_fetch_array($result)) {
-              $id = $row['id'];
-              $name = $row['name'];
-              $title = $row['title'];
-              $journal = $row['journal_name'];
-            ?>
-              <td><input type="checkbox" class="checkbox" name="ids[]" value=<?php echo $row['id'] ?> ></td>
-              <!-- <td><input type="checkbox" name="idcheckbox[]" class="form-control" value="<?php echo $row['id']; ?>" /></td> -->
-              <!-- <td><input type="checkbox" id="customCheck2" value="<?php echo $row['id']; ?>" /></td> -->
-              <?php
-              echo "<td>" . $name . "</td>";
-              echo "<td>" . $title . "</td>";
-              echo "<td>" . $journal . "</td>";
+            $num = mysqli_num_rows($result);
+            if($num != 0){        
+              while ($row = mysqli_fetch_array($result)) {
+                $id = $row['id'];
+                $name = $row['name'];
+                $title = $row['title'];
+                $journal = $row['journal_name'];
               ?>
-              <td>
-                <button type="button" class="btn btn-warning edit_data" id="<?php echo $row['id']; ?>" name="edit_data" ><i class="fas fa-edit" style="color:white;"></i></button>
-                <button type="button" class="btn btn-danger delete_data" id="<?php echo $row['id']; ?>" name="delete_data"><i class="bi bi-trash"></i></button>
-              </td>
-            <?php
-              echo "</tr>";
+                <td><input type="checkbox" class="checkbox" name="ids[]" value=<?php echo $row['id'] ?> ></td>
+                <!-- <td><input type="checkbox" name="idcheckbox[]" class="form-control" value="<?php echo $row['id']; ?>" /></td> -->
+                <!-- <td><input type="checkbox" id="customCheck2" value="<?php echo $row['id']; ?>" /></td> -->
+                <?php
+                echo "<td>" . $name . "</td>";
+                echo "<td>" . $title . "</td>";
+                echo "<td>" . $journal . "</td>";
+                ?>
+                <td>
+                  <button type="button" class="btn btn-warning edit_data" id="<?php echo $row['id']; ?>" name="edit_data" ><i class="fas fa-edit" style="color:white;"></i></button>
+                  <button type="button" class="btn btn-danger delete_data" id="<?php echo $row['id']; ?>" name="delete_data"><i class="bi bi-trash"></i></button>
+                </td>
+              <?php
+                echo "</tr>";
+              }
+            } else {
+              echo "no data record";
             }
             ?>
           </table>
@@ -403,14 +408,10 @@
       </div>
       <div class="modal-body" style="font-size:16px">
         <?php 
-        if(isset($_POST['ids'])){
-          echo "checked value"."<br>";
-        } else {
-          echo "หาวิธีใหม่"."<br/>";
-        }
+
         // include 'multiselect.php';
         // echo "ffffffffffffffffffffffff";
-          echo "APA style <br/>";
+          // echo "APA style <br/>";
           // include 'template/apa.php'; 
           // echo "<br/>";
           // echo "MLA style";
@@ -419,15 +420,15 @@
           // echo "Chicago style";
           // include 'template/chicago.php';
         ?>
-        <!-- <div id="apa">
-          <?php //include 'template/apa.php'; ?>
+        <div id="apa">
+          <?php  include 'template/apa.php'; ?>
         </div>
         <div id="mla">
-          <?php //include 'template/mla.php'; ?>
+          <?php include 'template/mla.php'; ?>
         </div>
         <div id="chicago">
-          <?php //include 'template/chicago.php'; ?>
-        </div> -->
+          <?php include 'template/chicago.php'; ?>
+        </div>
         
       </div>
       <div class="modal-footer">

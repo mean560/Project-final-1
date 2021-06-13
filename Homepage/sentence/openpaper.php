@@ -12,7 +12,7 @@ if (!isset($_SESSION['status_login'])) {
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paper</title>
+    <title>Simple sentence & Translate</title>
 
 
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -276,9 +276,10 @@ if (!isset($_SESSION['status_login'])) {
                                     $wdt = 0;
                                     $wp = 0;
                                     $wrb = 0;
-
-                                    for ($x = 0; $x < count($result); $x++) {
-                                        $arr[$x] = ($result[$x]);
+                                    for($v = 0; $v < count($result); $v++){
+                                    for ($x = 0; $x < count($result[$v]); $x++) {
+                                        $arr[$x] = $result[$v][$x];
+                                        // echo $arr[$x][1]."<br/>";
                                         if ($arr[$x][1] == 'CC') { $cc++; ?>
                                             <a href="#" data-toggle="tooltip" title="Coordinating Conjunction" style="border-radius: 5px; background-color: #FDB750; color:white; padding: 5px; "><?=$arr[$x][0]; ?></a>
                                         <?php } elseif ($arr[$x][1] == 'CD') { $cd++ ?>
@@ -348,12 +349,11 @@ if (!isset($_SESSION['status_login'])) {
                                         <?php } elseif ($arr[$x][1] == 'WRB') { $wrb++; ?>
                                             <a href="#" data-toggle="tooltip" title="wh- adverb" style="border-radius: 5px; background-color: #1B2E3C; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
                                         <?php } elseif($arr[$x][1] == '.') { echo "."; }
-                                    } ?>
-                                    <div class="container" style="overflow: auto; line-height: 1.5; font-size: 14px; font-style: italic; text-align:left; width: 96.25%; height:90px; position:absolute; right:10px; bottom: 10px;">Description :
-                                    <?php
-                                        if($cc >= 1){ ?> <i class="bi bi-circle-fill" style="color: #FDB750; border-radius: 5px; padding: 3px;">Coordinating Conjunction</i>
+                                    } }?>
+                                    <div class="container" style="overflow: auto; line-height: 1.5; font-size: 14px; font-style: italic; text-align:left; width: 96.25%; height:auto; position:absolute; right:10px; bottom: -100px;">Description :
+                                    <?php                                        if($cc >= 1){ ?> <i class="bi bi-circle-fill" style="color: #FDB750; border-radius: 5px; padding: 3px;">Coordinating Conjunction</i>
                                         <?php } if($cd>=1){ ?> <i class="bi bi-circle-fill" style="color: #FC2E20;">Cardinal Digit</i>
-                                        <?php } if($dt>=1){ ?> <i style="background-color:#FD7F20; color:white; border-radius: 5px; padding: 3px;">Determiner </i>
+                                        <?php } if($dt>=1){ ?> <i class="bi bi-circle-fill" style="color:#FD7F20;">Determiner </i>
                                         <?php } if($ex>=1){ ?> <i class="bi bi-circle-fill" style="color: #3B0918;">Existential</i>
                                         <?php } if($fw>=1){ ?> <i class="bi bi-circle-fill" style="color: #B8390E;">Foreign Word</i>
                                         <?php } if($in>=1){ ?> <i class="bi bi-circle-fill" style="color:#DC4731;">Preposition/Subordinating Conjunction</i>
@@ -385,7 +385,8 @@ if (!isset($_SESSION['status_login'])) {
                                         <?php } if($wdt>=1){ ?> <i class="bi bi-circle-fill" style="color:#2D2A11;">wh-determiner</i>
                                         <?php } if($wp>=1){ ?> <i class="bi bi-circle-fill" style="color: #B43B42;">wh- pronoun</i>
                                         <?php } if($wrb>=1){ ?> <i class="bi bi-circle-fill" style="color: #1B2E3C;">wh- adverb</i>  
-                                        <?php } ?>               
+                                        <?php } ?>   
+            
                                     </div>
                                 <?php
                                 }
@@ -396,15 +397,15 @@ if (!isset($_SESSION['status_login'])) {
                                     // echo "This is simple sentence";
                                     echo "";
                                 }
-                                else{
-                                    for ($y = 0; $y < count($ans); $y++) {
-                                        for($z = 0; $z < count($ans[$y]); $z++){
-                                            print $ans[$y][$z];
-                                            print " ";
-                                        }
-                                        echo "<br>";
-                                    }
-                                }
+                                // else{
+                                //     for ($y = 0; $y < count($ans); $y++) {
+                                //         for($z = 0; $z < count($ans[$y]); $z++){
+                                //             print $ans[$y][$z];
+                                //             print " ";
+                                //         }
+                                //         echo "<br>";
+                                //     }
+                                // }
                             }
                             elseif(isset($_POST["buttonTranslate"])){
                                 include("translate.php");

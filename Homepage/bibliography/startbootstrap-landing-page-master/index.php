@@ -1,7 +1,7 @@
 <?php
   error_reporting(0);
   include "config_s.php";
-  $sql="SELECT * FROM author_test";
+  $sql="SELECT * FROM author";
   $result=mysqli_query($con, $sql);
 
   $count=mysqli_num_rows($result);
@@ -12,6 +12,133 @@
   if (!isset($_SESSION['status_login'])) {
     header('location: ../authen/signin.php');
   }
+?>
+<?php
+// if(isset($_POST['show_button'])) {
+//   if(count($_POST['ids']) > 0) {
+//     $all = implode(",", $_POST['ids']);
+//      print_r ($all); echo"<br/>";
+//     $sql = mysqli_query($con, "select * from author where id in ($all)");
+//     while($row = mysqli_fetch_array($sql)){
+//       $id = $row['id'];
+//       $name = $row['name'];
+//       $title = $row['title'];
+//       $yearP = $row['yearP'];
+//       $journal_name = $row['journal_name'];
+//       $volume = $row['volume'];
+//       // $page = $row['pages'];
+//       $page_start = $row['page_start'];
+//       $page_end = $row['page_end'];
+//       $url = $row['url'];
+//       $issue = $row['issue'];
+//       $doi = $row['doi'];
+
+//       //จัดการชื่อ
+//       $answer = explode(" ",$name);
+//       //apa template
+//       if(sizeof($answer)==2){
+//         echo $answer[1]." ";
+//         echo $answer[0][0].". ";
+//         echo "(".$yearP."). ";
+//         echo $title.". ";
+//         echo "<i>$journal_name</i>".", ";
+//         if($volume != "") {
+//           echo $volume;
+//         } else {
+//           echo "";
+//         }
+//         if($issue!=""){
+//           echo "(".$issue."), ";
+//         } else {
+//           echo ", ";
+//         }
+//         if($page_end != ""){
+//           echo $page_start."-".$page_end.". ";
+//         } else {
+//           echo $page_start.". ";
+//         }
+//         if($url != ""){
+//           echo $url;
+//         } else {
+//           echo "https://doi.org/".$doi;
+//         } 
+//         echo "<br/>";
+
+//       } else if (sizeof($answer)==4){
+//         echo $answer[1]." ";
+//         echo $answer[0][0]."., & ";
+//         echo $answer[3].", ";
+//         echo $answer[2][0].". ";
+//         echo "(".$yearP."). ";
+//         echo $title.". ";
+//         echo "<i>$journal_name</i>".", ";
+//         if($volume != "") {
+//           echo $volume;
+//         } else {
+//           echo "";
+//         }
+//         if($issue!=""){
+//           echo "(".$issue."), ";
+//         } else {
+//           echo ", ";
+//         }
+//         if($page_end != ""){
+//           echo $page_start."-".$page_end.". ";
+//         } else {
+//           echo $page_start.". ";
+//         }            
+//         if($url != ""){
+//           echo $url;
+//         } else {
+//           echo "https://doi.org/".$doi;
+//         }
+//         echo "<br/>";
+
+//       } else if (sizeof($answer)==6){
+//         echo $answer[1]." ";
+//         echo $answer[0][0]."., ";
+//         echo $answer[3]." ";
+//         echo $answer[2][0]."., & ";
+//         echo $answer[5].", ";
+//         echo $answer[4][0].". ";
+//         echo "(".$yearP."). ";
+//         echo $title.". ";
+//         echo "<i>$journal_name</i>".", ";
+//         if($volume != "") {
+//           echo $volume;
+//         } else {
+//           echo "";
+//         }
+//         if($issue != ""){
+//           echo "(".$issue."), ";
+//         } else {
+//           echo ", ";
+//         }
+//         if($page_end != ""){
+//           echo $page_start."-".$page_end.". ";
+//         } else {
+//           echo $page_start.". ";
+//         }
+//         if($url != ""){
+//           echo $url;
+//         } else {
+//           echo "https://doi.org/".$doi;
+//         }
+//         echo "<br/>";
+
+//       }
+//       echo "<br/>";
+
+//     }
+//     // if($sql){
+//     //   echo "<script>alert('ได้ด้วยโว้ย');</script>";
+//     // } else {
+//     //   echo "<script>alert('มันต้องผิดสักที่');</script>";
+//     // }
+//   } else {
+//     echo "ยังไม่ได้เลือกสักช่องเลยนะ!!";
+//   }
+// }
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +175,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
 <body data-new-gr-c-s-check-loaded="14.990.0" data-gr-ext-installed="" data-new-gr-c-s-loaded="14.990.0">
@@ -89,30 +216,46 @@
   <div class="containerBody">
     <div class="leftBody">
       <button type="button" class="btn" data-toggle="modal" data-target="#insertModal" style="margin-top: 25px; margin-left: 25px; width: 70%; font-family: Arial, Helvetica, sans-serif; letter-spacing: 0px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; text-decoration-style: solid;">Create Source</button>
-    
+      <div class="list-group" style="padding-top: 16px;">
+        <div class="list-group-item" style="background-color: rgb(249, 249, 249); border:0px;">
+          <a class="dropdown-toggle" href="../startbootstrap-landing-page-master/index.php" data-toggle="dropdown" style="color: black; background-color: rgb(249, 249, 249); float: left; text-align: left; font-size: 14px;"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDQ4MC4wMDk1OCA0ODAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTEyOCAxMDQuMDAzOTA2di0zMmMwLTQuNDE3OTY4LTMuNTgyMDMxLTgtOC04aC0xMTJjLTQuNDE3OTY5IDAtOCAzLjU4MjAzMi04IDh2MzJ6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTAgMTIwLjAwMzkwNnYyNjRoMTI4di0yNjR6bTk2IDEwNGgtNjRjLTQuNDE3OTY5IDAtOC0zLjU4MjAzMS04LTh2LTY0YzAtNC40MTc5NjggMy41ODIwMzEtOCA4LThoNjRjNC40MTc5NjkgMCA4IDMuNTgyMDMyIDggOHY2NGMwIDQuNDE3OTY5LTMuNTgyMDMxIDgtOCA4em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0wIDQzMi4wMDM5MDZ2NDBjMCA0LjQxNzk2OSAzLjU4MjAzMSA4IDggOGgxMTJjNC40MTc5NjkgMCA4LTMuNTgyMDMxIDgtOHYtNDB6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTAgNDAwLjAwMzkwNmgxMjh2MTZoLTEyOHptMCAwIiBmaWxsPSIjYjFiOWM0IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBkPSJtMTQ0IDQwMC4wMDM5MDZoMTA0djE2aC0xMDR6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI0OCAzMi4wMDM5MDZ2LTI0YzAtNC40MTc5NjgtMy41ODIwMzEtNy45OTk5OTk3NS04LTcuOTk5OTk5NzVoLTg4Yy00LjQxNzk2OSAwLTggMy41ODIwMzE3NS04IDcuOTk5OTk5NzV2MjR6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTE0NCA4OC4wMDM5MDZoMTA0djI5NmgtMTA0em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0xNDQgNDMyLjAwMzkwNnY0MGMwIDQuNDE3OTY5IDMuNTgyMDMxIDggOCA4aDg4YzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTQwem0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0xNDQgNDguMDAzOTA2aDEwNHYyNGgtMTA0em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0yNjMuODA4NTk0IDE2NS42Njc5NjkgNC4yODEyNSAxNi40MzM1OTMgMTM1LjQ4NDM3NS0zNi4xMjg5MDYtNC4yODUxNTctMTYuNDMzNTk0em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0zMzAuNjY0MDYyIDQyMS45NDkyMTkgMTM1LjQ4MDQ2OS0zNi4xMjg5MDctOC41NzgxMjUtMzIuODg2NzE4LTEzNS40ODgyODEgMzYuMTI4OTA2em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im00NTMuNTI3MzQ0IDMzNy40NTMxMjUtNDUuOTEwMTU2LTE3Ni0xMzUuNDg4MjgyIDM2LjEyODkwNiA0NS45MTAxNTYgMTc2em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0yNTkuNzY5NTMxIDE1MC4xODc1IDEzNS40NzY1NjMtMzYuMTI1LTExLjQ4NDM3NS00NC4wNTg1OTRjLTEuMTgzNTk0LTQuMjY1NjI1LTUuNTQyOTY5LTYuODE2NDA2LTkuODM5ODQ0LTUuNzU3ODEybC0xMjAgMzJjLTQuMjM4MjgxIDEuMTYwMTU2LTYuNzY1NjI1IDUuNS01LjY4MzU5NCA5Ljc1NzgxMnptMCAwIiBmaWxsPSIjYjFiOWM0IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBkPSJtNDcwLjE4MzU5NCA0MDEuMzAwNzgxLTEzNS40ODgyODIgMzYuMTI4OTA3IDkuNTQyOTY5IDM2LjU3NDIxOGMuNTU0Njg4IDIuMDYyNSAxLjkwNjI1IDMuODIwMzEzIDMuNzYxNzE5IDQuODgyODEzIDEuMjA3MDMxLjczMDQ2OSAyLjU4OTg0NCAxLjExNzE4NyA0IDEuMTE3MTg3LjY5OTIxOSAwIDEuMzk4NDM4LS4wODIwMzEgMi4wNzgxMjUtLjIzODI4MWwxMjAtMzJjNC4yMzgyODEtMS4xNjAxNTYgNi43NjU2MjUtNS41MDM5MDYgNS42ODM1OTQtOS43NjE3MTl6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjwvZz48L3N2Zz4=" style="width: 15px; height: 15px;">  All Bibliographys <span class="caret"></span></a>
+        <ul class="dropdown-menu" style="background-color: rgb(249, 249, 249);">
+            <li role="presentation"><a href="../startbootstrap-landing-page-master/index.php" style="color: black; background-color: rgb(249, 249, 249); float: left; text-align: left; font-size: 14px;">All Bibliographys</a></li><br/>
+            <li role="presentation"><a href="../startbootstrap-landing-page-master/formNote.php" style="color: black; background-color: rgb(249, 249, 249); float: left; text-align: left; font-size: 14px;">Note</a></li><br/>
+            <li role="presentation"><a href="../startbootstrap-landing-page-master/formBibli.php" style="color: black; background-color: rgb(249, 249, 249); float: left; text-align: left; font-size: 14px;">Bibliography</a></li>
+        </ul>
+        
+        </div>
+      </div>
       <!-- list button -->
-      <ul class="list-group" style="padding-top: 16px; border-width: 0px;">
+      <!-- <ul class="list-group" style="padding-top: 16px; border-width: 0px;">
         <div class="btn-group-vertical" style="opacity: 1;">
-          <a href="index.php" class="list-group-item"ไ style="color: black; border-width: 0px; background-color: rgb(249, 249, 249); float: left; text-align: left; font-size: 14px;"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDQ4MC4wMDk1OCA0ODAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTEyOCAxMDQuMDAzOTA2di0zMmMwLTQuNDE3OTY4LTMuNTgyMDMxLTgtOC04aC0xMTJjLTQuNDE3OTY5IDAtOCAzLjU4MjAzMi04IDh2MzJ6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTAgMTIwLjAwMzkwNnYyNjRoMTI4di0yNjR6bTk2IDEwNGgtNjRjLTQuNDE3OTY5IDAtOC0zLjU4MjAzMS04LTh2LTY0YzAtNC40MTc5NjggMy41ODIwMzEtOCA4LThoNjRjNC40MTc5NjkgMCA4IDMuNTgyMDMyIDggOHY2NGMwIDQuNDE3OTY5LTMuNTgyMDMxIDgtOCA4em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0wIDQzMi4wMDM5MDZ2NDBjMCA0LjQxNzk2OSAzLjU4MjAzMSA4IDggOGgxMTJjNC40MTc5NjkgMCA4LTMuNTgyMDMxIDgtOHYtNDB6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTAgNDAwLjAwMzkwNmgxMjh2MTZoLTEyOHptMCAwIiBmaWxsPSIjYjFiOWM0IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBkPSJtMTQ0IDQwMC4wMDM5MDZoMTA0djE2aC0xMDR6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI0OCAzMi4wMDM5MDZ2LTI0YzAtNC40MTc5NjgtMy41ODIwMzEtNy45OTk5OTk3NS04LTcuOTk5OTk5NzVoLTg4Yy00LjQxNzk2OSAwLTggMy41ODIwMzE3NS04IDcuOTk5OTk5NzV2MjR6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTE0NCA4OC4wMDM5MDZoMTA0djI5NmgtMTA0em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0xNDQgNDMyLjAwMzkwNnY0MGMwIDQuNDE3OTY5IDMuNTgyMDMxIDggOCA4aDg4YzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTQwem0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0xNDQgNDguMDAzOTA2aDEwNHYyNGgtMTA0em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0yNjMuODA4NTk0IDE2NS42Njc5NjkgNC4yODEyNSAxNi40MzM1OTMgMTM1LjQ4NDM3NS0zNi4xMjg5MDYtNC4yODUxNTctMTYuNDMzNTk0em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0zMzAuNjY0MDYyIDQyMS45NDkyMTkgMTM1LjQ4MDQ2OS0zNi4xMjg5MDctOC41NzgxMjUtMzIuODg2NzE4LTEzNS40ODgyODEgMzYuMTI4OTA2em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im00NTMuNTI3MzQ0IDMzNy40NTMxMjUtNDUuOTEwMTU2LTE3Ni0xMzUuNDg4MjgyIDM2LjEyODkwNiA0NS45MTAxNTYgMTc2em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0yNTkuNzY5NTMxIDE1MC4xODc1IDEzNS40NzY1NjMtMzYuMTI1LTExLjQ4NDM3NS00NC4wNTg1OTRjLTEuMTgzNTk0LTQuMjY1NjI1LTUuNTQyOTY5LTYuODE2NDA2LTkuODM5ODQ0LTUuNzU3ODEybC0xMjAgMzJjLTQuMjM4MjgxIDEuMTYwMTU2LTYuNzY1NjI1IDUuNS01LjY4MzU5NCA5Ljc1NzgxMnptMCAwIiBmaWxsPSIjYjFiOWM0IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBkPSJtNDcwLjE4MzU5NCA0MDEuMzAwNzgxLTEzNS40ODgyODIgMzYuMTI4OTA3IDkuNTQyOTY5IDM2LjU3NDIxOGMuNTU0Njg4IDIuMDYyNSAxLjkwNjI1IDMuODIwMzEzIDMuNzYxNzE5IDQuODgyODEzIDEuMjA3MDMxLjczMDQ2OSAyLjU4OTg0NCAxLjExNzE4NyA0IDEuMTE3MTg3LjY5OTIxOSAwIDEuMzk4NDM4LS4wODIwMzEgMi4wNzgxMjUtLjIzODI4MWwxMjAtMzJjNC4yMzgyODEtMS4xNjAxNTYgNi43NjU2MjUtNS41MDM5MDYgNS42ODM1OTQtOS43NjE3MTl6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjwvZz48L3N2Zz4=" style="width: 15px; height: 15px;" /> All Bibliographys</a>
+          <a href="index.php" class="list-group-item" style="color: black; border-width: 0px; background-color: rgb(249, 249, 249); float: left; text-align: left; font-size: 14px;"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDQ4MC4wMDk1OCA0ODAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiIGNsYXNzPSIiPjxnPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTEyOCAxMDQuMDAzOTA2di0zMmMwLTQuNDE3OTY4LTMuNTgyMDMxLTgtOC04aC0xMTJjLTQuNDE3OTY5IDAtOCAzLjU4MjAzMi04IDh2MzJ6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTAgMTIwLjAwMzkwNnYyNjRoMTI4di0yNjR6bTk2IDEwNGgtNjRjLTQuNDE3OTY5IDAtOC0zLjU4MjAzMS04LTh2LTY0YzAtNC40MTc5NjggMy41ODIwMzEtOCA4LThoNjRjNC40MTc5NjkgMCA4IDMuNTgyMDMyIDggOHY2NGMwIDQuNDE3OTY5LTMuNTgyMDMxIDgtOCA4em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0wIDQzMi4wMDM5MDZ2NDBjMCA0LjQxNzk2OSAzLjU4MjAzMSA4IDggOGgxMTJjNC40MTc5NjkgMCA4LTMuNTgyMDMxIDgtOHYtNDB6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTAgNDAwLjAwMzkwNmgxMjh2MTZoLTEyOHptMCAwIiBmaWxsPSIjYjFiOWM0IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBkPSJtMTQ0IDQwMC4wMDM5MDZoMTA0djE2aC0xMDR6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTI0OCAzMi4wMDM5MDZ2LTI0YzAtNC40MTc5NjgtMy41ODIwMzEtNy45OTk5OTk3NS04LTcuOTk5OTk5NzVoLTg4Yy00LjQxNzk2OSAwLTggMy41ODIwMzE3NS04IDcuOTk5OTk5NzV2MjR6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTE0NCA4OC4wMDM5MDZoMTA0djI5NmgtMTA0em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0xNDQgNDMyLjAwMzkwNnY0MGMwIDQuNDE3OTY5IDMuNTgyMDMxIDggOCA4aDg4YzQuNDE3OTY5IDAgOC0zLjU4MjAzMSA4LTh2LTQwem0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0xNDQgNDguMDAzOTA2aDEwNHYyNGgtMTA0em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0yNjMuODA4NTk0IDE2NS42Njc5NjkgNC4yODEyNSAxNi40MzM1OTMgMTM1LjQ4NDM3NS0zNi4xMjg5MDYtNC4yODUxNTctMTYuNDMzNTk0em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0zMzAuNjY0MDYyIDQyMS45NDkyMTkgMTM1LjQ4MDQ2OS0zNi4xMjg5MDctOC41NzgxMjUtMzIuODg2NzE4LTEzNS40ODgyODEgMzYuMTI4OTA2em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im00NTMuNTI3MzQ0IDMzNy40NTMxMjUtNDUuOTEwMTU2LTE3Ni0xMzUuNDg4MjgyIDM2LjEyODkwNiA0NS45MTAxNTYgMTc2em0wIDAiIGZpbGw9IiNiMWI5YzQiIGRhdGEtb3JpZ2luYWw9IiMwMDAwMDAiIHN0eWxlPSIiIGNsYXNzPSIiPjwvcGF0aD48cGF0aCB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGQ9Im0yNTkuNzY5NTMxIDE1MC4xODc1IDEzNS40NzY1NjMtMzYuMTI1LTExLjQ4NDM3NS00NC4wNTg1OTRjLTEuMTgzNTk0LTQuMjY1NjI1LTUuNTQyOTY5LTYuODE2NDA2LTkuODM5ODQ0LTUuNzU3ODEybC0xMjAgMzJjLTQuMjM4MjgxIDEuMTYwMTU2LTYuNzY1NjI1IDUuNS01LjY4MzU5NCA5Ljc1NzgxMnptMCAwIiBmaWxsPSIjYjFiOWM0IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIiBjbGFzcz0iIj48L3BhdGg+PHBhdGggeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBkPSJtNDcwLjE4MzU5NCA0MDEuMzAwNzgxLTEzNS40ODgyODIgMzYuMTI4OTA3IDkuNTQyOTY5IDM2LjU3NDIxOGMuNTU0Njg4IDIuMDYyNSAxLjkwNjI1IDMuODIwMzEzIDMuNzYxNzE5IDQuODgyODEzIDEuMjA3MDMxLjczMDQ2OSAyLjU4OTg0NCAxLjExNzE4NyA0IDEuMTE3MTg3LjY5OTIxOSAwIDEuMzk4NDM4LS4wODIwMzEgMi4wNzgxMjUtLjIzODI4MWwxMjAtMzJjNC4yMzgyODEtMS4xNjAxNTYgNi43NjU2MjUtNS41MDM5MDYgNS42ODM1OTQtOS43NjE3MTl6bTAgMCIgZmlsbD0iI2IxYjljNCIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgc3R5bGU9IiIgY2xhc3M9IiI+PC9wYXRoPjwvZz48L3N2Zz4=" style="width: 15px; height: 15px;" /> All Bibliographys</a>
           <a href="fav.php" class="list-group-item" style="color: black; border-width: 0px; background-color: rgb(249, 249, 249); float: left; text-align: left; font-size: 14px;"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnN2Z2pzPSJodHRwOi8vc3ZnanMuY29tL3N2Z2pzIiB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgeD0iMCIgeT0iMCIgdmlld0JveD0iMCAwIDUxMS45ODY4NSA1MTEiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTIiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxnPjxwYXRoIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZD0ibTExNC41OTM3NSA0OTEuMTQwNjI1Yy01LjYwOTM3NSAwLTExLjE3OTY4OC0xLjc1LTE1LjkzMzU5NC01LjE4NzUtOC44NTU0NjgtNi40MTc5NjktMTIuOTkyMTg3LTE3LjQ0OTIxOS0xMC41ODIwMzEtMjguMDkzNzVsMzIuOTM3NS0xNDUuMDg5ODQ0LTExMS43MDMxMjUtOTcuOTYwOTM3Yy04LjIxMDkzOC03LjE2Nzk2OS0xMS4zNDc2NTYtMTguNTE5NTMyLTcuOTc2NTYyLTI4LjkwNjI1IDMuMzcxMDkzLTEwLjM2NzE4OCAxMi41NDI5NjgtMTcuNzA3MDMyIDIzLjQwMjM0My0xOC43MTA5MzhsMTQ3Ljc5Njg3NS0xMy40MTc5NjggNTguNDMzNTk0LTEzNi43NDYwOTRjNC4zMDg1OTQtMTAuMDQ2ODc1IDE0LjEyMTA5NC0xNi41MzUxNTYgMjUuMDIzNDM4LTE2LjUzNTE1NiAxMC45MDIzNDMgMCAyMC43MTQ4NDMgNi40ODgyODEgMjUuMDIzNDM3IDE2LjUxMTcxOGw1OC40MzM1OTQgMTM2Ljc2OTUzMiAxNDcuNzczNDM3IDEzLjQxNzk2OGMxMC44ODI4MTMuOTgwNDY5IDIwLjA1NDY4OCA4LjM0Mzc1IDIzLjQyNTc4MiAxOC43MTA5MzggMy4zNzEwOTMgMTAuMzY3MTg3LjI1MzkwNiAyMS43MzgyODEtNy45NTcwMzIgMjguOTA2MjVsLTExMS43MDMxMjUgOTcuOTQxNDA2IDMyLjkzNzUgMTQ1LjA4NTkzOGMyLjQxNDA2MyAxMC42Njc5NjgtMS43MjY1NjIgMjEuNjk5MjE4LTEwLjU3ODEyNSAyOC4wOTc2NTYtOC44MzIwMzEgNi4zOTg0MzctMjAuNjA5Mzc1IDYuODkwNjI1LTI5LjkxMDE1NiAxLjMwMDc4MWwtMTI3LjQ0NTMxMi03Ni4xNjAxNTYtMTI3LjQ0NTMxMyA3Ni4yMDMxMjVjLTQuMzA4NTk0IDIuNTU4NTk0LTkuMTA5Mzc1IDMuODYzMjgxLTEzLjk1MzEyNSAzLjg2MzI4MXptMTQxLjM5ODQzOC0xMTIuODc1YzQuODQzNzUgMCA5LjY0MDYyNCAxLjMwMDc4MSAxMy45NTMxMjQgMy44NTkzNzVsMTIwLjI3NzM0NCA3MS45Mzc1LTMxLjA4NTkzNy0xMzYuOTQxNDA2Yy0yLjIxODc1LTkuNzQ2MDk0IDEuMDg5ODQzLTE5LjkyMTg3NSA4LjYyMTA5My0yNi41MTU2MjVsMTA1LjQ3MjY1Ny05Mi41LTEzOS41NDI5NjktMTIuNjcxODc1Yy0xMC4wNDY4NzUtLjkxNzk2OS0xOC42ODc1LTcuMjM0Mzc1LTIyLjYxMzI4MS0xNi40OTIxODhsLTU1LjA4MjAzMS0xMjkuMDQ2ODc1LTU1LjE0ODQzOCAxMjkuMDY2NDA3Yy0zLjg4MjgxMiA5LjE5NTMxMi0xMi41MjM0MzggMTUuNTExNzE4LTIyLjU0Njg3NSAxNi40Mjk2ODdsLTEzOS41NjI1IDEyLjY3MTg3NSAxMDUuNDY4NzUgOTIuNWM3LjU1NDY4NyA2LjYxMzI4MSAxMC44NTkzNzUgMTYuNzY5NTMxIDguNjIxMDk0IDI2LjUzOTA2MmwtMzEuMDYyNSAxMzYuOTM3NSAxMjAuMjc3MzQzLTcxLjkxNDA2MmM0LjMwODU5NC0yLjU1ODU5NCA5LjEwOTM3Ni0zLjg1OTM3NSAxMy45NTMxMjYtMy44NTkzNzV6bS04NC41ODU5MzgtMjIxLjg0NzY1NnMwIC4wMjM0MzctLjAyMzQzOC4wNDI5Njl6bTE2OS4xMjg5MDYtLjA2MjUuMDIzNDM4LjA0Mjk2OWMwLS4wMjM0MzggMC0uMDIzNDM4LS4wMjM0MzgtLjA0Mjk2OXptMCAwIiBmaWxsPSIjYjFiOWM0IiBkYXRhLW9yaWdpbmFsPSIjMDAwMDAwIiBzdHlsZT0iIj48L3BhdGg+PC9nPjwvc3ZnPg==" style="width: 15px; height: 15px;" /> Favorites</a>
         </div>
-      </ul>
+      </ul> -->
     </div>
 
     <div class="rightBody">
       <form action="searchData.php" class="form-group" method="post">
-        <p class="text" style="display: inline-block; margin-left: 15px; margin-top:15px;">All Bibliographys</p>
-          <input type="text" class="form-control" id="search_word" name="search_word" placeholder="Search" style="width: 20%; display: inline-block; margin-left: 10px;">
-          <button type="submit" class="btn btn-secondary"><i class="bi bi-search"></i></button>
-        </p>
+        <p class="text" style="display: inline-block; margin-left: 15px; margin-top:15px;">Search :</p>
+        <input type="text" class="form-control" id="search_word" name="search_word" 
+        placeholder="Search" style="width: 20%; display: inline-block; margin-left: 10px;">
+        <button type="submit" class="btn btn-secondary"><i class="bi bi-search"></i></button>
+      </p>
+
       </form>
-      <form id="check-form" method="post">
+      <?php if($count==0){
+                echo "ไม่มีข้อมูลในตารางนี้นะ";
+            }else{?>
+
+        <form id="check-form" method="post">
         <div class="table-wrapper-scroll-y my-custom-scrollbar" style="height: 450px; background-color: white;">
           <table class="table table-bordered table-striped mb-0" id="tableAuthor" style='border-collapse: collapse;'>
             <tr>
-              <th style="width:5%;">
-                <input type="checkbox" id="select_all" class="form-check-input">
-                <label class="form-check-label">All</label>
+              <th>
+              <label class="form-check-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+              <input type="checkbox" id="select_all" class="form-check-input">
               </th>
               <!-- <th>B</th> -->
               <th>AUTHORS</th>
@@ -125,23 +268,17 @@
             <?php
             $con = mysqli_connect("localhost", "root", "", "project_test"); 
 
-            // $query = "select * from author_test where user_id = {$_SESSION['user_id']} UNION select b_name from search where user_id = {$_SESSION['user_id']}";
-            $query = "select b_name from search where user_id = {$_SESSION['user_id']}";
-            $query2 = "select name from author_test where user_id = {$_SESSION['user_id']}";
-            // $query = "select b_name from author_test union select name from search where user_id = {$_SESSION['user_id']}";
-            // $result = mysqli_query($con, $query);
-            $result1 = mysqli_query($con, $query);
-            $result2 = mysqli_query($con, $query2);
-            while ($row1 = mysqli_fetch_array($result1) && $row2 = mysqli_fetch_array($result2)) {
+            $query = "SELECT * FROM author WHERE user_id = {$_SESSION['user_id']}";
+            $result = mysqli_query($con, $query);
+            while ($row = mysqli_fetch_array($result)) {
               $id = $row['id'];
-              $name = $row1['b_name'];
-              $name = $row2['name'];
+              $name = $row['name'];
               $title = $row['title'];
               $journal = $row['journal_name'];
             ?>
               <td><input type="checkbox" class="checkbox" name="ids[]" value=<?php echo $row['id'] ?> ></td>
               <!-- <td><input type="checkbox" name="idcheckbox[]" class="form-control" value="<?php echo $row['id']; ?>" /></td> -->
-              <!-- <td></td> -->
+              <!-- <td><input type="checkbox" id="customCheck2" value="<?php echo $row['id']; ?>" /></td> -->
               <?php
               echo "<td>" . $name . "</td>";
               echo "<td>" . $title . "</td>";
@@ -156,23 +293,21 @@
             }
             ?>
           </table>
-        </div>
-        </form>
-
-        <?php  require 'insertModal.php'; ?>
+          </form>
+        </div> <?php }?>
+      <?php // require 'insertModal.php'; ?>
 
       <div class="bottomBody">
-      <button type="submit" class="btn" form="check-form" id="show_button" name="show_button" data-toggle="modal" data-target="#exampleModalCenter"
+        <!-- <button type="submit" class="btn" data-toggle="modal" data-target="#exampleModalCenter" style="display: inline-block; position: static; 
+          margin-top: 35px; margin-left: 23%;
+          background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; margin-right: 5px;
+          text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; 
+          text-decoration-style: solid;">Download Bibliography</button> -->
+          <button type="submit" class="btn" form="check-form" data-toggle="modal" data-target="#exampleModalCenter" id="show_button" name="show_button" 
           style="display: inline-block; position: static; margin-top: 35px; margin-left: 23%;
           background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; margin-right: 5px;
           text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; 
           text-decoration-style: solid;">Download Bibliography</button>
-        <!-- <button type="button" class="btn" form="check-form" data-toggle="modal" data-target="#exampleModalCenter" id="show_button" name="show_button"
-          style="display: inline-block; position: static; margin-top: 35px; margin-left: 23%;
-          background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; margin-right: 5px;
-          text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; 
-          text-decoration-style: solid;">Download Bibliography</button> -->
-
         <div class="form-group" style="display: inline-block; position: absolute; border-width: 1px; margin-top: 35px;">
           <select class="form-control" name="bibliographyStyle" style="width: 180px; height: 38px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif;">
             <option selected value="apa">APA</option>
@@ -183,23 +318,12 @@
             <!-- <option value="turabian">Turabian</option>
             <option value="vancouver">Vancouver</option> -->
           </select>
-        </div>
+      </div>
     </div>
-    <!-- </form> -->
   </div>
-        <?php // require 'insertModal.php'; ?>
-      
-        <?php require 'multiselect.php'; ?>
-        <div id="dialog" title="Basic dialog">
-  <p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the &apos;x&apos; icon.</p>
-</div>
-
+        <?php require 'insertModal.php'; ?>
 
   <style>
-    th {
-      vertical-align: middle;
-      text-align: center;
-    }
     .navbar .container {
       margin: 0;
     }
@@ -236,12 +360,33 @@
       height: 110px;
       text-align: left;
     }
-
   </style>
+
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $('#select_all').on('click', function(){
+      if(this.checked) {
+        $('.checkbox').each(function() {
+          this.checked = true;
+        })
+      } else {
+        $('.checkbox').each(function() {
+          this.checked = false;
+        })
+      }
+    });
+    $('.checkbox').on('click', function() {
+      if($('.checkbox:checked').length == $('.checkbox').length) {
+        $('#select_all').prop('checked', true);
+      } else {
+        $('#select_all').prop('checked', false);
+      }
+    });
+  });
+  </script>
   <!-- Bootstrap core JavaScript -->
   <script src="vendor/jquery/jquery.min.js"></script>
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
 
@@ -257,7 +402,32 @@
         </button>
       </div>
       <div class="modal-body" style="font-size:16px">
-        <iframe src="multiselect.php" width="auto" height="auto" frameborder="0" allowtransparency="true"></iframe>  
+        <?php 
+        if(isset($_POST['ids'])){
+          echo "checked value"."<br>";
+        } else {
+          echo "หาวิธีใหม่"."<br/>";
+        }
+        // include 'multiselect.php';
+        // echo "ffffffffffffffffffffffff";
+          echo "APA style <br/>";
+          // include 'template/apa.php'; 
+          // echo "<br/>";
+          // echo "MLA style";
+          // include 'template/mla.php';
+          // echo "<br/>";
+          // echo "Chicago style";
+          // include 'template/chicago.php';
+        ?>
+        <!-- <div id="apa">
+          <?php //include 'template/apa.php'; ?>
+        </div>
+        <div id="mla">
+          <?php //include 'template/mla.php'; ?>
+        </div>
+        <div id="chicago">
+          <?php //include 'template/chicago.php'; ?>
+        </div> -->
         
       </div>
       <div class="modal-footer">
@@ -267,8 +437,6 @@
     </div>
   </div>
 </div>
-
-
 <!-- ####################################################################################################################### -->
 
 <script type="text/javascript">
@@ -412,28 +580,11 @@
       });
     }
   });
-// click select all choose all ###################################################################################################################################################
-  // $('#select_all').on('click', function(){
-  //   if(this.checked) {
-  //     $('.checkbox').each(function() {
-  //       this.checked = true;
-  //     })
-  //   } else {
-  //     $('.checkbox').each(function() {
-  //       this.checked = false;
-  //     })
-  //   }
-  // });
-// click choose all checked select all #######################################################################################################################################
-  // $('.checkbox').on('click', function() {
-  //   if($('.checkbox:checked').length == $('.checkbox').length) {
-  //     $('#select_all').prop('checked', true);
-  //   } else {
-  //     $('#select_all').prop('checked', false);
-  //   }
-  // });
-// ##############################################################################
+  $("#check-form").submit(function(e){
+    $('#exampleModalCenter').modal('show');
+    e.preventDefault();
 
+  });
 
 });
 

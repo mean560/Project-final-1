@@ -1,33 +1,12 @@
 <?php
   error_reporting(0);
-
-require 'config_s.php';
- echo "55555555555555"; ?>
-<!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div> -->
+require 'config_s.php';?>
 <?php
-if($_POST['show_button']) {
+if(isset($_POST['show_button'])) {
   if(count($_POST['ids']) > 0) {
     $all = implode(",", $_POST['ids']);
      print_r ($all); echo"<br/>";
-    $sql = mysqli_query($con, "select * from author_test where id in ($all)");
+    $sql = mysqli_query($con, "select * from author where id in ($all)");
     while($row = mysqli_fetch_array($sql)){
       $id = $row['id'];
       $name = $row['name'];

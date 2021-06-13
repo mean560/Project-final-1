@@ -6,7 +6,7 @@ include ("../startbootstrap-landing-page-master/env/config.php");
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 
-$conn = mysqli_connect("localhost", "root", "", "userdb1");
+$conn = mysqli_connect("localhost", "root", "", "project_test");
 
 
 $id = $_POST['hidden_id'];
@@ -39,12 +39,21 @@ if($id != '') {
     $q = "update author_test set name='$b_name', title='$b_title', journal_name='$b_journal_name', periodical_name='$b_periodical_name',
     dayP='$b_dayP', monthP='$b_monthP', yearP='$b_yearP', page_start='$b_page_start', page_end='$b_page_end', volume='$b_volume', 
     issue='$b_issue', url='$b_url', doi='$b_doi' where id='$id' ";
+
+    $q2 = "update author set name='$b_name', title='$b_title', journal_name='$b_journal_name', periodical_name='$b_periodical_name',
+    dayP='$b_dayP', monthP='$b_monthP', yearP='$b_yearP', page_start='$b_page_start', page_end='$b_page_end', volume='$b_volume', 
+    issue='$b_issue', url='$b_url', doi='$b_doi' where id='$id' ";
+
 } else {
     $q = "insert into author_test(user_id, name, title, journal_name, periodical_name, dayP, monthP, yearP, page_start, page_end, volume, issue, url, doi)
     values('$user_id', '$b_name', '$b_title', '$b_journal_name', '$b_periodical_name', '$b_dayP', '$b_monthP', '$b_yearP', '$b_page_start', '$b_page_end', 
     '$b_volume', '$b_issue', '$b_url', '$b_doi')";
+
+    $q2 = "insert into author(user_id, name, title, journal_name, periodical_name, dayP, monthP, yearP, page_start, page_end, volume, issue, url, doi, whereCreate)
+    values('$user_id', '$b_name', '$b_title', '$b_journal_name', '$b_periodical_name', '$b_dayP', '$b_monthP', '$b_yearP', '$b_page_start', '$b_page_end', 
+    '$b_volume', '$b_issue', '$b_url', '$b_doi', 'Bibliography')";
 }
-if(mysqli_query($conn, $q)){
+if(mysqli_query($conn, $q)&&mysqli_query($conn, $q2)){
     echo "complete";
 } else {
     echo "error";

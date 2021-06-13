@@ -33,21 +33,15 @@ $newfilename = $user_id . $username . time() . "." . $ext;
 
 $sql = "INSERT INTO search (title, description, file_name, file_directory,user_id,date_create, url, last_update, keyword)
         VALUES('$title', '$description', '$newfilename', '$file_directory','$user_id','$date_create','$url','$last_update','$keyword')";
+
+$q2 = "insert into author(data_time, user_id, whereCreate)
+        values('$date_create', '$user_id', 'Note')";
+
 $query = mysqli_query($con, $sql);
+$query2 = mysqli_query($con, $q2);
+
 
 echo $sql;
+echo $query2;
 
-// if($hid_id!=''){
-//         $sql = "update search set b_name='$b_name', b_title='$b_title', b_journal_name='$b_journal_name', b_periodical_name='$b_periodical_name',
-//         b_dayP='$b_dayP', b_monthP='$b_monthP', b_year='$b_yearP', b_page_start='$b_page_start', b_page_end='$b_page_end', b_volume='$b_volume', 
-//         b_issue='$b_issue', b_url='$b_url', b_doi='$b_doi' where id='$hid_id' ";
-// }else{
-//         $sql = "INSERT INTO search (title, description, file_name, file_directory,user_id,date_create, url, last_update, keyword)
-//         VALUES('$title', '$description', '$newfilename', '$file_directory','$user_id','$date_create','$url','$last_update','$keyword')";
-// }
-// if($query = mysqli_query($con, $sql)){
-//         echo "complete";
-// }
-// else{
-//         echo "error";
-// }
+

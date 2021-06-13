@@ -3,8 +3,8 @@
         $all = $_POST['all'];
         echo $all;
 
-        $con = mysqli_connect("localhost", "root", "", "userdb1"); 
-        $query = "select * from author_test";
+        $con = mysqli_connect("localhost", "root", "", "project_test"); 
+        $query = "select * from author";
         $result = mysqli_query($con,$query);
         // $num = mysqli_num_rows($result);
         while($row = mysqli_fetch_array($result)){

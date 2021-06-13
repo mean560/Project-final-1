@@ -4,7 +4,7 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$dbname = "userdb1";
+$dbname = "project_test";
 
 $con = mysqli_connect($host, $user, $password, $dbname);
 

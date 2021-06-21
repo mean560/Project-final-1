@@ -253,10 +253,10 @@
         <div class="table-wrapper-scroll-y my-custom-scrollbar" style="height: 450px; background-color: white;">
           <table class="table table-bordered table-striped mb-0" id="tableAuthor" style='border-collapse: collapse;'>
             <tr>
-              <th>
+              <!-- <th>
               <label class="form-check-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="checkbox" id="select_all" class="form-check-input">
-              </th>
+              </th> -->
               <!-- <th>B</th> -->
               <th>AUTHORS</th>
               <th>TITLE</th>
@@ -268,7 +268,7 @@
             <?php
             
             $con = mysqli_connect("localhost", "root", "", "project_test"); 
-            $query = "SELECT * FROM author WHERE user_id = {$_SESSION['user_id']} and whereCreate ='Note'";
+            $query = "SELECT * FROM author WHERE user_id = {$_SESSION['user_id']} and whereCreate ='Note' and name != ''";
             $result = mysqli_query($con, $query);
             $num = mysqli_num_rows($result);
             if($num != 0){        
@@ -278,7 +278,7 @@
                 $title = $row['title'];
                 $journal = $row['journal_name'];
               ?>
-                <td><input type="checkbox" class="checkbox" name="ids[]" value=<?php echo $row['id'] ?> ></td>
+                <!-- <td><input type="checkbox" class="checkbox" name="ids[]" value=<?php echo $row['id'] ?> ></td> -->
                 <!-- <td><input type="checkbox" name="idcheckbox[]" class="form-control" value="<?php echo $row['id']; ?>" /></td> -->
                 <!-- <td><input type="checkbox" id="customCheck2" value="<?php echo $row['id']; ?>" /></td> -->
                 <?php

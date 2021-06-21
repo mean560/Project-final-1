@@ -37,9 +37,9 @@ $username = $_SESSION['username'];
                   echo "";
                 }
                 if($issue!=""){
-                  echo "no. ".$issue." ";
+                  echo "no. ".$issue.", ";
                 } else {
-                  echo ", ";
+                  echo "";
                 }
                 echo "(".$yearP."): ";
                 if($page_end != ""){
@@ -47,10 +47,12 @@ $username = $_SESSION['username'];
                 } else {
                   echo $page_start.", ";
                 } 
-                if($url != ""){
+                if($url != "" && $doi ==""){
                   echo $url;
-                } else {
+                } else if ($url == "" && $doi !=""){
                   echo "https://doi.org/".$doi;
+                } else{
+                  echo "";
                 }
                 echo "<br/>";
               }
@@ -67,9 +69,9 @@ $username = $_SESSION['username'];
                   echo "";
                 }
                 if($issue!=""){
-                  echo "no. ".$issue." ";
+                  echo "no. ".$issue.", ";
                 } else {
-                  echo ", ";
+                  echo "";
                 }
                 echo "(".$yearP."): ";
                 if($page_end != ""){
@@ -77,10 +79,12 @@ $username = $_SESSION['username'];
                 } else {
                   echo $page_start.", ";
                 } 
-                if($url != ""){
+                if($url != "" && $doi ==""){
                   echo $url;
-                } else {
+                } else if ($url == "" && $doi !=""){
                   echo "https://doi.org/".$doi;
+                } else{
+                  echo "";
                 }
                 echo "<br/>";
               }
@@ -99,9 +103,9 @@ $username = $_SESSION['username'];
                   echo "";
                 }
                 if($issue!=""){
-                  echo "no. ".$issue." ";
+                  echo "no. ".$issue.", ";
                 } else {
-                  echo ", ";
+                  echo "";
                 }
                 echo "(".$yearP."): ";
                 if($page_end != ""){
@@ -109,10 +113,12 @@ $username = $_SESSION['username'];
                 } else {
                   echo $page_start.", ";
                 } 
-                if($url != ""){
+                if($url != "" && $doi ==""){
                   echo $url;
-                } else {
+                } else if ($url == "" && $doi !=""){
                   echo "https://doi.org/".$doi;
+                } else{
+                  echo "";
                 }
                 echo "<br/>";
               }

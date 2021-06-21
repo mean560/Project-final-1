@@ -277,79 +277,80 @@ if (!isset($_SESSION['status_login'])) {
                                     $wp = 0;
                                     $wrb = 0;
                                     for($v = 0; $v < count($result); $v++){
-                                    for ($x = 0; $x < count($result[$v]); $x++) {
-                                        $arr[$x] = $result[$v][$x];
-                                        // echo $arr[$x][1]."<br/>";
-                                        if ($arr[$x][1] == 'CC') { $cc++; ?>
-                                            <a href="#" data-toggle="tooltip" title="Coordinating Conjunction" style="border-radius: 5px; background-color: #FDB750; color:white; padding: 5px; "><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'CD') { $cd++ ?>
-                                            <a href="#" data-toggle="tooltip" title="Cardinal Digit" style="border-radius: 5px; background-color: #FC2E20; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'DT') { $dt++; ?>
-                                            <a href="#" data-toggle="tooltip" title="Determiner" style="border-radius: 5px; background-color: #FD7F20; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'EX') { $ex++; ?>
-                                            <a href="#" data-toggle="tooltip" title="Existential There" style="border-radius: 5px; background-color: #3B0918; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'FW') { $fw++; ?>
-                                            <a href="#" data-toggle="tooltip" title="Foreign Word" style="border-radius: 5px; background-color: #B8390E; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'IN') { $in++; ?>
-                                            <a href="#" data-toggle="tooltip" title="Preposition/Subordinating Conjunction" style="border-radius: 5px; background-color: #DC4731; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'JJ') { $jj++; ?>
-                                            <a href="#" data-toggle="tooltip" title="This NLTK POS Tag is an adjective" style="border-radius: 5px; background-color: #D5AF10; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'JJR') { $jjr++; ?>
-                                            <a href="#" data-toggle="tooltip" title="Adjective, Comparative" style="border-radius: 5px; background-color: #BE6310; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'JJS') { $jjs++; ?>
-                                            <a href="#" data-toggle="tooltip" title="Adjective, Superlative" style="border-radius: 5px; background-color: #BC3110; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'LS') { $ls++; ?>
-                                            <a href="#" data-toggle="tooltip" title="List Market" style="border-radius: 5px; background-color: #0074B7; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'MD') { $md++; ?>
-                                            <a href="#" data-toggle="tooltip" title="modal" style="border-radius: 5px; background-color: #60A3D9; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'NN') { $nn++; ?>
-                                            <a href="#" data-toggle="tooltip" title="noun, singular" style="border-radius: 5px; background-color: #003B73; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'NNS') { $nns++; ?>
-                                            <a href="#" data-toggle="tooltip" title="noun plural" style="border-radius: 5px; background-color: #4E514E; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'NNP') { $nnp++; ?>
-                                            <a href="#" data-toggle="tooltip" title="proper noun, singular" style="border-radius: 5px; background-color: #666666; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'NNPS') { $nnps++; ?>
-                                            <a href="#" data-toggle="tooltip" title="proper noun, plural" style="border-radius: 5px;  background-color: #A5ABA0; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'PDT') { $pdt++; ?>
-                                            <a href="#" data-toggle="tooltip" title="predeterminer" style="border-radius: 5px; background-color: #59981A; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'POS') { $pos++; ?>
-                                            <a href="#" data-toggle="tooltip" title="possessive ending" style="border-radius: 5px; background-color: #81B622; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'PRP') { $prp++; ?>
-                                            <a href="#" data-toggle="tooltip" title="personal pronoun" style="border-radius: 5px; background-color: #3D550C; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'PRP$') { $prp2++; ?>
-                                            <a href="#" data-toggle="tooltip" title="possessive pronoun" style="border-radius: 5px; background-color: #870A30; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'RB') { $rb++; ?>
-                                            <a href="#" data-toggle="tooltip" title="adverb" style="border-radius: 5px; background-color: #D43790; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'RBR') { $rbr++; ?>
-                                            <a href="#" data-toggle="tooltip" title="adverb, comparative" style="border-radius: 5px; background-color: #FBB80F; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'RBS') { $rbs++; ?>
-                                            <a href="#" data-toggle="tooltip" title="adverb, superlative" style="border-radius: 5px;  background-color: #F2E437; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'RP') { $rp++; ?>
-                                            <a href="#" data-toggle="tooltip" title="particle" style="border-radius: 5px; background-color: #D3C02F; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'TO') { $to++; ?>
-                                            <a href="#" data-toggle="tooltip" title="infinite marker" style="border-radius: 5px; background-color: #FBEE0F; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'UH') { $uh++; ?>
-                                            <a href="#" data-toggle="tooltip" title="interjection" style="border-radius: 5px; background-color: #ECF87F; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'VB') { $vb++; ?>
-                                            <a href="#" data-toggle="tooltip" title="verb" style="border-radius: 5px; background-color: #6A8820; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'VBG') { $vbg++; ?>
-                                            <a href="#" data-toggle="tooltip" title="verb gerund" style="border-radius: 5px; background-color: #7F4AA4; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'VBD') { $vbg++; ?>
-                                            <a href="#" data-toggle="tooltip" title="verb past tense" style="border-radius: 5px; background-color: #C598AF; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'VBN') { $vbn++; ?>
-                                            <a href="#" data-toggle="tooltip" title="verb past participle" style="border-radius: 5px; background-color: #A45C40; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'VBP') { $vbp++; ?>
-                                            <a href="#" data-toggle="tooltip" title="verb, present tense not 3rd person singular" style="border-radius: 5px; background-color: #CAA88C; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'VBZ') { $vbz++; ?>
-                                            <a href="#" data-toggle="tooltip" title="verb, present tense with 3rd person singular" style="border-radius: 5px; background-color: #FF3F00; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'WDT') { $wdt++; ?>
-                                            <a href="#" data-toggle="tooltip" title="wh-determiner" style="border-radius: 5px; background-color: #2D2A11; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'WP') { $wp++; ?>
-                                            <a href="#" data-toggle="tooltip" title="wh- pronoun" style="border-radius: 5px; background-color: #B43B42; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif ($arr[$x][1] == 'WRB') { $wrb++; ?>
-                                            <a href="#" data-toggle="tooltip" title="wh- adverb" style="border-radius: 5px; background-color: #1B2E3C; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
-                                        <?php } elseif($arr[$x][1] == '.') { echo "."; }
-                                    } }?>
+                                        for ($x = 0; $x < count($result[$v]); $x++) {
+                                            $arr[$x] = $result[$v][$x];
+                                            // echo $arr[$x][1]."<br/>";
+                                            if ($arr[$x][1] == 'CC') { $cc++; ?>
+                                                <a href="#" data-toggle="tooltip" title="Coordinating Conjunction" style="border-radius: 5px; background-color: #FDB750; color:white; padding: 5px; "><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'CD') { $cd++ ?>
+                                                <a href="#" data-toggle="tooltip" title="Cardinal Digit" style="border-radius: 5px; background-color: #FC2E20; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'DT') { $dt++; ?>
+                                                <a href="#" data-toggle="tooltip" title="Determiner" style="border-radius: 5px; background-color: #FD7F20; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'EX') { $ex++; ?>
+                                                <a href="#" data-toggle="tooltip" title="Existential There" style="border-radius: 5px; background-color: #3B0918; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'FW') { $fw++; ?>
+                                                <a href="#" data-toggle="tooltip" title="Foreign Word" style="border-radius: 5px; background-color: #B8390E; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'IN') { $in++; ?>
+                                                <a href="#" data-toggle="tooltip" title="Preposition/Subordinating Conjunction" style="border-radius: 5px; background-color: #DC4731; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'JJ') { $jj++; ?>
+                                                <a href="#" data-toggle="tooltip" title="This NLTK POS Tag is an adjective" style="border-radius: 5px; background-color: #D5AF10; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'JJR') { $jjr++; ?>
+                                                <a href="#" data-toggle="tooltip" title="Adjective, Comparative" style="border-radius: 5px; background-color: #BE6310; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'JJS') { $jjs++; ?>
+                                                <a href="#" data-toggle="tooltip" title="Adjective, Superlative" style="border-radius: 5px; background-color: #BC3110; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'LS') { $ls++; ?>
+                                                <a href="#" data-toggle="tooltip" title="List Market" style="border-radius: 5px; background-color: #0074B7; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'MD') { $md++; ?>
+                                                <a href="#" data-toggle="tooltip" title="modal" style="border-radius: 5px; background-color: #60A3D9; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'NN') { $nn++; ?>
+                                                <a href="#" data-toggle="tooltip" title="noun, singular" style="border-radius: 5px; background-color: #003B73; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'NNS') { $nns++; ?>
+                                                <a href="#" data-toggle="tooltip" title="noun plural" style="border-radius: 5px; background-color: #4E514E; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'NNP') { $nnp++; ?>
+                                                <a href="#" data-toggle="tooltip" title="proper noun, singular" style="border-radius: 5px; background-color: #666666; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'NNPS') { $nnps++; ?>
+                                                <a href="#" data-toggle="tooltip" title="proper noun, plural" style="border-radius: 5px;  background-color: #A5ABA0; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'PDT') { $pdt++; ?>
+                                                <a href="#" data-toggle="tooltip" title="predeterminer" style="border-radius: 5px; background-color: #59981A; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'POS') { $pos++; ?>
+                                                <a href="#" data-toggle="tooltip" title="possessive ending" style="border-radius: 5px; background-color: #81B622; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'PRP') { $prp++; ?>
+                                                <a href="#" data-toggle="tooltip" title="personal pronoun" style="border-radius: 5px; background-color: #3D550C; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'PRP$') { $prp2++; ?>
+                                                <a href="#" data-toggle="tooltip" title="possessive pronoun" style="border-radius: 5px; background-color: #870A30; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'RB') { $rb++; ?>
+                                                <a href="#" data-toggle="tooltip" title="adverb" style="border-radius: 5px; background-color: #D43790; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'RBR') { $rbr++; ?>
+                                                <a href="#" data-toggle="tooltip" title="adverb, comparative" style="border-radius: 5px; background-color: #FBB80F; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'RBS') { $rbs++; ?>
+                                                <a href="#" data-toggle="tooltip" title="adverb, superlative" style="border-radius: 5px;  background-color: #F2E437; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'RP') { $rp++; ?>
+                                                <a href="#" data-toggle="tooltip" title="particle" style="border-radius: 5px; background-color: #D3C02F; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'TO') { $to++; ?>
+                                                <a href="#" data-toggle="tooltip" title="infinite marker" style="border-radius: 5px; background-color: #FBEE0F; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'UH') { $uh++; ?>
+                                                <a href="#" data-toggle="tooltip" title="interjection" style="border-radius: 5px; background-color: #ECF87F; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'VB') { $vb++; ?>
+                                                <a href="#" data-toggle="tooltip" title="verb" style="border-radius: 5px; background-color: #6A8820; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'VBG') { $vbg++; ?>
+                                                <a href="#" data-toggle="tooltip" title="verb gerund" style="border-radius: 5px; background-color: #7F4AA4; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'VBD') { $vbg++; ?>
+                                                <a href="#" data-toggle="tooltip" title="verb past tense" style="border-radius: 5px; background-color: #C598AF; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'VBN') { $vbn++; ?>
+                                                <a href="#" data-toggle="tooltip" title="verb past participle" style="border-radius: 5px; background-color: #A45C40; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'VBP') { $vbp++; ?>
+                                                <a href="#" data-toggle="tooltip" title="verb, present tense not 3rd person singular" style="border-radius: 5px; background-color: #CAA88C; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'VBZ') { $vbz++; ?>
+                                                <a href="#" data-toggle="tooltip" title="verb, present tense with 3rd person singular" style="border-radius: 5px; background-color: #FF3F00; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'WDT') { $wdt++; ?>
+                                                <a href="#" data-toggle="tooltip" title="wh-determiner" style="border-radius: 5px; background-color: #2D2A11; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'WP') { $wp++; ?>
+                                                <a href="#" data-toggle="tooltip" title="wh- pronoun" style="border-radius: 5px; background-color: #B43B42; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif ($arr[$x][1] == 'WRB') { $wrb++; ?>
+                                                <a href="#" data-toggle="tooltip" title="wh- adverb" style="border-radius: 5px; background-color: #1B2E3C; color:white; padding: 5px;"><?=$arr[$x][0]; ?></a>
+                                            <?php } elseif($arr[$x][1] == '.') { echo "."; }
+                                        } 
+                                    }?>
                                     <div class="container" style="overflow: auto; line-height: 1.5; font-size: 14px; font-style: italic; text-align:left; width: 96.25%; height:auto; position:absolute; right:10px; bottom: -100px;">Description :
                                     <?php                                        if($cc >= 1){ ?> <i class="bi bi-circle-fill" style="color: #FDB750; border-radius: 5px; padding: 3px;">Coordinating Conjunction</i>
                                         <?php } if($cd>=1){ ?> <i class="bi bi-circle-fill" style="color: #FC2E20;">Cardinal Digit</i>

@@ -76,7 +76,6 @@ if ($last != 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AllNote</title>
 
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -14,6 +14,7 @@
   }
 ?>
 <?php
+
 // if(isset($_POST['show_button'])) {
 //   if(count($_POST['ids']) > 0) {
 //     $all = implode(",", $_POST['ids']);
@@ -253,11 +254,11 @@
         <div class="table-wrapper-scroll-y my-custom-scrollbar" style="height: 450px; background-color: white;">
           <table class="table table-bordered table-striped mb-0" id="tableAuthor" style='border-collapse: collapse;'>
             <tr>
-              <th>
+              <!-- <th>
               <label class="form-check-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="checkbox" id="select_all" class="form-check-input">
-              </th>
-              <!-- <th>B</th> -->
+              </th> -->
+              <!-- <th style="display:none">B</th> -->
               <th>AUTHORS</th>
               <th>TITLE</th>
               <th>SOURCE</th>
@@ -268,7 +269,7 @@
             <?php
             
             $con = mysqli_connect("localhost", "root", "", "project_test"); 
-            $query = "SELECT * FROM author WHERE user_id = {$_SESSION['user_id']}";
+            $query = "SELECT * FROM author WHERE user_id = {$_SESSION['user_id']} and name != ''";
             $result = mysqli_query($con, $query);
             $num = mysqli_num_rows($result);
             if($num != 0){        
@@ -278,11 +279,14 @@
                 $title = $row['title'];
                 $journal = $row['journal_name'];
               ?>
-                <td><input type="checkbox" class="checkbox" name="ids[]" value=<?php echo $row['id'] ?> ></td>
+                <!-- <td><input type="checkbox" class="checkbox" id="case" name="ids[]" value=<?php echo $row['id'] ?> ></td> -->
                 <!-- <td><input type="checkbox" name="idcheckbox[]" class="form-control" value="<?php echo $row['id']; ?>" /></td> -->
                 <!-- <td><input type="checkbox" id="customCheck2" value="<?php echo $row['id']; ?>" /></td> -->
+                <!-- <p name="show_id" style="display:none"><?php echo $row['id'];?></p> -->
+                <td><p name="show_name"><?php echo $row['name'];?></p></td>
                 <?php
-                echo "<td>" . $name . "</td>";
+                
+                // echo "<td>" . $name . "</td>";
                 echo "<td>" . $title . "</td>";
                 echo "<td>" . $journal . "</td>";
                 ?>
@@ -303,9 +307,8 @@
       <?php // require 'insertModal.php'; ?>
 
       <div class="bottomBody">
-        <!-- <button type="submit" class="btn" data-toggle="modal" data-target="#exampleModalCenter" style="display: inline-block; position: static; 
-          margin-top: 35px; margin-left: 23%;
-          background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; margin-right: 5px;
+        <!-- <button type="button" id="checkBtn" class="btn" data-toggle="modal" data-target="#exampleModalCenter" style="display: inline-block; position: static; 
+          margin-top: 35px; margin-left: 23%; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; margin-right: 5px;
           text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; 
           text-decoration-style: solid;">Download Bibliography</button> -->
           <button type="submit" class="btn" form="check-form" data-toggle="modal" data-target="#exampleModalCenter" id="show_button" name="show_button" 
@@ -313,7 +316,7 @@
           background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif; border-width: 1px; margin-right: 5px;
           text-decoration-color: rgb(249, 204, 204); border-color: rgb(212, 212, 212); border-style: solid; 
           text-decoration-style: solid;">Download Bibliography</button>
-        <div class="form-group" style="display: inline-block; position: absolute; border-width: 1px; margin-top: 35px;">
+        <div class="form-group" id="select_style" style="display: inline-block; position: absolute; border-width: 1px; margin-top: 35px;">
           <select class="form-control" name="bibliographyStyle" style="width: 180px; height: 38px; background-color: rgb(249, 249, 249); font-family: Arial, Helvetica, sans-serif;">
             <option selected value="apa">APA</option>
             <!-- <option value="ama">AMA</option> -->
@@ -406,9 +409,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" style="font-size:16px">
+      <div class="modal-body" id="modaldata" style="font-size:16px">
+        
         <?php 
-
+        
         // include 'multiselect.php';
         // echo "ffffffffffffffffffffffff";
           // echo "APA style <br/>";
@@ -587,6 +591,30 @@
 
   });
 
+// ##################################################################################################################################
+  // $('#checkBtn').click(function() {
+  //   checked = $("input[type=checkbox]:checked").length==0;
+  //   if(checked){
+  //     alert("Please select at least one list.");
+  //     return false;
+  //   } else {
+  //     var ele = document.getElementsByName("ids[]");
+  //     var modal = document.getElementById("modaldata");
+  //     var name = document.getElementsByName("show_name");
+  //     var id = document.getElementsByName("show_id");
+  //     // var style = document.getElementsById("select_style");
+
+  //     modal.innerHTML="";
+  //     for(var i = 0; i<ele.length; i++){
+  //       if(ele[i].checked==true){
+  //         // modal.innerHTML+="<td align='center'><p>"+name[i].innerHTML+"</p></td>";
+  //         // modal.innerHTML+="<iframe src='../startbootstrap-landing-page-master/template/apa.php' width='100%'></iframe>";
+  //         modal.innerHTML+="<td align='center'><p>"+id[i].innerHTML+"</p></td>";
+
+  //       }
+  //     }
+  //   }
+  // });
 });
 
 </script>

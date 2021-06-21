@@ -1,12 +1,12 @@
-<?php 
+<?php
+
       include ("../startbootstrap-landing-page-master/env/config.php");
 
       $user_id = $_SESSION['user_id'];
       $username = $_SESSION['username'];
         // include 'config_s.php';
-        $all = $_POST['all'];
+        $all = $_POST['id'];
         echo $all;
-
         $con = mysqli_connect("localhost", "root", "", "project_test"); 
         $query = "select * from author where user_id = {$_SESSION['user_id']}";
         $result = mysqli_query($con,$query);
@@ -28,29 +28,37 @@
           if(sizeof($answer)==2){
             echo $answer[1]." ";
             echo $answer[0][0].". ";
-            echo "(".$yearP."). ";
+            if($yearP!=" "){
+              echo "(".$yearP."). ";
+            } else {
+              echo "";
+            }
             echo $title.". ";
-            echo "<i>$journal_name</i>".", ";
+            echo "<i>$journal_name</i>"."";
             if($volume != "") {
-              echo $volume;
+              echo ", ".$volume;
             } else {
               echo "";
             }
             if($issue!=""){
               echo "(".$issue."), ";
             } else {
-              echo ", ";
+              echo "";
             }
-            if($page_end != ""){
+            if($page_start !="" && $page_end != ""){
               echo $page_start."-".$page_end.". ";
-            } else {
+            } else if($page_start !="" && $page_end == "") {
               echo $page_start.". ";
+            } else{
+              echo "";
             }
-            if($url != ""){
+            if($url != "" && $doi ==""){
               echo $url;
-            } else {
+            } else if ($url == "" && $doi !=""){
               echo "https://doi.org/".$doi;
-            } 
+            } else{
+              echo "";
+            }
             echo "<br/>";
 
           } else if (sizeof($answer)==4){
@@ -58,28 +66,35 @@
             echo $answer[0][0]."., & ";
             echo $answer[3].", ";
             echo $answer[2][0].". ";
-            echo "(".$yearP."). ";
-            echo $title.". ";
-            echo "<i>$journal_name</i>".", ";
+            if($yearP!=""){
+              echo "(".$yearP."). ";
+            } else {
+              echo "";
+            }            echo $title.". ";
+            echo "<i>$journal_name</i>"."";
             if($volume != "") {
-              echo $volume;
+              echo ", ".$volume;
             } else {
               echo "";
             }
             if($issue!=""){
               echo "(".$issue."), ";
             } else {
-              echo ", ";
+              echo "";
             }
-            if($page_end != ""){
+            if($page_start !="" && $page_end != ""){
               echo $page_start."-".$page_end.". ";
-            } else {
+            } else if($page_start !="" && $page_end == "") {
               echo $page_start.". ";
-            }            
-            if($url != ""){
+            } else{
+              echo "";
+            }
+            if($url != "" && $doi ==""){
               echo $url;
-            } else {
+            } else if ($url == "" && $doi !=""){
               echo "https://doi.org/".$doi;
+            } else{
+              echo "";
             }
             echo "<br/>";
 
@@ -90,28 +105,37 @@
             echo $answer[2][0]."., & ";
             echo $answer[5].", ";
             echo $answer[4][0].". ";
-            echo "(".$yearP."). ";
+            // echo "(".$yearP."). ";
+            if($yearP!=""){
+              echo "(".$yearP."). ";
+            } else {
+              echo "";
+            }
             echo $title.". ";
-            echo "<i>$journal_name</i>".", ";
+            echo "<i>$journal_name</i>"."";
             if($volume != "") {
-              echo $volume;
+              echo ", " . $volume;
             } else {
               echo "";
             }
             if($issue != ""){
               echo "(".$issue."), ";
             } else {
-              echo ", ";
+              echo "";
             }
-            if($page_end != ""){
+            if($page_start !="" && $page_end != ""){
               echo $page_start."-".$page_end.". ";
-            } else {
+            } else if($page_start !="" && $page_end == "") {
               echo $page_start.". ";
+            } else{
+              echo "";
             }
-            if($url != ""){
+            if($url != "" && $doi ==""){
               echo $url;
-            } else {
+            } else if ($url == "" && $doi !=""){
               echo "https://doi.org/".$doi;
+            } else{
+              echo "";
             }
             echo "<br/>";
 

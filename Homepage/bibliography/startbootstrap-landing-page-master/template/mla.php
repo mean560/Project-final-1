@@ -1,9 +1,8 @@
 <?php 
         // include 'config_s.php';
         include ("../startbootstrap-landing-page-master/env/config.php");
-
-$user_id = $_SESSION['user_id'];
-$username = $_SESSION['username'];
+        $user_id = $_SESSION['user_id'];
+        $username = $_SESSION['username'];
         $con = mysqli_connect("localhost", "root", "", "project_test"); 
         $query = "select * from author where user_id = {$_SESSION['user_id']}";
         $result = mysqli_query($con,$query);
@@ -29,8 +28,11 @@ $username = $_SESSION['username'];
                 echo $answer[1].", ";
                 echo $answer[0].". ";
                 echo "<span>\"$title.\"<span>";
-                echo "<i> $journal_name, </i> ";
-                if($volume != ""){
+                if($journal_name!=""){
+                  echo "<i> $journal_name, </i> ";
+                } else {
+                  echo "";
+                }                if($volume != ""){
                   echo "vol. ".$volume.", ";
                 } else {
                   echo "";
@@ -53,11 +55,13 @@ $username = $_SESSION['username'];
                 else {
                   echo "";
                 }
-                if($url != ""){
+                if($url != "" && $doi ==""){
                   echo $url;
-                } else {
+                } else if ($url == "" && $doi !=""){
                   echo "https://doi.org/".$doi;
-                } 
+                } else{
+                  echo "";
+                }
                 echo "<br/>";
               }
               else if(sizeof($answer)==4){
@@ -66,7 +70,11 @@ $username = $_SESSION['username'];
                 echo $answer[3]." ";
                 echo $answer[2][0].". ";
                 echo "<span>\"$title.\"<span>";
-                echo "<i> $journal_name, </i> ";
+                if($journal_name!=""){
+                  echo "<i> $journal_name, </i> ";
+                } else {
+                  echo "";
+                }
                 if($volume != ""){
                   echo "vol. ".$volume.", ";
                 } else {
@@ -90,17 +98,23 @@ $username = $_SESSION['username'];
                 else {
                   echo "";
                 }
-                if($url != ""){
+                if($url != "" && $doi ==""){
                   echo $url;
-                } else {
+                } else if ($url == "" && $doi !=""){
                   echo "https://doi.org/".$doi;
-                } 
+                } else{
+                  echo "";
+                }
                 echo "<br/>";
               } else if(sizeof($answer)==6){
                 echo $answer[1]." ";
                 echo $answer[0].", et al. ";
                 echo "<span>\"$title.\"<span>";
-                echo "<i> $journal_name, </i> ";
+                if($journal_name!=""){
+                  echo "<i> $journal_name, </i> ";
+                } else {
+                  echo "";
+                }
                 if($volume != ""){
                   echo "vol. ".$volume.", ";
                 } else {
@@ -124,11 +138,13 @@ $username = $_SESSION['username'];
                 else {
                   echo "";
                 }
-                if($url != ""){
+                if($url != "" && $doi ==""){
                   echo $url;
-                } else {
+                } else if ($url == "" && $doi !=""){
                   echo "https://doi.org/".$doi;
-                } 
+                } else{
+                  echo "";
+                }
                 echo "<br/>";
               }
               echo "<br/>";

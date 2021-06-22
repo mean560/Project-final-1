@@ -8,13 +8,16 @@ from nltk.tokenize import PunktSentenceTokenizer
 # from nltk.tokenize import sent_tokenize, word_tokenize
 
 train_text = state_union.raw("2005-GWBush.txt")
+
+# simple_text = state_union.raw("2005-GWBush.txt")
+
 # simple_text = "i love you"
+
 simple_text = ''
 for word in sys.argv[1:]:
     simple_text += word + ' '
 
 custom_sent_tokenizer = PunktSentenceTokenizer(train_text)
-
 tokenized = custom_sent_tokenizer.tokenize(simple_text)
 
 def process_content():

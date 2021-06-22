@@ -219,11 +219,19 @@ if (!isset($_SESSION['status_login'])) {
             <div class="input-note">
                 <form id="my-form" method="POST" action="openpaper.php">
                     <!-- <input class="w3-input"> -->
-                    <textarea name="inserttxt" id="inserttxt" placeholder="Enter one sentence..." style="padding: 15px; font-size: 16px; width:100%; height: 200px;">
+                    <textarea name="inserttxt" id="inserttxt" placeholder="Enter sentence..." style="padding: 15px; font-size: 16px; width:100%; height: 200px;">
                         <?php
                             isset($_POST['inserttxt']) ? $inserttxt = $_POST['inserttxt'] : $inserttxt = 'null';
                             if (isset($_POST["inserttxt"])) {
-                                echo trim($inserttxt);
+                                // echo trim($inserttxt);
+                                $str = trim(preg_replace('/\s+/', ' ', $_POST["inserttxt"]));
+                                $arr = array_map('trim',array_filter(explode('.', $str)));
+                                //print_r($arr);
+                                for($q = 0; $q < count($arr); $q++){
+                                    echo $arr[$q].".\n"."\n";
+                                    // echo "";
+                                }
+
                             } else {
                                 echo "";
                             }
@@ -394,19 +402,7 @@ if (!isset($_SESSION['status_login'])) {
                             }
                             else if(isset($_POST["buttonPastofSentence"])){
                                 include("runsimplesentence.php");
-                                if(empty($ans)){
-                                    // echo "This is simple sentence";
-                                    echo "";
-                                }
-                                // else{
-                                //     for ($y = 0; $y < count($ans); $y++) {
-                                //         for($z = 0; $z < count($ans[$y]); $z++){
-                                //             print $ans[$y][$z];
-                                //             print " ";
-                                //         }
-                                //         echo "<br>";
-                                //     }
-                                // }
+
                             }
                             elseif(isset($_POST["buttonTranslate"])){
                                 include("translate.php");
@@ -428,22 +424,8 @@ if (!isset($_SESSION['status_login'])) {
 
 <script>
 $(document).ready(function() {
+    $('textarea').val($('textarea').val().trim());
 
-    $('textarea').val($('textarea').val().trim())
 
-    // $('#submitUpload').click(function(){
-
-    //     var file_name = $('#file_name').val() || '';
-    //     var file_directory = $('#file_directory').val() || '';
-
-    //     $.ajax({
-    //         url:'./savepdf.php',
-    //         type: 'POST',
-    //         data: {
-    //             file_name: file_name,
-    //             file_directory: file_directory,
-    //         }
-    //     });
-    // });
 });
 </script>

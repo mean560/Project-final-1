@@ -127,10 +127,10 @@ if (!isset($_SESSION['status_login'])) {
         <div class="table-wrapper-scroll-y my-custom-scrollbar" style="height: 450px; background-color: white;">
           <table class="table table-bordered table-striped mb-0" id="tableAuthor" style='border-collapse: collapse;'>
             <tr>
-              <th>
+              <!-- <th>
               <label class="form-check-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
               <input type="checkbox" id="select_all" class="form-check-input">
-              </th>
+              </th> -->
               <!-- <th>B</th> -->
               <th>AUTHORS</th>
               <th>TITLE</th>
@@ -153,11 +153,13 @@ if (!isset($_SESSION['status_login'])) {
                 $title = $row['title'];
                 $journal = $row['journal_name'];
               ?>
-                <td><input type="checkbox" class="checkbox" name="ids[]" value=<?php echo $row['id'] ?> ></td>
+                <!-- <td><input type="checkbox" class="checkbox" name="ids[]" value=<?php echo $row['id'] ?> ></td> -->
                 <!-- <td><input type="checkbox" name="idcheckbox[]" class="form-control" value="<?php echo $row['id']; ?>" /></td> -->
                 <!-- <td><input type="checkbox" id="customCheck2" value="<?php echo $row['id']; ?>" /></td> -->
+                <td><p name="show_name"><?php echo $row['name'];?></p></td>
+
                 <?php
-                echo "<td>" . $name . "</td>";
+                // echo "<td>" . $name . "</td>";
                 echo "<td>" . $title . "</td>";
                 echo "<td>" . $journal . "</td>";
                 ?>
@@ -283,14 +285,9 @@ if (!isset($_SESSION['status_login'])) {
       </div>
       <div class="modal-body" style="font-size:16px">
         <?php 
-        if(isset($_POST['ids'])){
-          echo "checked value"."<br>";
-        } else {
-          echo "หาวิธีใหม่"."<br/>";
-        }
+        
         // include 'multiselect.php';
         // echo "ffffffffffffffffffffffff";
-          echo "APA style <br/>";
           // include 'template/apa.php'; 
           // echo "<br/>";
           // echo "MLA style";
@@ -299,15 +296,15 @@ if (!isset($_SESSION['status_login'])) {
           // echo "Chicago style";
           // include 'template/chicago.php';
         ?>
-        <!-- <div id="apa">
-          <?php //include 'template/apa.php'; ?>
+        <div id="apa">
+          <?php include 'template/apa.php'; ?>
         </div>
         <div id="mla">
-          <?php //include 'template/mla.php'; ?>
+          <?php include 'template/mla.php'; ?>
         </div>
         <div id="chicago">
-          <?php //include 'template/chicago.php'; ?>
-        </div> -->
+          <?php include 'template/chicago.php'; ?>
+        </div>
         
       </div>
       <div class="modal-footer">

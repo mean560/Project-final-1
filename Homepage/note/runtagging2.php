@@ -15,7 +15,7 @@ if($stringText == "" || trim($stringText) == ""){
     $arrStr = array_map('trim',array_filter(explode('.', $stringText_new)));
     for($i = 0; $i < count($arrStr); $i++) {
         $word[$i] = shell_exec('python C:/xampp/htdocs/Project-final-1/Homepage/sentence/tagging.py ' . $arrStr[$i]);
-        $result[$i] = json_decode($word[$i], true);
+        $result2[$i] = json_decode($word[$i], true);
         // print_r($word[$i]);
     }
     

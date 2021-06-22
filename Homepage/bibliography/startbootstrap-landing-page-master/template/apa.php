@@ -5,8 +5,8 @@
       $user_id = $_SESSION['user_id'];
       $username = $_SESSION['username'];
         // include 'config_s.php';
-        $all = $_POST['id'];
-        echo $all;
+        // $all = $_POST['id'];
+        // echo $all;
         $con = mysqli_connect("localhost", "root", "", "project_test"); 
         $query = "select * from author where user_id = {$_SESSION['user_id']}";
         $result = mysqli_query($con,$query);
@@ -22,6 +22,8 @@
           $page_end = $row['page_end'];
           $url = $row['url'];
           $issue = $row['issue'];
+          $doi = $row['doi'];
+
           //จัดการชื่อ
           $answer = explode(" ",$name);
           //print apa

@@ -408,14 +408,14 @@
       </div>
       <div class="modal-body" style="font-size:16px">
         <?php 
-        if(isset($_POST['ids'])){
-          echo "checked value"."<br>";
-        } else {
-          echo "หาวิธีใหม่"."<br/>";
-        }
+        // if(isset($_POST['ids'])){
+        //   echo "checked value"."<br>";
+        // } else {
+        //   echo "หาวิธีใหม่"."<br/>";
+        // }
         // include 'multiselect.php';
         // echo "ffffffffffffffffffffffff";
-          echo "APA style <br/>";
+          // echo "APA style <br/>";
           // include 'template/apa.php'; 
           // echo "<br/>";
           // echo "MLA style";

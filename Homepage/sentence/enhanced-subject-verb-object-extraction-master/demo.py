@@ -7,7 +7,7 @@ str1 = ''
 for word in sys.argv[1:]:
     str1 += word + ' '
 
-# str1 = "Symptoms cn include fever, cough and shortness of breath."
+# str1 = "I have to leave now."
 
 # str = TextBlob(str1)
 # sss = str.correct()

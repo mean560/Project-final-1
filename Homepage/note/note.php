@@ -428,7 +428,7 @@ if (isset($_GET['logout'])) {
                       }
                     }
                   } ?>
-                  <div class="container" style="margin: 140px 0px 0px -15px; border: 0px solid; line-height: 1.5; font-size: 14px; font-style: italic; text-align: left; width: 105%; height: auto;">Description : <br />
+                  <div class="container" style="margin: 40px 0px 0px -15px; border: 0px solid; line-height: 1.5; font-size: 14px; font-style: italic; text-align: left; width: 105%; height: auto;">Description : <br />
                     <?php
                     if ($cc >= 1) { ?> <i class="bi bi-circle-fill" style="color: #FDB750; border-radius: 5px; padding: 3px;">Coordinating Conjunction</i>
                     <?php }
